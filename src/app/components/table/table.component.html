@@ -24,16 +24,12 @@
         <table class="data-table">
             <thead>
                 <tr>
-                    <th>STT </th>
                     <th scope="col" *ngFor="let item of tableData" [style.min-width.px]="item.width">{{ item.name }}
                     </th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let item of dataSub; let i = index">
-                    <td>
-                        {{ i+1 }}
-                    </td>
                     <td *ngFor="let i of tableData">
                         <span *ngIf="i.type === 'number'" (click)="handleRouteLink(item)">{{ item[i.id] | number
                             }}</span>

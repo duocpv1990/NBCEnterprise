@@ -1,0 +1,90 @@
+import { CollumsModel } from "./base/collums.model";
+import { FilterModel } from "./base/filter.model";
+
+export class EnterPriseModel {
+
+
+    public get filter(): Array<FilterModel> {
+        return [
+            {
+                Text: 'Mã doanh nghiệp',
+                type: 'text',
+                data: [],
+                condition: 'code'
+            },
+            {
+                Text: 'Tên đăng ký',
+                type: 'text',
+                data: [],
+                condition: 'register'
+            },
+            {
+                Text: 'Trạng thái',
+                type: 'select',
+                data: [],
+                condition: 'status'
+            },
+            {
+                Text: '',
+                type: 'search',
+                condition: 'stt'
+            }];
+    }
+
+
+    public get collums(): Array<CollumsModel> {
+        return [
+            {
+                id: 'stt',
+                name: 'STT',
+                width: 100,
+                type: 'text',
+            },
+            {
+                id: 'code',
+                name: 'Mã doanh nghiệp',
+                width: 200,
+                type: 'text',
+            },
+
+            {
+                id: 'global',
+                name: 'Mã địa điểm toàn cầu',
+                width: 200,
+                type: 'text',
+            },
+            {
+                id: 'register',
+                name: 'Tên đăng ký',
+                width: 200,
+                type: 'text',
+            },
+            {
+                id: 'gt',
+                name: 'Giấy tờ',
+                width: 200,
+                type: 'text',
+            },
+            {
+                id: 'status',
+                name: 'Trạng thái',
+                width: 200,
+                type: 'text',
+            },
+            {
+                id: 'update',
+                name: 'Cập nhật',
+                width: 200,
+                type: 'text',
+            },
+            {
+                id: 'noun',
+                name: 'Hành động',
+                width: 200,
+                type: 'setting',
+            },
+
+        ];
+    }
+
+}

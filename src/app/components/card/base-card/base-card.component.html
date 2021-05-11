@@ -1,0 +1,20 @@
+<div [style.width]="dataCard.width" [style.height]="dataCard.height" [class]="dataCard.cssClass">
+    <div>
+        <div class="text-card-header">
+            {{dataCard.title.text}}
+        </div>
+        <div class="text-card-status">
+            {{dataCard.title.status}}
+        </div>
+    </div>
+    <div class="base-grid" [style.grid-template-columns]="numCol">
+        <div *ngFor="let i of dataCard.list">
+            <div class="text-card-label">
+                {{i.label}}
+            </div>
+            <div class="text-card-content">
+                {{i.value}}
+            </div>
+        </div>
+    </div>
+</div>

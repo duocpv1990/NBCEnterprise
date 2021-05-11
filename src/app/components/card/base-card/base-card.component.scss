@@ -1,0 +1,9 @@
+.base-grid {
+  display: grid;
+  grid-gap: 20px;
+  margin-top: 1.2em;
+  padding-bottom: 0.8em;
+  .text-card-label {
+    margin-bottom: 0.5em;
+  }
+}

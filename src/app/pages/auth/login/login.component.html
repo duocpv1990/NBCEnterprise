@@ -1,0 +1,12 @@
+<div class="login">
+    <div class="login-text-header">
+        Đăng nhập
+    </div>
+    <app-login-form (onForgotPW)="routeTo($event)" [loginError]="errorLogin" (onSubmit)="login($event)" [loginFormData]="data">
+
+    </app-login-form>
+    <a class="login-link" routerLink="/forgot">Quên mật khẩu</a>
+
+</div>
+
+<!-- (onForgotPW)="routeTo($event)" (onSubmit)="login($event)" [loginFormTitle]="'Đăng nhập'" -->

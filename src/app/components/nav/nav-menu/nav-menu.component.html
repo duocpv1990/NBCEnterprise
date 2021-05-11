@@ -1,0 +1,16 @@
+<div class="logo">
+    <img src="assets/img/nbc-logo.svg" alt="">
+</div>
+
+<div *ngFor="let i of dataNavMenu?.list" [routerLink]="[i.linkURL]" class="nav-menu"
+    [routerLinkActive]="['nav-menu-active']">
+    <div class="nav-menu-icon" [routerLinkActive]="['nav-menu-active-icon']">
+        <img [src]="i.icon" alt="">
+    </div>
+    <div class="nav-menu-list" [routerLinkActive]="['nav-menu-active-list']">
+        {{i.name}}
+    </div>
+
+</div>
+
+<!-- [routerLinkActive]="['nav-menu','nav-menu-active']" -->

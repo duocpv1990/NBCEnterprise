@@ -1,0 +1,59 @@
+.form-login {
+    // height: 310px;
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    .form-group {
+        height: 72px;
+        margin-bottom: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .form-login-input {
+            border-radius: 12px;
+            height: 44px;
+            outline: none;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 20px;
+            padding: 0px 16px;
+            border: 0.5px solid rgba($color: #000000, $alpha: 0.5);
+        }
+        input:focus {
+            background: #FBFBFB;
+            border: 1px solid #EE0033;
+        }
+        .login-error {
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 17px;
+            color: #EE0033;
+            padding-top: 10px;
+        }
+    }
+    .form-login-btn {
+        background: #F899AD;
+        border-radius: 8px;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 16px;
+        text-align: center;
+        color: #FFFFFF;
+        height: 44px;
+        outline: none;
+        border: none;
+    }
+    .form-login-forgot {
+        text-align: right;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 20px;
+        text-decoration-line: underline;
+        color: #222222;
+        cursor: pointer;
+    }
+}

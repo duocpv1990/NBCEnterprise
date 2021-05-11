@@ -1,0 +1,53 @@
+.filter-card {
+  // width: 100%;
+  background: var(--color-bg-white);
+  padding: 30px 150px 30px 50px;
+  border-radius: 0px 0px 20px 20px;
+  .filter-card-title {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+    color: #ffffff;
+    margin-bottom: 20px;
+  }
+  .filter-card-data {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 20px 50px;
+    .list-data {
+      width: 205px;
+      .label {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 20px;
+        color: #414141;
+        margin-bottom: 10px;
+      }
+      .input {
+        background: #ffffff;
+        border-radius: 12px;
+        outline: none;
+        height: 44px;
+        padding: 0px 16px;
+        width: 100%;
+      }
+      .search {
+        background: #ee0033;
+        border-radius: 8px;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 16px;
+        text-align: center;
+        height: 44px;
+        width: 120px;
+        border: none;
+        outline: none;
+        color: #ffffff;
+        margin-top: 30px;
+      }
+    }
+  }
+}

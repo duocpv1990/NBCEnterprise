@@ -12,6 +12,6 @@ export const appRoutes: Routes = [
     path: '',
     loadChildren: () =>
       import('./pages/main/main.module').then((m) => m.MainModule),
-    canLoad: [AppGuard],
+    // canLoad: [AppGuard],
   },
 ];

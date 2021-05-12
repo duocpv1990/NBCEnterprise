@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DeleteComponent } from 'src/app/components/dialog/delete/delete.component';
 import { EnterPriseModel } from 'src/app/models/enterprise.model';
+import { DeleteEnterpriseComponent } from '../delete-enterprise/delete-enterprise.component';
+import { EnterpriseCreateComponent } from '../enterprise-create/enterprise-create.component';
 
 @Component({
   selector: 'app-enterprise-list',
@@ -76,37 +80,59 @@ export class EnterpriseListComponent implements OnInit {
   dataTable;
   listActive;
   dataSub;
-  constructor() { }
+  constructor(
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.listFilter = this.config.filter;
     this.dataTable = this.config.collums;
+    this.listActive = this.config.btnActice;
     this.dataSub = this.data;
   }
-  handleCallback(ev){
+  handleCallback(ev) {
     const filter = this.listFilter.filter(x => x.value);
     if (!filter.length) return this.dataSub = this.data;
     filter.forEach((x, ix) => {
-        if (ix === 0) {
-            if (x.type === 'text' || x.type === 'search') {
-                this.dataSub = this.data.filter(
-                    (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
-            } else {
-                this.dataSub = this.data.filter((a) => a[x.condition] == x.value);
-            }
+      if (ix === 0) {
+        if (x.type === 'text' || x.type === 'search') {
+          this.dataSub = this.data.filter(
+            (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
         } else {
-            if (x.type === 'text' || x.type === 'search') {
-                this.dataSub = this.dataSub.filter(
-                    (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
-            } else {
-                this.dataSub = this.dataSub.filter((a) => a[x.condition] == x.value);
-            }
+          this.dataSub = this.data.filter((a) => a[x.condition] == x.value);
         }
+      } else {
+        if (x.type === 'text' || x.type === 'search') {
+          this.dataSub = this.dataSub.filter(
+            (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
+        } else {
+          this.dataSub = this.dataSub.filter((a) => a[x.condition] == x.value);
+        }
+      }
 
     });
   }
-  handleCallbackTable($event){
-
+  handleCallbackTable(ev) {
+    console.log(ev);
+    if (ev.type === 'create') {
+      return this.dialog.open(EnterpriseCreateComponent, {
+        width: '940px',
+        height: '843px'
+      }).afterClosed().subscribe(result => {
+      });
+    }
+    if (ev.type === 'delete') {
+      return this.dialog.open(DeleteEnterpriseComponent, {
+        width: '400px',
+        height: '250px',
+        data: {
+          item: ev.item,
+          title: "Xoá doanh nghiệp",
+          content: "Bạn có muốn xoá thông tin doanh nghiệp trên hệ thống?"
+        }
+      }).afterClosed().subscribe(result => {
+      });
+    }
   }
 
 }

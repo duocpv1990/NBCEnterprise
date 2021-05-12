@@ -19,7 +19,8 @@ export class ShopListComponent implements OnInit {
       "register": 'Công ty TNHH Việt An',
       "gt": '1 giấy tờ',
       "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021"
+      "update": "13:30, 21/04/2021",
+      "MediaURL": "assets/img/default-avatar.jpg"
     },
     {
       "stt": "2",
@@ -78,6 +79,7 @@ export class ShopListComponent implements OnInit {
   listActive;
   ngOnInit(): void {
     this.listFilter = this.config.filter;
+    this.listActive = this.config.btnActice;
     this.dataTable = this.config.collums;
   }
   handleCallback($event){

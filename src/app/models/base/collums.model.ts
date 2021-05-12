@@ -4,4 +4,5 @@ export class CollumsModel {
     width: number;
     type: string;
     idSub?: string;
+    color?: string;
 }

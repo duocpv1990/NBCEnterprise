@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { DistributorModel } from 'src/app/models/distributor.model';
-import { EnterPriseModel } from 'src/app/models/enterprise.model';
+import { DeleteEnterpriseComponent } from '../../enterprise/delete-enterprise/delete-enterprise.component';
+import { CreateDistributorComponent } from '../create-distributor/create-distributor.component';
 
 @Component({
-  selector: 'app-disributor-list',
-  templateUrl: './disributor-list.component.html',
-  styleUrls: ['./disributor-list.component.scss']
+  selector: 'app-distributor-list',
+  templateUrl: './distributor-list.component.html',
+  styleUrls: ['./distributor-list.component.scss']
 })
-export class DisributorListComponent implements OnInit {
+export class DistributorListComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public dialog: MatDialog
+  ) { }
   config = new DistributorModel();
   listFilter = [];
   data = [
@@ -81,34 +85,55 @@ export class DisributorListComponent implements OnInit {
   ngOnInit(): void {
     this.listFilter = this.config.filter;
     this.dataTable = this.config.collums;
+    this.listActive = this.config.btnActice;
     this.dataSub = this.data;
   }
-  handleCallback(ev){
+  handleCallback(ev) {
     const filter = this.listFilter.filter(x => x.value);
     if (!filter.length) return this.dataSub = this.data;
     filter.forEach((x, ix) => {
-        if (ix === 0) {
-            if (x.type === 'text' || x.type === 'search') {
-                this.dataSub = this.data.filter(
-                    (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
-            } else {
-                this.dataSub = this.data.filter((a) => a[x.condition] == x.value);
-            }
+      if (ix === 0) {
+        if (x.type === 'text' || x.type === 'search') {
+          this.dataSub = this.data.filter(
+            (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
         } else {
-            if (x.type === 'text' || x.type === 'search') {
-                this.dataSub = this.dataSub.filter(
-                    (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
-            } else {
-                this.dataSub = this.dataSub.filter((a) => a[x.condition] == x.value);
-            }
+          this.dataSub = this.data.filter((a) => a[x.condition] == x.value);
         }
+      } else {
+        if (x.type === 'text' || x.type === 'search') {
+          this.dataSub = this.dataSub.filter(
+            (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
+        } else {
+          this.dataSub = this.dataSub.filter((a) => a[x.condition] == x.value);
+        }
+      }
 
     });
 
   }
-  handleCallbackTable(ev){
-     console.log(ev);
-     
+  handleCallbackTable(ev) {
+    console.log(ev);
+    if (ev.type === 'create') {
+      return this.dialog.open(CreateDistributorComponent, {
+        width: '940px',
+        height: '843px'
+      }).afterClosed().subscribe(result => {
+      });
+    }
+
+    if (ev.type === 'delete') {
+      return this.dialog.open(DeleteEnterpriseComponent, {
+        width: '400px',
+        height: '250px',
+        data: {
+          item: ev.item,
+          title: "Xoá nhà phân phối",
+          content: "Bạn có muốn xoá thông tin nhà phân phối trên hệ thống?"
+        }
+      }).afterClosed().subscribe(result => {
+      });
+    }
+
   }
 
 }

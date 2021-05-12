@@ -1,29 +1,36 @@
-<div class="header-info" *ngIf="profile |async as pro">
-    <div class="header-info-avt">
-        <img [src]="pro.Avatar" alt="">
+<div class="header">
+  <div class="search">
+    <input type="search" placeholder="Tìm kiếm" />
+    <img src="assets/svg/nbc-search.svg" alt="" srcset="" />
+  </div>
+  <div class="badge">
+    <span matBadge="2" matBadgeOverlap="false">
+      <img src="assets/svg/nbc-mess.svg" srcset="" />
+    </span>
+    <span matBadge="18" matBadgeOverlap="false">
+      <img src="assets/svg/nbc-noti.svg" srcset="" />
+    </span>
+    <span matBadge="!" matBadgeOverlap="false" matBadgeColor="warn">
+      <img src="assets/svg/nbc-setting.svg" srcset="" />
+    </span>
+  </div>
+  <div class="info">
+    <div class="image" [matMenuTriggerFor]="menu">
+      <img src="assets/img/default-avatar.jpg" alt="" srcset="" />
     </div>
-    <div class="header-info-name ">
-        {{pro.FullName}}
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="btnLogout()">
+        <mat-icon> <span class="material-icons"> logout </span> </mat-icon>
+        <span>Đăng xuất</span>
+      </button>
+      <!-- <button mat-menu-item (click)="changePassword()">
+        <mat-icon><span class="material-icons"> https </span></mat-icon>
+        <span>Đổi mật khẩu</span>
+      </button> -->
+    </mat-menu>
+    <div class="detail">
+      <strong>Cty TNHH Nhật Minh</strong>
+      <p>Superadmin</p>
     </div>
-    <div class="header-info-btn " mat-icon-button [matMenuTriggerFor]="menu " aria-label="Example icon-button with a menu ">
-        <!-- <mat-icon>more_vert</mat-icon> -->
-        <span class="material-icons ">
-                expand_more
-                </span>
-        <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="btnLogout() ">
-                <mat-icon>  <span class="material-icons ">
-                                    logout
-                    </span> </mat-icon>
-
-                    <span>Đăng xuất</span>
-            </button>
-
-            <button mat-menu-item (click)="changePassword()">
-              <mat-icon><span class="material-icons ">
-                https
-                </span></mat-icon>
-              <span>Đổi mật khẩu</span>
-            </button>
-        </mat-menu>
-    </div>
+  </div>
+</div>

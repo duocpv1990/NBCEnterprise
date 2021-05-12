@@ -6,7 +6,7 @@ export const appRoutes: Routes = [
     path: '',
     loadChildren: () =>
       import('./pages/auth/auth.module').then((m) => m.AuthModule),
-    canActivate: [AppGuard],
+    // canActivate: [AppGuard],
   },
   {
     path: '',

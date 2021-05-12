@@ -5,6 +5,8 @@ import { RouterModule } from '@angular/router';
 import { distributorRoute } from './distributor.routes';
 import { DistributorComponent } from './distributor.component';
 import { DisributorListComponent } from './disributor-list/disributor-list.component';
+import { FilterBaseModule } from 'src/app/components/filter/filter.component';
+import { TableBaseModule } from 'src/app/components/table/table.component';
 
 
 
@@ -12,6 +14,8 @@ import { DisributorListComponent } from './disributor-list/disributor-list.compo
   declarations: [DistributorComponent, DisributorListComponent],
   imports: [
     CommonModule,
+    FilterBaseModule,
+    TableBaseModule,
     RouterModule.forChild(distributorRoute)
   ],
   exports: [DistributorComponent]

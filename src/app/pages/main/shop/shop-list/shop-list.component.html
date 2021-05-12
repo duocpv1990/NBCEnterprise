@@ -1,1 +1,8 @@
-<p>shop-list works!</p>
+<div class="content-title">Danh sách cửa hàng</div>
+<app-filter [(listFilter)]="listFilter" (callback)="handleCallback($event)">
+</app-filter>
+<br>
+<br>
+<app-table [tableData]="dataTable" [data]="data" [listActive]="listActive" (callback)="handleCallbackTable($event)"></app-table>
+
+

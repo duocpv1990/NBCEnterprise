@@ -1,1 +1,8 @@
-<p>disributor-list works!</p>
+<div class="content-title">Danh sách nhà phân phối</div>
+<app-filter [(listFilter)]="listFilter" (callback)="handleCallback($event)">
+</app-filter>
+<br>
+<br>
+<app-table [tableData]="dataTable" [data]="dataSub" [listActive]="listActive" (callback)="handleCallbackTable($event)"></app-table>
+
+

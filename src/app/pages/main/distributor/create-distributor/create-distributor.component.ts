@@ -11,7 +11,7 @@ export class CreateDistributorComponent implements OnInit {
   conFig = new DistributorModel;
   dataModel = {};
   option = {
-      title: 'Thêm mới doanh nghiệp',
+      title: 'Thêm mới nhà phân phối',
       type: 'create'
   };
 

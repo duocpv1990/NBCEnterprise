@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ShopModel } from 'src/app/models/shop.model';
+import { ShopCreateComponent } from '../shop-create/shop-create.component';
+import { ShopDeleteComponent } from '../shop-delete/shop-delete.component';
 
 @Component({
   selector: 'app-shop-list',
@@ -8,7 +11,9 @@ import { ShopModel } from 'src/app/models/shop.model';
 })
 export class ShopListComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private dialog: MatDialog
+  ) { }
   config = new ShopModel();
   listFilter = [];
   data = [
@@ -82,11 +87,29 @@ export class ShopListComponent implements OnInit {
     this.listActive = this.config.btnActice;
     this.dataTable = this.config.collums;
   }
-  handleCallback($event){
+  handleCallback(ev){
 
   }
-  handleCallbackTable($event){
-
+  handleCallbackTable(ev){
+    if (ev.type === 'create') {
+      return this.dialog.open(ShopCreateComponent, {
+        width: '940px',
+        height: '843px'
+      }).afterClosed().subscribe(result => {
+      });
+    }
+    if (ev.type === 'delete') {
+      return this.dialog.open(ShopDeleteComponent, {
+        width: '400px',
+        height: '250px',
+        data: {
+          item: ev.item,
+          title: "Xoá điểm bán",
+          content: "Bạn có muốn xoá thông tin điểm bán trên hệ thống?"
+        }
+      }).afterClosed().subscribe(result => {
+      });
+    }
   }
 
 }

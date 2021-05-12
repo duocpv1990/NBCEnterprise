@@ -30,10 +30,36 @@ export class ShopModel {
                 condition: 'fullText'
             }];
     }
-
-
+   
+    public get btnActice(): Array<any> {
+        return [
+            {
+                class: 'btn-create',
+                text: 'Thêm mới',
+                type: 'create',
+                icon: ''
+            },
+            {
+                class: 'btn-delete',
+                text: 'Xoá',
+                type: 'delete',
+                icon: ''
+            },            {
+                class: 'btn-export',
+                text: 'Export',
+                type: 'export',
+                icon: ''
+            }
+        ];
+    }
     public get collums(): Array<CollumsModel> {
         return [
+            {
+                id: 'checkbox',
+                name: '',
+                width: 100,
+                type: 'checkbox',
+            },
             {
                 id: 'stt',
                 name: 'STT',
@@ -41,9 +67,9 @@ export class ShopModel {
                 type: 'text',
             },
             {
-                id: 'image',
+                id: 'MediaURL',
                 name: 'Ảnh',
-                width: 200,
+                width: 100,
                 type: 'image',
             },
 

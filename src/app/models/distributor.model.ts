@@ -29,15 +29,21 @@ export class DistributorModel {
     public get collums(): Array<CollumsModel> {
         return [
             {
+                id: 'checkbox',
+                name: '',
+                width: 100,
+                type: 'checkbox',
+            },
+            {
                 id: 'stt',
                 name: 'STT',
                 width: 100,
                 type: 'text',
             },
             {
-                id: 'image',
+                id: 'MediaURL',
                 name: 'Ảnh',
-                width: 200,
+                width: 100,
                 type: 'image',
             },
 
@@ -90,6 +96,28 @@ export class DistributorModel {
                 type: 'setting',
             },
 
+        ];
+    }
+
+    public get btnActice(): Array<any> {
+        return [
+            {
+                class: 'btn-create',
+                text: 'Thêm mới',
+                type: 'create',
+                icon: ''
+            },
+            {
+                class: 'btn-delete',
+                text: 'Gỡ nhà phân phối',
+                type: 'delete',
+                icon: ''
+            },            {
+                class: 'btn-export',
+                text: 'Export',
+                type: 'export',
+                icon: ''
+            }
         ];
     }
 

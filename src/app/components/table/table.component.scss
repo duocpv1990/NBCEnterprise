@@ -1,10 +1,33 @@
 .table-style {
     padding: 25px;
     height: 100%;
+    .btn-header{
+        display: flex;
+        align-items: center;
+        position: relative;
+        height: 50px;
+        margin: 10px;
+    }
+    .checkbox{
+        width: 23px;
+        height: 23px;
+    }
+    .image{
+        width: 50px;
+        height: 50px;
+        border-radius: 7px;
+    }
+    .btn-table{
+        background: none;
+        outline: none;
+        border: none;
+        cursor: pointer;
+    }
     .paginator {
         display: flex;
         align-items: center;
-        padding-bottom: 20px;
+        position: absolute;
+        right: 0;
         .current-page {
             margin-right: 10px;
             display: flex;
@@ -22,11 +45,12 @@
                     width: 10px;
                 }
             }
+
         }
     }
     .group-btn {
         text-align: right;
-        button {
+        button:not(:nth-child(1)) {
             margin-left: 20px;
         }
     }
@@ -34,4 +58,49 @@
 .scroll{
     width: 100%;
     overflow-x: auto;
+}
+.btn-create{
+   width: 150px;
+   height: 40px;
+   background-color: #1894FF;
+   color: white;
+   border: none;
+   border-radius: 10px;
+   cursor: pointer;
+}
+.btn-delete{
+   height: 40px;
+   padding: 0 20px;
+   color: #FF1818;
+   background-color:#FFFFFF ;
+   border: 1px solid #FF1818;
+   border-radius: 10px;
+   cursor: pointer;
+}
+.btn-export{
+   width: 120px;
+   height: 40px;
+   color: white;
+   background-color: #F79E28;
+   border-radius: 10px;
+   border: none;
+   cursor: pointer;
+}
+.btn-hide{
+    width: 85px;
+   height: 40px;
+   color: white;
+   background-color: #898989;
+   border-radius: 10px;
+   border: none;
+   cursor: pointer;
+}
+.bnt-show{
+    width: 85px;
+    height: 40px;
+    color: #1894FF;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #1894FF;
+    cursor: pointer;
 }

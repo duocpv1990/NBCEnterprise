@@ -81,6 +81,7 @@ export class EnterpriseListComponent implements OnInit {
   ngOnInit(): void {
     this.listFilter = this.config.filter;
     this.dataTable = this.config.collums;
+    this.listActive = this.config.btnActice;
     this.dataSub = this.data;
   }
   handleCallback(ev){

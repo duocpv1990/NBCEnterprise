@@ -55,15 +55,19 @@
           outline-style: none;
         }
 
-        ::ng-deep .mat-tab-header {
+        .mat-tab-header {
           width: 28rem;
           left: 38%;
         }
-        ::ng-deep
-          .mat-tab-header-pagination-controls-enabled
-          .mat-tab-header-pagination {
+
+        .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
           display: none;
         }
+
+        .mat-tab-label.mat-tab-label-active {
+          color: var(--color-primary);
+        }
+
         .tab-content {
           height: 39vh;
         }

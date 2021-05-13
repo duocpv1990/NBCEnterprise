@@ -1,46 +1,160 @@
 .home-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  .col__item-1 {
-    height: 50vh;
-    margin: 5px;
-    .row-1 {
-      display: flex;
-      justify-content: space-between;
-
-      .box {
-        height: 125px;
-        width: 100%;
+  .col {
+    &__item-1 {
+      margin: 5px;
+      .row-1 {
         display: flex;
-        align-items: center;
+        justify-content: space-between;
+
+        .box {
+          height: 125px;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          margin: 10px;
+          border-radius: 15px;
+          color: #ffffff;
+          padding-left: 15px;
+          &:nth-child(1) {
+            background-color: var(--color-primary);
+          }
+          &:nth-child(2) {
+            background-color: #018431;
+          }
+          &:nth-child(3) {
+            background-color: #ff8d0e;
+          }
+        }
+      }
+
+      .row-2 {
+        height: 125px;
+        background: var(--color-white);
         margin: 10px;
         border-radius: 15px;
-        color: #ffffff;
+        display: flex;
+        align-items: center;
         padding-left: 15px;
-        &:nth-child(1) {
-          background-color: #1921fa;
+      }
+
+      .row-3 {
+        &__content {
+          background: var(--color-white);
+          padding: 3%;
+          margin: 10px;
+          border-radius: 15px;
         }
-        &:nth-child(2) {
-          background-color: #018431;
+
+        select {
+          position: absolute;
+          height: 3em;
+          padding: 0 1em;
+          border-radius: 15px;
+          outline-style: none;
         }
-        &:nth-child(3) {
-          background-color: #ff8d0e;
+
+        .mat-tab-header {
+          width: 28rem;
+          left: 38%;
+        }
+
+        .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
+          display: none;
+        }
+
+        .mat-tab-label.mat-tab-label-active {
+          color: var(--color-primary);
+        }
+
+        .tab-content {
+          height: 39vh;
+        }
+        .chart {
+          overflow: hidden;
         }
       }
     }
 
-    .row-2__content {
-      height: 125px;
-      background: #ffffff;
-      margin: 10px;
+    &__item-2 {
+      margin: 5px;
+      .chart-block {
+        margin: 10px;
+        border-radius: 15px;
+        background: var(--color-white);
+        .chart-title {
+          padding: 10px 15px;
+          font-weight: 600;
+        }
+        .chart-content {
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
+
+    &__item-right {
+      background: var(--color-white);
+      padding: 2em;
+      height: 66%;
       border-radius: 15px;
-      display: flex;
-      align-items: center;
-      padding-left: 15px;
     }
   }
-  .col__item-2 {
-    height: 30vh;
-    margin: 5px;
+
+  .list {
+    width: 100%;
+    height: 100%;
+
+    &-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 3%;
+      .title {
+        font-weight: 600;
+      }
+      .link {
+        color: var(--color-primary);
+        cursor: pointer;
+      }
+    }
+
+    .list-item {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 3px solid var(--color-section);
+      padding: 10px 0px;
+      .list-item_left {
+        display: flex;
+        img {
+          width: 100px;
+          height: 100px;
+          border-radius: 15px;
+          margin-right: 20px;
+        }
+        &-text {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          div:nth-of-type(1) {
+            font-weight: 600;
+          }
+          button {
+            background-color: #ff8d0e;
+            width: 77px;
+            height: 37px;
+            border: none;
+            border-radius: 20px;
+            color: #fff;
+          }
+        }
+      }
+
+      .list-item_right {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+    }
   }
 }

@@ -46,7 +46,7 @@ export class HomePageComponent implements OnInit {
     this.chart1Options = {
       series: [44, 55, 13, 43, 22],
       chart: {
-        width: 380,
+        width: 500,
         type: "pie"
       },
       labels: ["Hà Nội", "Hồ Chí Minh", "Hải Phòng", "Cần Thơ", "Đà Nẵng"],

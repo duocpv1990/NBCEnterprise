@@ -63,23 +63,23 @@ export class Product {
                 id: 'image',
                 name: 'Ảnh',
                 width: 200,
-                type: 'text'
+                type: 'image'
             },
             {
-                id: 'product',
-                name: 'Ngày bảo dưỡng gần nhất',
+                id: 'productName',
+                name: 'Sản phẩm',
                 width: 200,
-                type: 'date',
+                type: 'text',
             },
             {
                 id: 'barcode',
                 name: 'Mã vạch',
                 width: 200,
-                type: 'date',
+                type: 'text',
             },
 
             {
-                id: 'contract_package',
+                id: 'contractPackage',
                 name: 'Gói hợp đồng',
                 width: 200,
                 type: 'text',
@@ -88,33 +88,55 @@ export class Product {
                 id: 'owner',
                 name: 'Công ty sở hữu',
                 width: 200,
-                type: 'setting',
+                type: 'text',
             },
             {
                 id: 'authorization',
                 name: 'Quyền quản lý',
                 width: 200,
-                type: 'setting',
+                type: 'object',
             },
             {
                 id: 'status',
                 name: 'Trạng thái',
                 width: 200,
-                type: 'setting',
+                type: 'text',
             },
             {
-                id: 'info-status',
+                id: 'infoStatus',
                 name: 'Trạng thái thông tin',
                 width: 200,
-                type: 'setting',
+                type: 'text',
             },
             {
-                id: 'scan-count',
+                id: 'scanCount',
                 name: 'Lượt quét',
                 width: 200,
-                type: 'setting',
+                type: 'text',
             },
 
+        ];
+    }
+
+    public get btnActice(): Array<any> {
+        return [
+            {
+                class: 'btn-create',
+                text: 'Thêm mới',
+                type: 'create',
+                icon: ''
+            },
+            {
+                class: 'btn-delete',
+                text: 'Xoá sản phẩm',
+                type: 'delete',
+                icon: ''
+            }, {
+                class: 'btn-export',
+                text: 'Export',
+                type: 'export',
+                icon: ''
+            }
         ];
     }
 

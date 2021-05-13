@@ -4,7 +4,7 @@
   </div>
   <div class="layout">
     <div class="content row align-items-center" *ngFor="let item of data">
-      <div class="label" *ngIf="item.type !== 'img'">{{ item?.label }}</div>
+      <div class="label" *ngIf="item.type !== 'img' && item.type !== 'button' ">{{ item?.label }}</div>
       <div class="input-text" [class]="item.class">
         <div
           *ngIf="

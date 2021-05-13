@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ApexAxisChartSeries, ApexDataLabels, ApexFill, ApexGrid, ApexMarkers, ApexStroke, ApexTitleSubtitle, ApexTooltip, ApexXAxis, ApexYAxis, ChartComponent } from "ng-apexcharts";
 
 import {
@@ -34,7 +35,8 @@ export type Chart2Options = {
 export class HomePageComponent implements OnInit {
   chart1Options: Partial<Chart1Options>;
   chart2Options: Partial<Chart2Options>;
-
+  date = new FormControl(new Date());
+  serializedDate = new FormControl((new Date()).toISOString());
 
   constructor() { }
 

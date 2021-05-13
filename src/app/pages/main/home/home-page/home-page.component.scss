@@ -73,6 +73,21 @@
         }
         .chart {
           overflow: hidden;
+          .mat-form-field-appearance-fill .mat-form-field-flex {
+            padding: 0;
+          }
+          .mat-form-field-underline {
+            display: none;
+          }
+
+          .mat-form-field-appearance-fill .mat-form-field-flex {
+            background: var(--color-secondary);
+          }
+          .mat-form-field:not(.mat-form-field-appearance-legacy)
+            .mat-form-field-suffix
+            .mat-icon-button {
+            right: 260%;
+          }
         }
       }
     }

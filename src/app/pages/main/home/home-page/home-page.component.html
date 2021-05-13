@@ -58,20 +58,26 @@
                         </mat-tab>
                         <mat-tab label="Tuần này">
                             <div class="chart tab-content">
-                                <div class="calendar">
-                                    <mat-form-field appearance="fill">
-                                        <!-- <mat-label>Angular forms</mat-label> -->
-                                        <input matInput [matDatepicker]="picker1" [formControl]="date">
-                                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                                        <mat-datepicker #picker1></mat-datepicker>
-                                    </mat-form-field>
-                                    -
-                                    <mat-form-field appearance="fill">
-                                        <!-- <mat-label>Angular forms (w/ deserialization)</mat-label> -->
-                                        <input matInput [matDatepicker]="picker2" [formControl]="serializedDate">
-                                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                                        <mat-datepicker #picker2></mat-datepicker>
-                                    </mat-form-field>
+                                <div class="search">
+                                    <div class="date-picker">
+                                        <mat-form-field appearance="fill">
+                                            <!-- <mat-label>Angular forms</mat-label> -->
+                                            <input matInput [matDatepicker]="picker1" [formControl]="date">
+                                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker1></mat-datepicker>
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="fill">
+                                            <!-- <mat-label>Angular forms (w/ deserialization)</mat-label> -->
+                                            <input matInput [matDatepicker]="picker2" [formControl]="serializedDate">
+                                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker2></mat-datepicker>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="search-button">
+                                        <button>Tìm kiếm</button>
+                                    </div>
+
                                 </div>
 
 

@@ -73,6 +73,33 @@
         }
         .chart {
           overflow: hidden;
+          .search {
+            display: flex;
+            justify-content: flex-end;
+            &-button {
+              margin-top: 1.2%;
+              button {
+                color: var(--color-secondary);
+                padding: 0.6em;
+                border: none;
+                border-radius: 5px;
+                background: var(--color-button-gray);
+                cursor: pointer;
+              }
+            }
+          }
+
+          .mat-input-element {
+            padding-bottom: 5px;
+          }
+
+          .mat-form-field-wrapper {
+            padding-bottom: 0;
+          }
+
+          .mat-form-field {
+            width: 8rem;
+          }
           .mat-form-field-appearance-fill .mat-form-field-flex {
             padding: 0;
           }
@@ -86,7 +113,7 @@
           .mat-form-field:not(.mat-form-field-appearance-legacy)
             .mat-form-field-suffix
             .mat-icon-button {
-            right: 260%;
+            right: 35%;
           }
         }
       }

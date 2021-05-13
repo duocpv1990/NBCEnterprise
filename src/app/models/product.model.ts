@@ -58,6 +58,12 @@ export class Product {
 
     public get collums(): Array<CollumsModel> {
         return [
+            {
+                id: 'checkbox',
+                name: '',
+                width: 100,
+                type: 'checkbox',
+            },
 
             {
                 id: 'image',

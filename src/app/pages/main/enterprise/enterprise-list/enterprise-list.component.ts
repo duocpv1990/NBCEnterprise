@@ -4,6 +4,7 @@ import { DeleteComponent } from 'src/app/components/dialog/delete/delete.compone
 import { EnterPriseModel } from 'src/app/models/enterprise.model';
 import { DeleteEnterpriseComponent } from '../delete-enterprise/delete-enterprise.component';
 import { EnterpriseCreateComponent } from '../enterprise-create/enterprise-create.component';
+import { EnterpriseEditComponent } from '../enterprise-edit/enterprise-edit.component';
 
 @Component({
   selector: 'app-enterprise-list',
@@ -18,61 +19,103 @@ export class EnterpriseListComponent implements OnInit {
       "stt": "1",
       "code": "023456781",
       "global": '023456781',
-      "register": 'Công ty TNHH Việt An',
+      "register": 'Công ty TNHH Việt An 1',
       "gt": '1 giấy tờ',
       "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021"
-
+      "update": "13:30, 21/04/2021",
+      "taxcode": "01234",
+      "country":"Viet Nam",
+      "city" : "1",
+      "district": "1",
+      "address" : "Ha Noi - Viet Nam",
+      "phone": "0987654321",
+      "email": "city@gmail.com",
+      "website": "https://www.consultindochina.com/"
     },
     {
       "stt": "2",
       "code": "023456781",
       "global": '023456781',
-      "register": 'Công ty TNHH Việt An',
+      "register": 'Công ty TNHH Việt An 2 ',
       "gt": '1 giấy tờ',
       "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021"
-
+      "update": "13:30, 21/04/2021",
+      "taxcode": "01234",
+      "country":"Viet Nam",
+      "city" : "1",
+      "district": "1",
+      "address" : "Ha Noi - Viet Nam",
+      "phone": "0987654321",
+      "email": "city@gmail.com",
+      "website": "https://www.consultindochina.com/"
     },
     {
       "stt": "3",
       "code": "023456781",
       "global": '023456781',
-      "register": 'Công ty TNHH Việt An',
+      "register": 'Công ty TNHH Việt An 3',
       "gt": '1 giấy tờ',
       "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021"
-
+      "update": "13:30, 21/04/2021",
+      "taxcode": "01234",
+      "country":"Viet Nam",
+      "city" : "1",
+      "district": "1",
+      "address" : "Ha Noi - Viet Nam",
+      "phone": "0987654321",
+      "email": "city@gmail.com",
+      "website": "https://www.consultindochina.com/"
     },
     {
       "stt": "4",
       "code": "023456781",
       "global": '023456781',
-      "register": 'Công ty TNHH Việt An',
+      "register": 'Công ty TNHH Việt An 4',
       "gt": '1 giấy tờ',
       "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021"
-
+      "update": "13:30, 21/04/2021",
+      "taxcode": "01234",
+      "country":"Viet Nam",
+      "city" : "1",
+      "district": "1",
+      "address" : "Ha Noi - Viet Nam",
+      "phone": "0987654321",
+      "email": "city@gmail.com",
+      "website": "https://www.consultindochina.com/"
     },
     {
       "stt": "5",
       "code": "023456781",
       "global": '023456781',
-      "register": 'Công ty TNHH Việt An',
+      "register": 'Công ty TNHH Việt An 5',
       "gt": '1 giấy tờ',
       "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021"
-
+      "update": "13:30, 21/04/2021",
+      "taxcode": "01234",
+      "country":"Viet Nam",
+      "city" : "1",
+      "district": "1",
+      "address" : "Ha Noi - Viet Nam",
+      "phone": "0987654321",
+      "email": "city@gmail.com",
+      "website": "https://www.consultindochina.com/"
     },
     {
       "stt": "6",
       "code": "023456781",
       "global": '023456781',
-      "register": 'Công ty TNHH Việt An',
+      "register": 'Công ty TNHH Việt An 6',
       "gt": '1 giấy tờ',
       "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021"
-
+      "update": "13:30, 21/04/2021",
+      "taxcode": "01234",
+      "country":"Viet Nam",
+      "city" : "1",
+      "district": "1",
+      "address" : "Ha Noi - Viet Nam",
+      "phone": "0987654321",
+      "email": "city@gmail.com",
+      "website": "https://www.consultindochina.com/"
     },
 
 
@@ -118,6 +161,14 @@ export class EnterpriseListComponent implements OnInit {
       return this.dialog.open(EnterpriseCreateComponent, {
         width: '940px',
         height: '843px'
+      }).afterClosed().subscribe(result => {
+      });
+    }
+    if (ev.type === 'edit') {
+      return this.dialog.open(EnterpriseEditComponent, {
+        width: '940px',
+        height: '843px',
+        data: ev.item
       }).afterClosed().subscribe(result => {
       });
     }

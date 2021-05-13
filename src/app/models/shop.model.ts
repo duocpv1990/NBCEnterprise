@@ -15,7 +15,7 @@ export class ShopModel {
             },
             {
                 Text: 'Tỉnh thành',
-                type: 'text',
+                type: 'select',
                 data: [],
                 condition: 'province'
             },

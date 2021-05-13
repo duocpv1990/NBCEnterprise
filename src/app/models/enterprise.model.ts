@@ -119,9 +119,9 @@ export class EnterPriseModel {
     public get create(): Array<CreateModel> {
         return [
             {
-                id: 'name',
+                id: 'register',
                 label: 'Tên doanh nghiệp',
-                name: 'name',
+                name: 'register',
                 type: 'text'
             },
             {
@@ -133,7 +133,7 @@ export class EnterPriseModel {
             {
                 id: 'global',
                 label: 'Mã địa điểm toàn cầu GLN',
-                name: 'code',
+                name: 'global',
                 type: 'text'
             },
             {

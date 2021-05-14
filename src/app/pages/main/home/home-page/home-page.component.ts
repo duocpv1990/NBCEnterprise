@@ -86,12 +86,13 @@ export class HomePageComponent implements OnInit {
       },
       stroke: {
         width: 1,
-        curve: "straight"
+        curve: "straight",
+        colors: ['#ACACAC']
       },
 
       grid: {
         row: {
-          colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
+          colors: ["#f3f3f3", "transparent"],
           opacity: 0.5
         }
       },
@@ -110,7 +111,8 @@ export class HomePageComponent implements OnInit {
         size: 6,
         hover: {
           size: 10
-        }
+        },
+        colors: ['#1921FA']
       },
     };
 

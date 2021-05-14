@@ -1,5 +1,11 @@
 .form-create {
   padding: 15px;
+  .subtitle {
+    margin-left: 0.5em;
+    color: #1894ff;
+    font-weight: 600;
+    margin-top: 3em;
+  }
   .layout {
     display: grid;
     grid-template-columns: 1fr 1fr;

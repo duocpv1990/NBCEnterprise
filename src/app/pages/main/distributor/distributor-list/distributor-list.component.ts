@@ -20,6 +20,12 @@ export class DistributorListComponent implements OnInit {
     {
       "stt": "1",
       "code": "023456781",
+      "MediaURL": "https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg",
+      "distributor": "Nhà phân phối số 1",
+      'address': "Hàng Bồ - Hoàn Kiếm - Hà Nội",
+      'area': 'Hà Nội',
+      'production': 0,
+      'phone': '0123456789',
       "global": '023456781',
       "register": 'Công ty TNHH Việt An',
       "gt": '1 giấy tờ',
@@ -29,6 +35,12 @@ export class DistributorListComponent implements OnInit {
     {
       "stt": "2",
       "code": "023456781",
+      "MediaURL": "https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg",
+      "distributor": "Nhà phân phối số 1",
+      'address': "Hàng Bồ - Hoàn Kiếm - Hà Nội",
+      'area': 'Hà Nội',
+      'production': 0,
+      'phone': '0123456789',
       "global": '023456781',
       "register": 'Công ty TNHH Việt An',
       "gt": '1 giấy tờ',
@@ -39,41 +51,63 @@ export class DistributorListComponent implements OnInit {
     {
       "stt": "3",
       "code": "023456781",
+      "MediaURL": "https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg",
       "global": '023456781',
       "register": 'Công ty TNHH Việt An',
       "gt": '1 giấy tờ',
       "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021"
-
+      "update": "13:30, 21/04/2021",
+      "distributor": "Nhà phân phối số 1",
+      'address': "Hàng Bồ - Hoàn Kiếm - Hà Nội",
+      'area': 'Hà Nội',
+      'production': 0,
+      'phone': '0123456789',
     },
     {
       "stt": "4",
       "code": "023456781",
+      "MediaURL": "https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg",
       "global": '023456781',
       "register": 'Công ty TNHH Việt An',
       "gt": '1 giấy tờ',
       "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021"
-
+      "update": "13:30, 21/04/2021",
+      "distributor": "Nhà phân phối số 1",
+      'address': "Hàng Bồ - Hoàn Kiếm - Hà Nội",
+      'area': 'Hà Nội',
+      'production': 0,
+      'phone': '0123456789',
     },
     {
       "stt": "5",
       "code": "023456781",
+      "MediaURL": "https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg",
       "global": '023456781',
       "register": 'Công ty TNHH Việt An',
       "gt": '1 giấy tờ',
       "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021"
-
+      "update": "13:30, 21/04/2021",
+      "distributor": "Nhà phân phối số 1",
+      'address': "Hàng Bồ - Hoàn Kiếm - Hà Nội",
+      'area': 'Hà Nội',
+      'production': 0,
+      'phone': '0123456789',
     },
     {
       "stt": "6",
       "code": "023456781",
+      "MediaURL": "https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg",
+
       "global": '023456781',
       "register": 'Công ty TNHH Việt An',
       "gt": '1 giấy tờ',
       "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021"
+      "update": "13:30, 21/04/2021",
+      "distributor": "Nhà phân phối số 1",
+      'address': "Hàng Bồ - Hoàn Kiếm - Hà Nội",
+      'area': 'Hà Nội',
+      'production': 0,
+      'phone': '0123456789',
 
     },
 

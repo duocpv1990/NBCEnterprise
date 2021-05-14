@@ -1,6 +1,7 @@
 .home-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
+
   .col {
     &__item-1 {
       margin: 5px;
@@ -69,7 +70,7 @@
         }
 
         .tab-content {
-          height: 39vh;
+          height: 43vh;
         }
         .chart {
           overflow: hidden;
@@ -135,7 +136,7 @@
     &__item-right {
       background: var(--color-white);
       padding: 2em;
-      height: 51%;
+      height: 58%;
       border-radius: 15px;
     }
     &__item-left {
@@ -230,7 +231,25 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
+        &-text {
+          width: 15rem;
+          text-align: end;
+        }
       }
+    }
+  }
+
+  .subtitle {
+    display: flex;
+    align-items: center;
+    margin-left: 1.8em;
+    &-dot {
+      font-size: 3em;
+      color: #1921fa;
+    }
+    &-text {
+      font-size: 0.8em;
+      font-weight: 600;
     }
   }
 }

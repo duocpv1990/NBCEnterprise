@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product.model';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ProductAddComponent } from '../product-add/product-add.component';
+import { ProductUpdateComponent } from '../product-update/product-update.component';
+import { ProductDeleteComponent } from '../product-delete/product-delete.component';
 
 @Component({
   selector: 'app-product-list',
@@ -87,7 +91,9 @@ export class ProductListComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.listFilter = this.config.filter;
@@ -118,6 +124,38 @@ export class ProductListComponent implements OnInit {
       }
 
     });
+
+  }
+
+  handleCallbackTable(ev) {
+    console.log(ev);
+    if (ev.type === 'create') {
+      return this.dialog.open(ProductAddComponent, {
+        width: '940px',
+        height: '843px'
+      }).afterClosed().subscribe(result => {
+      });
+    }
+    if (ev.type === 'edit') {
+      return this.dialog.open(ProductUpdateComponent, {
+        width: '940px',
+        height: '843px',
+        data: ev.item
+      }).afterClosed().subscribe(result => {
+      });
+    }
+    if (ev.type === 'delete') {
+      return this.dialog.open(ProductDeleteComponent, {
+        width: '400px',
+        height: '250px',
+        data: {
+          item: ev.item,
+          title: "Xoá sản phẩm",
+          content: "Bạn có muốn xoá sản phẩm trên hệ thống?"
+        }
+      }).afterClosed().subscribe(result => {
+      });
+    }
   }
 
 

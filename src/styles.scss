@@ -38,6 +38,12 @@ body {
   font-family: "Montserrat", sans-serif;
   margin: 0px;
   height: 100%;
+  button {
+    font-family: "Montserrat", sans-serif !important;
+  }
+  .mat-tab-label .mat-tab-label-content {
+    font-family: "Montserrat", sans-serif !important;
+  }
 }
 
 .mat-dialog-container {

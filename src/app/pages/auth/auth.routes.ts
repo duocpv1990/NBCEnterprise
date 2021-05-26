@@ -14,8 +14,8 @@ export const authRoutes: Routes = [
         component: LoginComponent,
       },
       {
-        path:'forgot',
-        component:ForgotComponent
+        path: 'forgot',
+        component: ForgotComponent
       },
       {
         path: '',

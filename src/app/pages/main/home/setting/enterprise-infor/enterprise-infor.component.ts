@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Product } from 'src/app/models/product.model';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ProductAddComponent } from '../product-add/product-add.component';
-import { ProductUpdateComponent } from '../product-update/product-update.component';
-import { ProductDeleteComponent } from '../product-delete/product-delete.component';
+import { ProductAddComponent } from '../../../product/product-add/product-add.component';
+import { ProductDeleteComponent } from '../../../product/product-delete/product-delete.component';
+import { ProductUpdateComponent } from '../../../product/product-update/product-update.component';
 
 @Component({
-  selector: 'app-product-list',
-  templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.scss']
+  selector: 'app-enterprise-infor',
+  templateUrl: './enterprise-infor.component.html',
+  styleUrls: ['./enterprise-infor.component.scss']
 })
-export class ProductListComponent implements OnInit {
+export class EnterpriseInforComponent implements OnInit {
   listFilter;
   config = new Product();
   value: string;
@@ -90,10 +90,7 @@ export class ProductListComponent implements OnInit {
       scanCount: 6
     }
   ];
-
-  constructor(
-    private dialog: MatDialog
-  ) { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.listFilter = this.config.filter;
@@ -103,6 +100,7 @@ export class ProductListComponent implements OnInit {
     this.dataSub = this.data;
   }
 
+ 
   handleCallback(ev) {
     const filter = this.listFilter.filter(x => x.value);
     if (!filter.length) return this.dataSub = this.data;
@@ -157,7 +155,5 @@ export class ProductListComponent implements OnInit {
       });
     }
   }
-
-
 
 }

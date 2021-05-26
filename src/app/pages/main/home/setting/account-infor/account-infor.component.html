@@ -1,0 +1,45 @@
+<p class="title">
+    Thông tin tài khoản
+</p>
+<div class="row">
+    <div class="col-5">
+        <div class="add-img">
+            <!-- <img [scr]="'scsdc" alt=""> -->
+            <div class="circle">
+                <label for="img">
+					<img src="assets/svg/camera.png" alt="">
+					<input hidden id="img" type="file">
+				</label>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-7">
+        <div class="form-infor">
+            <form class="row">
+                <label class="col-6">
+					Họ (<span>*</span>)<br>
+					<input type="text">
+				</label>
+                <label class="col-6">
+					Tên (<span>*</span>)<br>
+					<input type="text">
+				</label>
+                <label class="col-6">
+					Điện thoại đăng nhập (<span>*</span>) <br>
+					<input type="text">
+				</label>
+                <label class="col-6">
+					Email <br>
+					<input type="text">
+				</label>
+            </form>
+            <div class="action">
+                <app-base-button [titleButton]="'Lưu'" [dataButton]="{cssClass: 'save-button'}"></app-base-button>
+                <app-base-button [titleButton]="'Hủy bỏ'" [dataButton]="{cssClass: 'cancel-button'}"></app-base-button>
+            </div>
+
+        </div>
+    </div>
+</div>

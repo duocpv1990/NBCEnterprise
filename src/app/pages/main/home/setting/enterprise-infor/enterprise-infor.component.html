@@ -1,0 +1,76 @@
+<mat-tab-group>
+    <mat-tab label="Thông tin liên hệ">
+        <div class="row">
+            <div class="col-5">
+                <div class="add-img">
+                    <div class="circle">
+                        <label for="img">
+							<img src="assets/svg/camera.png" alt="">
+							<input hidden id="img" type="file">
+						</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-7">
+                <div class="form-infor">
+                    <form class="row">
+                        <label class="col-12">
+							Tên doanh nghiệp (<span>*</span>)<br>
+							<input type="text">
+						</label>
+                        <label class="col-12">
+							Tên hiển thị  (<span>*</span>)<br>
+							<input type="text">
+						</label>
+                        <label class="col-6">
+							Mã số thuế (<span>*</span>) <br>
+							<input type="text">
+						</label>
+                        <label class="col-6">
+							Điện thoại (<span>*</span>)<br>
+							<input type="text">
+						</label>
+                        <label class="col-4">
+							Địa chỉ<span>*</span>)<br>
+							<input type="text">
+						</label>
+                        <label class="col-4">
+							Quận huyện (<span>*</span>) <br>
+							<input type="text">
+						</label>
+                        <label class="col-4">
+							Tỉnh, thành phố (<span>*</span>) <br>
+							<input type="text">
+						</label>
+                        <label class="col-6">
+							Email (<span>*</span>)<br>
+							<input type="text">
+						</label>
+                        <label class="col-6">
+							Website (<span>*</span>)<br>
+							<input type="text">
+						</label>
+                        <label class="col-12">
+							Giới thiệu <br>
+							<input type="text">
+						</label>
+                    </form>
+
+                    <div class="action">
+                        <app-base-button [titleButton]="'Lưu'" [dataButton]="{cssClass: 'save-button'}"></app-base-button>
+                        <app-base-button [titleButton]="'Hủy bỏ'" [dataButton]="{cssClass: 'cancel-button'}"></app-base-button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Quản lý giấy tờ">
+
+        <app-filter [(listFilter)]="listFilter" (callback)="handleCallback($event)">
+        </app-filter>
+
+        <app-table [tableData]="dataTable" [data]="dataSub" [listActive]="listActive" (callback)="handleCallbackTable($event)">
+        </app-table>
+    </mat-tab>
+</mat-tab-group>

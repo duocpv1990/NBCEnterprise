@@ -1,6 +1,6 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@import '~@angular/material/theming';
+@import "~@angular/material/theming";
 // Plus imports for other components in your app.
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
@@ -15,7 +15,15 @@ $VT-HTBH-Admin-accent: mat-palette($mat-pink, A200, A100, A400);
 $VT-HTBH-Admin-warn: mat-palette($mat-red);
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$VT-HTBH-Admin-theme: mat-light-theme(( color: ( primary: $VT-HTBH-Admin-primary, accent: $VT-HTBH-Admin-accent, warn: $VT-HTBH-Admin-warn, )));
+$VT-HTBH-Admin-theme: mat-light-theme(
+  (
+    color: (
+      primary: $VT-HTBH-Admin-primary,
+      accent: $VT-HTBH-Admin-accent,
+      warn: $VT-HTBH-Admin-warn,
+    ),
+  )
+);
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
@@ -23,20 +31,21 @@ $VT-HTBH-Admin-theme: mat-light-theme(( color: ( primary: $VT-HTBH-Admin-primary
 
 /* You can add global styles to this file, and also import other style files */
 
-@font-face {
-    font-family: "San-Francisco";
-    src: url("./assets/font/FontsFree-Net-SFProDisplay-Regular.ttf");
-}
-
-@import './themes/root-color.scss';
-@import './themes/global-class.scss';
+@import "./themes/root-color.scss";
+@import "./themes/global-class.scss";
 html,
 body {
-    font-family: "San-Francisco";
-    margin: 0px;
-    height: 100%;
+  font-family: "Montserrat", sans-serif;
+  margin: 0px;
+  height: 100%;
+  button {
+    font-family: "Montserrat", sans-serif !important;
+  }
+  .mat-tab-label .mat-tab-label-content {
+    font-family: "Montserrat", sans-serif !important;
+  }
 }
 
 .mat-dialog-container {
-    padding: 0px !important;
+  padding: 0px !important;
 }

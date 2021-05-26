@@ -116,3 +116,35 @@
   cursor: pointer;
   font-size: 16px;
 }
+
+.require-icon {
+  color: red;
+}
+
+.text-area {
+  margin-top: 0.8em;
+  textarea {
+    width: 98%;
+    border: 1px solid #bcbcbc;
+    outline-style: none;
+  }
+}
+
+.button-block {
+  text-align: center;
+  margin-top: 0.8em;
+  .action-btn {
+    font-size: 14px;
+    width: 8em;
+    height: 3em;
+    border: none;
+    color: white;
+    border-radius: 10px;
+  }
+  .action-btn:nth-child(1) {
+    background: #d6d6d6;
+  }
+  .action-btn:nth-child(2) {
+    background: #1894ff;
+  }
+}

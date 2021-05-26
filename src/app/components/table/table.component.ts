@@ -66,6 +66,12 @@ export class TableComponent implements OnInit, OnChanges {
             item: item
         })
     }
+    handleClickRow(item) {
+        this.callback.emit({
+            item: item,
+            type: 'edit'
+        });
+    }
 }
 
 @NgModule({

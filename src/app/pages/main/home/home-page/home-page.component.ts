@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ApexAxisChartSeries, ApexDataLabels, ApexFill, ApexGrid, ApexMarkers, ApexStroke, ApexTitleSubtitle, ApexTooltip, ApexXAxis, ApexYAxis, ChartComponent } from "ng-apexcharts";
 
 import {
@@ -34,7 +35,8 @@ export type Chart2Options = {
 export class HomePageComponent implements OnInit {
   chart1Options: Partial<Chart1Options>;
   chart2Options: Partial<Chart2Options>;
-
+  date = new FormControl(new Date());
+  serializedDate = new FormControl((new Date()).toISOString());
 
   constructor() { }
 
@@ -46,7 +48,7 @@ export class HomePageComponent implements OnInit {
     this.chart1Options = {
       series: [44, 55, 13, 43, 22],
       chart: {
-        width: 380,
+        width: 500,
         type: "pie"
       },
       labels: ["Hà Nội", "Hồ Chí Minh", "Hải Phòng", "Cần Thơ", "Đà Nẵng"],
@@ -84,12 +86,13 @@ export class HomePageComponent implements OnInit {
       },
       stroke: {
         width: 1,
-        curve: "straight"
+        curve: "straight",
+        colors: ['#ACACAC']
       },
 
       grid: {
         row: {
-          colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
+          colors: ["#f3f3f3", "transparent"],
           opacity: 0.5
         }
       },
@@ -108,7 +111,8 @@ export class HomePageComponent implements OnInit {
         size: 6,
         hover: {
           size: 10
-        }
+        },
+        colors: ['#1921FA']
       },
     };
 

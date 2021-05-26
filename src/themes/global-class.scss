@@ -176,6 +176,27 @@
   margin: 0px 16px;
 }
 
+.save-button {
+  width: 137px;
+  height: 50px;
+  border-radius: 10px;
+  color: #fff;
+  background-color: #002c6c;
+  font-size: 14px;
+  border: none;
+  margin-right: 20px;
+}
+
+.cancel-button {
+  width: 137px;
+  height: 50px;
+  border-radius: 10px;
+  color: #fff;
+  background-color: #d6d6d6;
+  font-size: 14px;
+  border: none;
+}
+
 .btn-cancel {
   background: #ffffff;
   border-radius: 8px;
@@ -196,6 +217,7 @@
   border-radius: 20px;
   background-color: var(--color-white);
 }
+
 .shadow-half {
   box-shadow: 0 0 3px 1px rgb(128 128 128 / 30%);
   border-bottom-left-radius: 20px;
@@ -209,7 +231,7 @@
   border: 1px solid #e4e4e4;
   outline-style: none;
   &-search {
-    background-color: var(--color-list-nav);
+    background-color: var(--color-primary);
     border-radius: 20px;
     height: 40px;
     padding: 0px 20px;
@@ -225,21 +247,21 @@
   font-weight: 600;
 }
 
-// - Table Style- 
+// - Table Style-
 .data-table {
   min-width: 100%;
   text-align: center;
   thead {
-    background-color: #E1E1E1;
+    background-color: #e1e1e1;
     color: black;
     font-weight: 500;
     border-radius: 10px;
     tr {
-      background-color: #E1E1E1;
+      background-color: #e1e1e1;
       height: 70px;
     }
     th {
-      background-color: #E1E1E1;
+      background-color: #e1e1e1;
     }
     th:not(:last-child) {
       .content {
@@ -263,7 +285,6 @@
     height: 65px;
     tr {
       height: 65px;
-      
       td {
         .data-content {
           height: 100%;
@@ -271,8 +292,8 @@
           flex-direction: row;
           justify-content: center;
           align-items: center;
-          white-space: nowrap; 
-          text-overflow: ellipsis; 
+          white-space: nowrap;
+          text-overflow: ellipsis;
           margin: auto;
         }
       }

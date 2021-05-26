@@ -1,4 +1,5 @@
 import { CollumsModel } from "./base/collums.model";
+import { CreateModel } from "./base/create.model";
 import { FilterModel } from "./base/filter.model";
 
 export class Product {
@@ -132,16 +133,83 @@ export class Product {
                 type: 'create',
                 icon: ''
             },
+            // {
+            //     class: 'btn-create',
+            //     text: 'Cập nhật',
+            //     type: 'update',
+            //     icon: ''
+            // },
             {
                 class: 'btn-delete',
                 text: 'Xoá sản phẩm',
                 type: 'delete',
                 icon: ''
-            }, {
+            },
+            {
                 class: 'btn-export',
                 text: 'Export',
                 type: 'export',
                 icon: ''
+            }
+        ];
+    }
+
+    public get create(): Array<CreateModel> {
+        return [
+            {
+                id: 'barcode',
+                label: 'Mã số sản phẩm toàn cầu(GTIN) (*)',
+                name: 'barcode',
+                type: 'text'
+            },
+            {
+                id: 'productName',
+                label: 'Tên sản phẩm (*)',
+                name: 'productName',
+                type: 'text'
+            },
+            {
+                id: 'price',
+                label: 'Giá niêm yết (*)',
+                name: 'price',
+                type: 'text'
+            },
+            {
+                id: 'category',
+                label: 'Ngành hàng (*)',
+                name: 'category',
+                type: 'select'
+            },
+            {
+                id: 'productDetail',
+                label: 'Mô tả sản phẩm',
+                name: 'productDetail',
+                type: 'text'
+            },
+            {
+                id: 'companyInfo',
+                label: 'Nhãn hiệu',
+                name: 'companyInfo',
+                type: 'text'
+            },
+            {
+                id: 'distributor',
+                label: 'Nhà phân phối (*)',
+                name: 'distributor',
+                type: 'text'
+            },
+            {
+                id: 'shop',
+                label: 'Điểm bán',
+                name: 'shop',
+                type: 'text'
+            },
+
+            {
+                id: 'avatar',
+                label: 'Ảnh đại diện',
+                name: 'avatar',
+                type: 'img'
             }
         ];
     }

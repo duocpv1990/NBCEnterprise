@@ -35,12 +35,14 @@
                         <span *ngIf="i.type === 'checkbox'"><input class="checkbox" type="checkbox"></span>
                         <span *ngIf="i.type === 'image'"><img class="image" src="{{item[i.id]}}" alt=""
                                 srcset=""></span>
-                        <span *ngIf="i.type === 'number'" (click)="handleRouteLink(item)">{{ item[i.id] |
+                        <span *ngIf="i.type === 'number'" (click)="handleRouteLink(item);handleClickRow(item)">{{
+                            item[i.id] |
                             number}}</span>
-                        <span *ngIf="i.type === 'text'" (click)="handleRouteLink(item)">{{ item[i.id] }}</span>
-                        <span *ngIf="i.type === 'object'" (click)="handleRouteLink(item)">{{
+                        <span *ngIf="i.type === 'text'" (click)="handleRouteLink(item);handleClickRow(item)">{{
+                            item[i.id] }}</span>
+                        <span *ngIf="i.type === 'object'" (click)="handleRouteLink(item);handleClickRow(item)">{{
                             item[i.id][i.idSub]}}</span>
-                        <span *ngIf="i.type === 'date'" (click)="handleRouteLink(item)">
+                        <span *ngIf="i.type === 'date'" (click)="handleRouteLink(item);handleClickRow(item)">
                             {{ item[i.id] | date: "dd-MM-YYYY" }}
                         </span>
                         <span *ngIf="i.type === 'setting'">

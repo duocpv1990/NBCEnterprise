@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ProductAddComponent } from '../product-add/product-add.component';
 import { ProductUpdateComponent } from '../product-update/product-update.component';
 import { ProductDeleteComponent } from '../product-delete/product-delete.component';
+import { ImportExcelComponent } from 'src/app/components/dialog/import-excel/import-excel.component';
 
 @Component({
   selector: 'app-product-list',
@@ -133,6 +134,13 @@ export class ProductListComponent implements OnInit {
       return this.dialog.open(ProductAddComponent, {
         width: '940px',
         height: '843px'
+      }).afterClosed().subscribe(result => {
+      });
+    }
+    if (ev.type === 'import') {
+      return this.dialog.open(ImportExcelComponent, {
+        width: '500px',
+        height: '350px'
       }).afterClosed().subscribe(result => {
       });
     }

@@ -1,5 +1,5 @@
 .table-style {
-    padding: 25px;
+    padding: 25px 0;
     height: 100%;
     .btn-header{
         display: flex;
@@ -50,9 +50,13 @@
     }
     .group-btn {
         text-align: right;
-        button:not(:nth-child(1)) {
-            margin-left: 20px;
+        display: flex;
+        .group-btn-item{
+            margin-right: 20px;
         }
+        // button:not(:nth-child(1)) {
+        //     margin-left: 20px;
+        // }
     }
 }
 .scroll{

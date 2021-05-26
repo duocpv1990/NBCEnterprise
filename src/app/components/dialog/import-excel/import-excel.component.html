@@ -1,0 +1,32 @@
+<div class="import-excel">
+  <div class="title">IMPORT FILE EXCEL</div>
+  <div class="content">
+    <div class="step">
+      <div class="step-1">BƯỚC 1: TẢI VỀ FILE MẪU</div>
+      <div class="sample-file">
+        <p>File mẫu:</p>
+        <span>Excel 2003(.xls)</span> <span>Excel 2007 trở lên (.xlsm)</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-2">BƯỚC 2: TẢI LÊN FILE MẪU</div>
+      <div class="sample-file">
+        <p>File excel:</p>
+        <input type="file" />
+      </div>
+    </div>
+    <div class="checkbox">
+      <div class="radio">
+        <input id="update" type="radio" />
+        <label for="update">Cập nhật thông tin</label>
+      </div>
+      <div class="radio"> 
+        <input id="create" type="radio" />
+        <label for="create">Thêm mới</label>
+      </div>
+    </div>
+  </div>
+  <div class="btn-group">
+    <button class="btn-save" (click)="import()">Import</button>
+  </div>
+</div>

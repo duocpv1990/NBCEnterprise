@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeleteComponent } from 'src/app/components/dialog/delete/delete.component';
+import { ImportExcelComponent } from 'src/app/components/dialog/import-excel/import-excel.component';
 import { EnterPriseModel } from 'src/app/models/enterprise.model';
 import { DeleteEnterpriseComponent } from '../delete-enterprise/delete-enterprise.component';
 import { EnterpriseCreateComponent } from '../enterprise-create/enterprise-create.component';
@@ -161,6 +162,13 @@ export class EnterpriseListComponent implements OnInit {
       return this.dialog.open(EnterpriseCreateComponent, {
         width: '940px',
         height: '843px'
+      }).afterClosed().subscribe(result => {
+      });
+    }
+    if (ev.type === 'import') {
+      return this.dialog.open(ImportExcelComponent, {
+        width: '500px',
+        height: '350px'
       }).afterClosed().subscribe(result => {
       });
     }

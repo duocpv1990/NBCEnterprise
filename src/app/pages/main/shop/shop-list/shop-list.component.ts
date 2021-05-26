@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ImportExcelComponent } from 'src/app/components/dialog/import-excel/import-excel.component';
 import { ShopModel } from 'src/app/models/shop.model';
 import { ShopCreateComponent } from '../shop-create/shop-create.component';
 import { ShopDeleteComponent } from '../shop-delete/shop-delete.component';
@@ -130,6 +131,13 @@ export class ShopListComponent implements OnInit {
       return this.dialog.open(ShopCreateComponent, {
         width: '940px',
         height: '843px'
+      }).afterClosed().subscribe(result => {
+      });
+    }
+    if (ev.type === 'import') {
+      return this.dialog.open(ImportExcelComponent, {
+        width: '500px',
+        height: '350px'
       }).afterClosed().subscribe(result => {
       });
     }

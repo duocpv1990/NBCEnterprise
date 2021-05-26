@@ -19,7 +19,12 @@ export const homeRoute: Routes = [
         path: 'setting',
         loadChildren: () =>
           import('./setting/setting.module').then((m) => m.SettingModule),
-      }
+      },
+      {
+        path: '',
+        redirectTo: '',
+        pathMatch: 'full',
+      },
     ]
   }
 ]

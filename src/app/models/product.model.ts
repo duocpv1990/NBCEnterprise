@@ -158,43 +158,43 @@ export class Product {
         return [
             {
                 id: 'barcode',
-                label: 'Mã vạch sản phẩm',
+                label: 'Mã số sản phẩm toàn cầu(GTIN) (*)',
                 name: 'barcode',
                 type: 'text'
             },
             {
                 id: 'productName',
-                label: 'Tên sản phẩm',
+                label: 'Tên sản phẩm (*)',
                 name: 'productName',
                 type: 'text'
             },
             {
                 id: 'price',
-                label: 'Giá',
+                label: 'Giá niêm yết (*)',
                 name: 'price',
                 type: 'text'
             },
             {
                 id: 'category',
-                label: 'Danh mục',
+                label: 'Ngành hàng (*)',
                 name: 'category',
-                type: 'text'
+                type: 'select'
             },
             {
                 id: 'productDetail',
-                label: 'Chi tiết sản phẩm',
+                label: 'Mô tả sản phẩm',
                 name: 'productDetail',
                 type: 'text'
             },
             {
                 id: 'companyInfo',
-                label: 'Thông tin công ty',
+                label: 'Nhãn hiệu',
                 name: 'companyInfo',
                 type: 'text'
             },
             {
                 id: 'distributor',
-                label: 'Nhà phân phối',
+                label: 'Nhà phân phối (*)',
                 name: 'distributor',
                 type: 'text'
             },

@@ -1,18 +1,18 @@
 <div class="header">
-    <div class="search">
+    <!-- <div class="search">
         <input type="search" placeholder="Tìm kiếm" />
         <img src="assets/svg/nbc-search.svg" alt="" srcset="" />
-    </div>
+    </div> -->
     <div class="badge">
         <span matBadge="2" matBadgeOverlap="false">
-      <img src="assets/svg/nbc-mess.svg" srcset="" />
-    </span>
+            <img src="assets/svg/nbc-mess.svg" srcset="" />
+        </span>
         <span matBadge="18" matBadgeOverlap="false">
-      <img src="assets/svg/nbc-noti.svg" srcset="" />
-    </span>
+            <img src="assets/svg/nbc-noti.svg" srcset="" />
+        </span>
         <span matBadge="!" [matMenuTriggerFor]="setting" matBadgeOverlap="false" matBadgeColor="warn">
-      <img src="assets/svg/nbc-setting.svg" srcset="" />
-    </span>
+            <img src="assets/svg/nbc-setting.svg" srcset="" />
+        </span>
         <mat-menu #setting="matMenu" yPosition="below">
             <button mat-menu-item [routerLink]="['/home/setting/enterprise']">Thông tin doanh nghiệp</button>
             <button mat-menu-item [routerLink]="['/home/setting']">Thông tin tài khoản</button>
@@ -26,9 +26,9 @@
         </div>
         <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="btnLogout()">
-        <mat-icon> <span class="material-icons"> logout </span> </mat-icon>
-        <span>Đăng xuất</span>
-      </button>
+                <mat-icon> <span class="material-icons"> logout </span> </mat-icon>
+                <span>Đăng xuất</span>
+            </button>
             <!-- <button mat-menu-item (click)="changePassword()">
         <mat-icon><span class="material-icons"> https </span></mat-icon>
         <span>Đổi mật khẩu</span>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ImportExcelComponent } from 'src/app/components/dialog/import-excel/import-excel.component';
 import { DistributorModel } from 'src/app/models/distributor.model';
 import { DeleteEnterpriseComponent } from '../../enterprise/delete-enterprise/delete-enterprise.component';
 import { CreateDistributorComponent } from '../create-distributor/create-distributor.component';
@@ -154,7 +155,13 @@ export class DistributorListComponent implements OnInit {
       }).afterClosed().subscribe(result => {
       });
     }
-
+    if (ev.type === 'import') {
+      return this.dialog.open(ImportExcelComponent, {
+        width: '500px',
+        height: '350px'
+      }).afterClosed().subscribe(result => {
+      });
+    }
     if (ev.type === 'delete') {
       return this.dialog.open(DeleteEnterpriseComponent, {
         width: '400px',

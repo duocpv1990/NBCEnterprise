@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, NgModule, OnChanges, OnInit, Output } from '@angular/core';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
     selector: 'app-table',
@@ -54,10 +55,13 @@ export class TableComponent implements OnInit, OnChanges {
     }
 
     onClickBtnActive = (i) => {
-        this.callback.emit({
-            type: i.type,
-            service: i.service
-        })
+        if (i.type !== 'create') {
+            this.callback.emit({
+                type: i.type,
+                service: i.service
+            })
+        }
+
     }
 
     handleRouteLink = (item) => {
@@ -72,6 +76,16 @@ export class TableComponent implements OnInit, OnChanges {
             type: 'edit'
         });
     }
+    clickCreate() {
+        this.callback.emit({
+            type: 'create'
+        })
+    }
+    import() {
+        this.callback.emit({
+            type: 'import',
+        })
+    }
 }
 
 @NgModule({
@@ -79,7 +93,8 @@ export class TableComponent implements OnInit, OnChanges {
         TableComponent,
     ],
     imports: [
-        CommonModule
+        CommonModule,
+        MatMenuModule
     ],
     exports: [
         TableComponent

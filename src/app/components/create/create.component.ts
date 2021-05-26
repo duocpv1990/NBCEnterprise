@@ -29,7 +29,7 @@ export class CreateComponent implements OnInit {
   }
 
   preview(files, value) {
-     if (value === 'avatar') {
+    if (value === 'avatar') {
       if (files.length === 0)
         return;
       let reader = new FileReader();
@@ -39,17 +39,17 @@ export class CreateComponent implements OnInit {
         this.model.MediaURL = reader.result;
       }
     }
-    else if(value === 'background'){
+    else if (value === 'background') {
       if (files.length === 0)
-      return;
-    let reader = new FileReader();
-    this.imagePath = files;
-    reader.readAsDataURL(files[0]);
-    reader.onload = (_event) => {
-      this.model.BackgroundURL = reader.result;
-      console.log(this.model);
-      
-    }
+        return;
+      let reader = new FileReader();
+      this.imagePath = files;
+      reader.readAsDataURL(files[0]);
+      reader.onload = (_event) => {
+        this.model.BackgroundURL = reader.result;
+        console.log(this.model);
+
+      }
     }
 
   }
@@ -63,7 +63,7 @@ export class CreateComponent implements OnInit {
 
 @NgModule({
   declarations: [CreateComponent],
-  imports: [CommonModule, MatDialogModule, FormsModule, MatIconModule],
+  imports: [CommonModule, MatDialogModule, MatMenuModule, FormsModule, MatIconModule],
   exports: [CreateComponent],
 })
 export class CreateModule { }

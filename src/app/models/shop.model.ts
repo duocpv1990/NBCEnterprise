@@ -26,8 +26,8 @@ export class ShopModel {
                 condition: 'form'
             },
             {
-                Text: '',
-                type: 'search',
+                Text: 'Tìm kiếm',
+                type: 'button',
                 condition: 'fullText'
             }];
     }

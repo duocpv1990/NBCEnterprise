@@ -20,8 +20,8 @@ export class DistributorModel {
                 condition: 'city'
             },
             {
-                Text: '',
-                type: 'search',
+                Text: 'Tìm kiếm',
+                type: 'button',
                 condition: "production"
             }];
     }

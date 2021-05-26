@@ -26,8 +26,8 @@ export class EnterPriseModel {
                 condition: 'status'
             },
             {
-                Text: '',
-                type: 'search',
+                Text: 'Tìm kiếm',
+                type: 'button',
                 condition: 'stt'
             }];
     }

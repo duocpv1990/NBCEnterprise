@@ -50,8 +50,8 @@ export class Product {
                 condition: 'info-status'
             },
             {
-                Text: '',
-                type: 'search',
+                Text: 'Tìm kiếm',
+                type: 'button',
                 condition: 'fullText'
             }];
     }

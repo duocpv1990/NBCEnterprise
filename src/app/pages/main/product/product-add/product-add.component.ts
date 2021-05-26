@@ -25,6 +25,9 @@ export class ProductAddComponent implements OnInit {
   }];
 
   listCreate = [];
+  imageUrl: string;
+  chips = ['Nhựa', 'Chì'];
+  chipInput = '';
 
   constructor(
     private dialogRef: MatDialogRef<ProductAddComponent>,
@@ -56,6 +59,19 @@ export class ProductAddComponent implements OnInit {
 
   save = (value) => {
     this.dataModel = value;
+  }
+
+  processFile(files: File) {
+    var reader = new FileReader();
+    reader.readAsDataURL(files[0]);
+    reader.onload = _event => {
+      this.imageUrl = reader.result.toString();
+    };
+  }
+
+  addChip(value) {
+    this.chips.push(value);
+    this.chipInput = '';
   }
 
 }

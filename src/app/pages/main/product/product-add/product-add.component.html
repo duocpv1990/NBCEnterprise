@@ -68,6 +68,27 @@
             </div>
         </div>
     </div>
+    <div class="upload-img">
+        <div class="content row align-items-center">
+            <div class="label"> Ảnh đại diện (<span class="require-icon">*</span>) </div>
+            <div class="input-text">
+                <div class="avatar insideShadow">
+                    <img [src]="imageUrl">
+                    <label for="imageProcess">
+                        <span class="material-icons">
+                            add_a_photo
+                        </span>
+                    </label>
+                    <input #imageProcess type="file" accept='image/*' id="imageProcess"
+                        (change)="processFile(imageProcess.files)" hidden>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="subtitle">
+        GIẤY CHỨNG NHẬN
+    </div>
 
     <div class="subtitle">
         THÔNG TIN CHI TIẾT
@@ -79,7 +100,11 @@
             <div class="label"> Thành phần (<span class="require-icon">*</span>) </div>
             <div class="input-text">
                 <div>
-                    <input type="text" id="" name="" />
+                    <span *ngFor="let chip of chips">
+                        {{chip}}
+                    </span>
+                    <input [(ngModel)]="chipInput" name="chipInput" type="text"
+                        (keyup.enter)=addChip($event.target.value) />
                 </div>
 
             </div>

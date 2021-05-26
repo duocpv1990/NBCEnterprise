@@ -1,2 +1,182 @@
-<app-edit [(data)]="listCreate" [(option)]="option" [(dataModel)]="dataModel" [(arrayButton)]="arrayButton"
-    (callback)="handleCallbackEvent($event)"></app-edit>
+<!-- <app-edit [(data)]="listCreate" [(option)]="option" [(dataModel)]="dataModel" [(arrayButton)]="arrayButton"
+    (callback)="handleCallbackEvent($event)"></app-edit> -->
+
+<div class="form-create">
+    <div class="title">
+        THÔNG TIN SẢN PHẨM
+    </div>
+    <div class="subtitle">
+        THÔNG TIN CHUNG
+    </div>
+    <div class="layout">
+
+        <div class="content row align-items-center">
+            <div class="label"> Mã số sản phẩm toàn cầu (GTIN) (<span class="require-icon">*</span>) </div>
+            <div class="input-text">
+                <div>
+                    <input type="text" value="123456789" />
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="content row align-items-center">
+            <div class="label"> Tên sản phẩm (<span class="require-icon">*</span>) </div>
+            <div class="input-text">
+                <div>
+                    <input type="text" value="Bút bi Thiên Long" />
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="content row align-items-center">
+            <div class="label"> Gía niêm yết (<span class="require-icon">*</span>) </div>
+            <div class="input-text">
+                <div>
+                    <input type="text" value="120.000 đ" />
+                </div>
+            </div>
+        </div>
+        <div class="content row align-items-center">
+            <div class="label"> Ngành hàng (<span class="require-icon">*</span>) </div>
+            <div class="input-text">
+                <div>
+                    <select>
+                        <option *ngFor="let category of categories">
+                            {{category}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="content row align-items-center">
+            <div class="label"> Nhà phân phối (<span class="require-icon">*</span>) </div>
+            <div class="input-text">
+                <div>
+                    <input type="text" value="Công ty TNHH Việt An" />
+                </div>
+            </div>
+        </div>
+        <div class="content row align-items-center">
+            <div class="label"> Điểm bán (<span class="require-icon">*</span>) </div>
+            <div class="input-text">
+                <div>
+                    <input type="text" value="Tạp hóa Ut Thư, Tạp hóa đổi mới" />
+                </div>
+            </div>
+        </div>
+        <div class="content row align-items-center">
+            <div class="label"> Thị trường mục tiêu (<span class="require-icon">*</span>) </div>
+            <div class="input-text">
+                <div>
+                    <select name="" id="">
+                        <option value="" *ngFor="let country of contries">
+                            {{country.name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="upload-img">
+        <div class="content row align-items-center">
+            <div class="label"> Ảnh đại diện (<span class="require-icon">*</span>) </div>
+            <div class="input-text">
+                <div class="avatar insideShadow">
+                    <img [src]="imageUrl">
+                    <label for="imageProcess">
+                        <span class="material-icons">
+                            add_a_photo
+                        </span>
+                    </label>
+                    <input #imageProcess type="file" accept='image/*' id="imageProcess"
+                        (change)="processFile(imageProcess.files)" hidden>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="subtitle">
+        GIẤY CHỨNG NHẬN &nbsp; &nbsp; <button class="btn-add-new">Thêm mới</button>
+    </div>
+
+    <div class="subtitle">
+        THÔNG TIN CHI TIẾT
+    </div>
+
+    <div class="layout">
+
+        <div class="content row align-items-center">
+            <div class="label"> Thành phần (<span class="require-icon">*</span>) </div>
+            <div class="input-text">
+                <div class="chip-block">
+                    <div class="chip-item" *ngFor="let chip of chips">
+                        {{chip}} &nbsp; &nbsp; <span (click)="removeChip()">x</span>
+                    </div>
+                    <input [(ngModel)]="chipInput" name="chipInput" type="text"
+                        (keyup.enter)=addChip($event.target.value) />
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="content row align-items-center">
+            <div class="label"> Nhãn hiệu (<span class="require-icon">*</span>) </div>
+            <div class="input-text">
+                <div>
+                    <input type="text" id="" name="" />
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="content row align-items-center">
+            <div class="label"> Khối lượng/dung tích sản phẩm (<span class="require-icon">*</span>) </div>
+            <div class="input-text">
+                <div>
+                    <input type="text" id="" name="" />
+                </div>
+            </div>
+        </div>
+        <div class="content row align-items-center">
+            <div class="label"> Đơn vị (<span class="require-icon">*</span>) </div>
+            <div class="input-text">
+                <div>
+                    <input type="text" id="" name="" />
+                </div>
+            </div>
+        </div>
+        <div class="content row align-items-center">
+            <div class="label"> Ngày sản xuất (<span class="require-icon">*</span>) </div>
+            <div class="input-text">
+                <div>
+                    <input type="text" id="" name="" />
+                </div>
+            </div>
+        </div>
+        <div class="content row align-items-center">
+            <div class="label"> Hạn sử dụng (<span class="require-icon">*</span>) </div>
+            <div class="input-text">
+                <div>
+                    <input type="text" id="" name="" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-area">
+        <label for="">Hướng dẫn sử dụng (<span class="require-icon">*</span>)</label>
+        <textarea rows="5"></textarea>
+    </div>
+
+    <div class="button-block">
+        <button (click)="closeDialog()" class="action-btn cancel-btn">Đóng</button>
+        &nbsp;
+        <button (click)="closeDialog()" class="action-btn save-btn">Chỉnh sửa</button>
+    </div>
+
+</div>

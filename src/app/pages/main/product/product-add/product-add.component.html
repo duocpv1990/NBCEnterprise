@@ -2,7 +2,7 @@
     (callback)="handleCallbackEvent($event)"></app-create> -->
 <div class="form-create">
     <div class="title">
-        Thêm mới sản phẩm
+        THÊM MỚI SẢN PHẨM
     </div>
     <div class="subtitle">
         THÔNG TIN CHUNG
@@ -44,8 +44,8 @@
             <div class="input-text">
                 <div>
                     <select>
-                        <option>
-                            test
+                        <option *ngFor="let category of categories">
+                            {{category}}
                         </option>
                     </select>
                 </div>
@@ -64,6 +64,18 @@
             <div class="input-text">
                 <div>
                     <input type="text" id="" name="" />
+                </div>
+            </div>
+        </div>
+        <div class="content row align-items-center">
+            <div class="label"> Thị trường mục tiêu (<span class="require-icon">*</span>) </div>
+            <div class="input-text">
+                <div>
+                    <select name="" id="">
+                        <option value="" *ngFor="let country of contries">
+                            {{country.name}}
+                        </option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -87,7 +99,7 @@
     </div>
 
     <div class="subtitle">
-        GIẤY CHỨNG NHẬN
+        GIẤY CHỨNG NHẬN &nbsp; &nbsp; <button class="btn-add-new">Thêm mới</button>
     </div>
 
     <div class="subtitle">
@@ -99,10 +111,10 @@
         <div class="content row align-items-center">
             <div class="label"> Thành phần (<span class="require-icon">*</span>) </div>
             <div class="input-text">
-                <div>
-                    <span *ngFor="let chip of chips">
-                        {{chip}}
-                    </span>
+                <div class="chip-block">
+                    <div class="chip-item" *ngFor="let chip of chips">
+                        {{chip}} &nbsp; &nbsp; <span (click)="removeChip()">x</span>
+                    </div>
                     <input [(ngModel)]="chipInput" name="chipInput" type="text"
                         (keyup.enter)=addChip($event.target.value) />
                 </div>
@@ -161,9 +173,9 @@
     </div>
 
     <div class="button-block">
-        <button class="action-btn cancel-btn">Hủy bỏ</button>
+        <button (click)="closeDialog()" class="action-btn cancel-btn">Hủy bỏ</button>
         &nbsp;
-        <button class="action-btn save-btn">Lưu</button>
+        <button (click)="closeDialog()" class="action-btn save-btn">Lưu</button>
     </div>
 
 </div>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { from } from 'rxjs';
 import { Product } from 'src/app/models/product.model';
+import { categories, contries } from './product-mock';
 
 @Component({
   selector: 'app-product-add',
@@ -26,11 +28,14 @@ export class ProductAddComponent implements OnInit {
 
   listCreate = [];
   imageUrl: string;
-  chips = ['Nhựa', 'Chì'];
+  chips = [];
   chipInput = '';
+  categories = categories;
+  contries = contries;
 
   constructor(
     private dialogRef: MatDialogRef<ProductAddComponent>,
+
   ) { }
 
 
@@ -72,6 +77,14 @@ export class ProductAddComponent implements OnInit {
   addChip(value) {
     this.chips.push(value);
     this.chipInput = '';
+  }
+
+  removeChip() {
+    this.chips.pop();
+  }
+
+  closeDialog() {
+    this.dialogRef.close();
   }
 
 }

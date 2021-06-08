@@ -15,9 +15,8 @@
             <div class="col">
                 <label>Trạng thái</label>
                 <select class="form-select form-control">
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="1"> Hiển thị </option>
+
                 </select>
             </div>
             <div class="col">
@@ -61,6 +60,15 @@
                 &nbsp;
                 <label for="link">Đường link</label>
                 <input type="text" class="form-control" placeholder="Nhập URL">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="button-block">
+                    <button (click)="closeDialog()" class="action-btn cancel-btn">Hủy bỏ</button>
+                    &nbsp;
+                    <button (click)="closeDialog()" class="action-btn save-btn">Lưu</button>
+                </div>
             </div>
         </div>
     </div>

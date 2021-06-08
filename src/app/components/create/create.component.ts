@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, NgModule, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-
+import { AddCertificateComponent } from '../dialog/add-certificate/add-certificate.component';
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
@@ -22,6 +22,7 @@ export class CreateComponent implements OnInit {
   imagePath;
   imgURL;
   constructor(
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -59,6 +60,11 @@ export class CreateComponent implements OnInit {
     i.data = this.model;
     this.callback.emit(i);
   }
+
+  addCertificate() {
+    this.dialog.open(AddCertificateComponent)
+  }
+
 }
 
 @NgModule({

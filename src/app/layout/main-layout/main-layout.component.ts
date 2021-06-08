@@ -28,7 +28,7 @@ export class MainLayoutComponent implements OnInit {
       },
       {
         icon: 'assets/img/enterprise-code.svg',
-        name: 'Mã doanh nghiệp',
+        name: 'Doanh nghiệp',
         linkURL: 'enterprise',
       },
       {

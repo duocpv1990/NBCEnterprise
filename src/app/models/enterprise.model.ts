@@ -108,7 +108,7 @@ export class EnterPriseModel {
                 text: 'Xoá mã doanh nghiệp',
                 type: 'delete',
                 icon: ''
-            },            {
+            }, {
                 class: 'btn-export',
                 text: 'Export',
                 type: 'export',
@@ -177,7 +177,7 @@ export class EnterPriseModel {
                 label: 'Email',
                 name: 'email',
                 type: 'text'
-            },            
+            },
             {
                 id: 'website',
                 label: 'Website',
@@ -198,7 +198,7 @@ export class EnterPriseModel {
             },
             {
                 id: 'addnew',
-                label: 'Chứng từ, chứng nhận',
+                label: 'GIẤY CHỨNG CHỈ, CHỨNG NHẬN',
                 name: 'addnew',
                 type: 'button'
             },

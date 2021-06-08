@@ -1,6 +1,6 @@
 .certificate-container {
   width: 45vw;
-  height: 45vh;
+  height: 56vh;
   padding: 15px;
   .row {
     margin: 16px auto;
@@ -11,7 +11,7 @@
   }
 
   .upload-block {
-    border: 1px solid var(--color-button-gray);
+    border: 1px solid var(--color-border);
     border-radius: 5px;
     padding: 8px;
     height: 7vh;

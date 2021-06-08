@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, NgModule, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -14,9 +14,15 @@ export class AddCertificateComponent implements OnInit {
   fileString;
   imagesPick: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
-  constructor() { }
+  constructor(
+    private dialogRef: MatDialogRef<AddCertificateComponent>,
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  closeDialog() {
+    this.dialogRef.close();
   }
 
   onSelectFile(files) {

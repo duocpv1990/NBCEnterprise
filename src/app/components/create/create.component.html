@@ -68,7 +68,9 @@
   <div class="add-new">
     <div class="content row align-items-center" [hidden]="item.type !== 'button'" *ngFor="let item of data">
       <div class="label">{{ item?.label }}</div>
-      <button class="btn-add-new">Thêm mới</button>
+      &nbsp;
+      &nbsp;
+      <button class="btn-add-new" (click)="addCertificate()">Thêm mới</button>
     </div>
   </div>
   <div class="group-btn">
@@ -76,6 +78,6 @@
       (click)="onClickButton(i)">
       {{ i?.text }}
     </button>
-    
+
   </div>
 </div>

@@ -2,21 +2,11 @@
   <div class="row btn-header">
     <div class="group-btn">
       <div class="group-btn-item" *ngFor="let i of listActive">
-        <button
-        *ngIf="i.type !== 'create'"
-        class="btn"
-        [class]="i.class"
-        (click)="onClickBtnActive(i)"
-      >
-        {{ i?.text }}
-      </button>
-        <button
-          [matMenuTriggerFor]="menu"
-          *ngIf="i.type === 'create'"
-          class="btn"
-          [class]="i.class"
-          (click)="onClickBtnActive(i)"
-        >
+        <button *ngIf="i.type !== 'create'" class="btn" [class]="i.class" (click)="onClickBtnActive(i)">
+          {{ i?.text }}
+        </button>
+        <button [matMenuTriggerFor]="menu" *ngIf="i.type === 'create'" class="btn" [class]="i.class"
+          (click)="onClickBtnActive(i)">
           {{ i?.text }}
         </button>
       </div>
@@ -42,58 +32,31 @@
     <table class="data-table">
       <thead>
         <tr>
-          <th
-            scope="col"
-            *ngFor="let item of tableData"
-            [style.min-width.px]="item.width"
-          >
+          <th scope="col" *ngFor="let item of tableData" [style.min-width.px]="item.width">
             {{ item.name }}
-            <input
-              class="checkbox"
-              *ngIf="item.type === 'checkbox'"
-              type="checkbox"
-            />
+            <input class="checkbox" *ngIf="item.type === 'checkbox'" type="checkbox" />
           </th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of dataSub; let i = index">
           <td *ngFor="let i of tableData">
-            <span *ngIf="i.type === 'checkbox'"
-              ><input class="checkbox" type="checkbox"
-            /></span>
-            <span *ngIf="i.type === 'image'"
-              ><img class="image" src="{{ item[i.id] }}" alt="" srcset=""
-            /></span>
-            <span
-              *ngIf="i.type === 'number'"
-              (click)="handleRouteLink(item); handleClickRow(item)"
-              >{{ item[i.id] | number }}</span
-            >
-            <span
-              *ngIf="i.type === 'text'"
-              (click)="handleRouteLink(item); handleClickRow(item)"
-              >{{ item[i.id] }}</span
-            >
-            <span
-              *ngIf="i.type === 'object'"
-              (click)="handleRouteLink(item); handleClickRow(item)"
-              >{{ item[i.id][i.idSub] }}</span
-            >
-            <span
-              *ngIf="i.type === 'date'"
-              (click)="handleRouteLink(item); handleClickRow(item)"
-            >
+            <span *ngIf="i.type === 'checkbox'"><input class="checkbox" type="checkbox" /></span>
+            <span *ngIf="i.type === 'image'"><img class="image" src="{{ item[i.id] }}" alt="" srcset="" /></span>
+            <span *ngIf="i.type === 'number'" (click)="handleRouteLink(item); handleClickRow(item)">{{ item[i.id] |
+              number }}</span>
+            <span *ngIf="i.type === 'text'" (click)="handleRouteLink(item); handleClickRow(item)">{{ item[i.id]
+              }}</span>
+            <span *ngIf="i.type === 'object'" (click)="handleRouteLink(item); handleClickRow(item)">{{
+              item[i.id][i.idSub] }}</span>
+            <span *ngIf="i.type === 'date'" (click)="handleRouteLink(item); handleClickRow(item)">
               {{ item[i.id] | date: "dd-MM-YYYY" }}
             </span>
             <span *ngIf="i.type === 'setting'">
               <button (click)="onClickSetting(item, 'edit')" class="btn-table">
                 <img src="assets/svg/nbc-edit.svg" alt="" srcset="" />
               </button>
-              <button
-                (click)="onClickSetting(item, 'delete')"
-                class="btn-table"
-              >
+              <button (click)="onClickSetting(item, 'delete')" class="btn-table">
                 <img src="assets/svg/nbc-delete.svg" alt="" srcset="" />
               </button>
             </span>

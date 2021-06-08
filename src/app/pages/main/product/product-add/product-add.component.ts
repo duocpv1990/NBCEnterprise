@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { from } from 'rxjs';
+import { AddCertificateComponent } from 'src/app/components/dialog/add-certificate/add-certificate.component';
 import { Product } from 'src/app/models/product.model';
 import { categories, contries } from './product-mock';
 
@@ -35,7 +36,7 @@ export class ProductAddComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<ProductAddComponent>,
-
+    private dialog: MatDialog
   ) { }
 
 
@@ -85,6 +86,10 @@ export class ProductAddComponent implements OnInit {
 
   closeDialog() {
     this.dialogRef.close();
+  }
+
+  addCertificate() {
+    this.dialog.open(AddCertificateComponent)
   }
 
 }

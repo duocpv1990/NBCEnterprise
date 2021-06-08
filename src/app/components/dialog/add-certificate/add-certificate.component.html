@@ -1,0 +1,67 @@
+<div class="certificate-container">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <div class="title">THÊM MỚI CHỨNG CHỈ</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Tên chứng nhận</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Trạng thái</label>
+                <select class="form-select form-control">
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+            <div class="col">
+                <label>Ngày hết hạn</label>
+                <input type="date" class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h6>Hình ảnh giấy chứng nhận</h6>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col">
+                <input type="radio" name="certificateImage" id="browser" value="browser" checked>
+                &nbsp;
+                <label for="browser">Tải ảnh từ máy</label>
+                <div class="upload-block">
+                    <label for="upload" class="upload-btn">
+                        <span class="material-icons">
+                            add
+                        </span>
+                    </label>
+                    <div class="imagePicking imageForm">
+                        <ul class="list-group" *ngFor="let fileName of fileNames; let i = index">
+
+                            <li class="list-item">
+                                {{ fileName }}
+                            </li>
+                        </ul>
+
+                    </div>
+                    <input #upload type="file" accept="image/*" id="upload" multiple
+                        (change)="onSelectFile(upload.files)" required hidden />
+                </div>
+
+            </div>
+            <div class="col">
+                <input type="radio" name="certificateImage" id="link" value="link">
+                &nbsp;
+                <label for="link">Đường link</label>
+                <input type="text" class="form-control" placeholder="Nhập URL">
+            </div>
+        </div>
+    </div>
+</div>

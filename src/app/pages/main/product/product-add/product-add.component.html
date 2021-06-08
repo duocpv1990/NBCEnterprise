@@ -1,6 +1,6 @@
-<app-create [(data)]="listCreate" [(option)]="option" [(arrayButton)]="arrayButton"
-    (callback)="handleCallbackEvent($event)"></app-create>
-<!-- <div class="form-create">
+<!-- <app-create [(data)]="listCreate" [(option)]="option" [(arrayButton)]="arrayButton"
+    (callback)="handleCallbackEvent($event)"></app-create> -->
+<div class="form-create">
     <div class="title">
         THÊM MỚI SẢN PHẨM
     </div>
@@ -99,7 +99,7 @@
     </div>
 
     <div class="subtitle">
-        GIẤY CHỨNG NHẬN &nbsp; &nbsp; <button class="btn-add-new">Thêm mới</button>
+        GIẤY CHỨNG NHẬN &nbsp; &nbsp; <button class="btn-add-new" (click)="addCertificate()">Thêm mới</button>
     </div>
 
     <div class="subtitle">
@@ -178,4 +178,4 @@
         <button (click)="closeDialog()" class="action-btn save-btn">Lưu</button>
     </div>
 
-</div> -->
+</div>

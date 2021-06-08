@@ -1,0 +1,35 @@
+.certificate-container {
+  width: 45vw;
+  height: 45vh;
+  padding: 15px;
+  .row {
+    margin: 16px auto;
+  }
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .upload-block {
+    border: 1px solid var(--color-button-gray);
+    border-radius: 5px;
+    padding: 8px;
+    height: 7vh;
+    overflow-y: auto;
+    .upload-btn {
+      position: absolute;
+      right: 22px;
+      top: 38px;
+      .material-icons {
+        border: 1px solid var(--color-button-blue);
+        color: var(--color-button-blue);
+        border-radius: 5px;
+      }
+    }
+  }
+
+  .list-item {
+    list-style: none;
+    color: var(--color-button-blue);
+  }
+}

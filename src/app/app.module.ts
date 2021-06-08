@@ -9,6 +9,7 @@ import { APIInterceptor } from './utils/interceptors/api.interceptor';
 import { AuthInterceptor } from './utils/interceptors/auth.interceptor';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [

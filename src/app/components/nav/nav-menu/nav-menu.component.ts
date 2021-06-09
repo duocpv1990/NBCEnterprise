@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, NgModule, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatListModule } from '@angular/material/list';
+import { RoleDirectiveModule } from 'src/app/utils/directives/role.directive';
 
 @Component({
   selector: 'app-nav-menu',
@@ -9,16 +12,24 @@ import { RouterModule } from '@angular/router';
 })
 export class NavMenuComponent implements OnInit {
   @Input() dataNavMenu;
-  constructor() {}
+  isActive: number;
 
-  ngOnInit(): void {}
+  constructor() { }
+
+  ngOnInit(): void { }
 }
 
 
 @NgModule({
   declarations: [NavMenuComponent],
-  imports: [CommonModule, RouterModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    RoleDirectiveModule,
+    MatExpansionModule,
+    MatListModule,
+  ],
 
   exports: [NavMenuComponent],
 })
-export class NavComponentModule {}
+export class NavComponentModule { }

@@ -14,6 +14,7 @@ import { CreateModule } from 'src/app/components/create/create.component';
 import { EditModule } from 'src/app/components/edit/edit.component';
 import { DeleteModule } from 'src/app/components/dialog/delete/delete.component';
 import { FormsModule } from '@angular/forms';
+import { RoleDirectiveModule } from 'src/app/utils/directives/role.directive';
 
 @NgModule({
   declarations: [ProductComponent, ProductListComponent, ProductAddComponent, ProductUpdateComponent, ProductDeleteComponent],
@@ -25,7 +26,8 @@ import { FormsModule } from '@angular/forms';
     CreateModule,
     EditModule,
     DeleteModule,
-    FormsModule
+    FormsModule,
+    RoleDirectiveModule
   ],
   exports: [ProductComponent]
 })

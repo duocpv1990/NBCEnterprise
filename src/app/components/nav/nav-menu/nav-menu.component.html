@@ -1,14 +1,52 @@
-<div class="logo">
-    <img src="assets/img/Logo_GS1 white.svg" alt="">
-</div>
+<div *roles="'enterprise' else saleAdmin">
 
-<div *ngFor="let i of dataNavMenu?.list" [routerLink]="[i.linkURL]" class="nav-menu"
-    [routerLinkActive]="['nav-menu-active']">
-    <div class="nav-menu-icon" [routerLinkActive]="['nav-menu-active-icon']">
-        <img [src]="i.icon" alt="">
-    </div>
-    <div class="nav-menu-list" [routerLinkActive]="['nav-menu-active-list']">
-        {{i.name}}
+    <div class="logo">
+        <img src="assets/img/Logo_GS1 white.svg" alt="">
     </div>
 
+    <div *ngFor="let i of dataNavMenu?.list" [routerLink]="[i.linkURL]" class="nav-menu"
+        [routerLinkActive]="['nav-menu-active']">
+        <div class="nav-menu-icon" [routerLinkActive]="['nav-menu-active-icon']">
+            <img [src]="i.icon" alt="">
+        </div>
+        <div class="nav-menu-list" [routerLinkActive]="['nav-menu-active-list']">
+            {{i.name}}
+        </div>
+
+    </div>
 </div>
+
+
+
+<ng-template #saleAdmin>
+    <mat-nav-list class="nav">
+        <div class="logo">
+            <img src="assets/img/Logo_GS1 white.svg" alt="" srcset="" />
+        </div>
+        <mat-accordion [displayMode]="'flat'">
+            <div *ngFor="let navItem of dataNavMenu?.list; let i = index" class="nav-item">
+                <div class="nav-head mat-elevation-z0" *ngIf="navItem.subs.length === 0">
+                    <a class="nav-link" [routerLink]="navItem.linkURL" [routerLinkActive]="['nav-menu-active']">
+                        <img [src]="navItem.icon" />
+                        <span class="nav-link-text">{{ navItem.name }}</span>
+                    </a>
+                </div>
+                <mat-expansion-panel *ngIf="navItem.subs.length > 0" class="mat-elevation-z0">
+                    <mat-expansion-panel-header class="nav-head">
+                        <mat-panel-title class="nav-link">
+                            <img [src]="navItem.icon" />
+                            <span class="nav-link-text">{{ navItem.name }}</span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="nav-section">
+                        <div *ngFor="let navPage of navItem.subs" class="nav-item">
+                            <a class="nav-link" [routerLink]="navPage.path" [routerLinkActive]="['nav-submenu-active']">
+                                {{ navPage.name }}
+                            </a>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </div>
+        </mat-accordion>
+    </mat-nav-list>
+</ng-template>

@@ -52,11 +52,16 @@ import { HomePageComponent } from './home-page/home-page.component'
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { SettingComponent } from './setting/setting.component';
 import { SettingModule } from './setting/setting.module';
+import { FilterBaseModule } from 'src/app/components/filter/filter.component';
+import { TableBaseModule } from 'src/app/components/table/table.component';
+import { HomeEnterpriseComponent } from './home-enterprise/home-enterprise.component';
+import { HomeProductComponent } from './home-product/home-product.component';
+import { HomeNotificationComponent } from './home-notification/home-notification.component';
 
 
 
 @NgModule({
-  declarations: [HomeComponent, HomePageComponent],
+  declarations: [HomeComponent, HomePageComponent, HomeEnterpriseComponent, HomeProductComponent, HomeNotificationComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(homeRoute),
@@ -107,7 +112,9 @@ import { SettingModule } from './setting/setting.module';
     OverlayModule,
     PortalModule,
     ScrollingModule,
-    SettingModule
+    SettingModule,
+    FilterBaseModule,
+    TableBaseModule,
   ],
   exports: [HomeComponent]
 })

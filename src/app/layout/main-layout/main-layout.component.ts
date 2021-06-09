@@ -13,36 +13,43 @@ import { fader } from 'src/app/utils/animations/fader.animation';
 })
 export class MainLayoutComponent implements OnInit {
   showFiller = false;
-
   dataNav = {
     list: [
       {
         icon: 'assets/img/home.svg',
         name: 'Trang chủ',
         linkURL: 'home',
-      },
-      {
-        icon: 'assets/img/bag.svg',
-        name: 'Sản phẩm',
-        linkURL: 'product',
+        subs: [
+          { name: 'Danh sách doanh nghiệp', path: 'home/enterprise-list' },
+          { name: 'Danh sách sản phẩm', path: 'home/product-list' }
+        ]
       },
       {
         icon: 'assets/img/enterprise-code.svg',
         name: 'Doanh nghiệp',
         linkURL: 'enterprise',
+        subs: []
       },
       {
         icon: 'assets/img/distributor.svg',
         name: 'Nhà phân phối',
         linkURL: 'distributor',
+        subs: []
       },
       {
-        icon: 'assets/img/shop.svg',
-        name: 'Điểm bán',
-        linkURL: 'shop',
+        icon: 'assets/img/bag.svg',
+        name: 'Sản phẩm',
+        linkURL: 'product',
+        subs: []
       },
+      // {
+      //   icon: 'assets/img/shop.svg',
+      //   name: 'Điểm bán',
+      //   linkURL: 'shop',
+      // },
     ],
   };
+
   constructor() { }
 
   ngOnInit(): void { }

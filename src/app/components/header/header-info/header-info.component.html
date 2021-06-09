@@ -1,39 +1,116 @@
 <div class="header">
     <!-- <div class="search">
-        <input type="search" placeholder="Tìm kiếm" />
-        <img src="assets/svg/nbc-search.svg" alt="" srcset="" />
-    </div> -->
+    <input type="search" placeholder="Tìm kiếm" />
+    <img src="assets/svg/nbc-search.svg" alt="" srcset="" />
+  </div> -->
     <div class="badge">
         <span matBadge="2" matBadgeOverlap="false">
             <img src="assets/svg/nbc-mess.svg" srcset="" />
         </span>
-        <span matBadge="18" matBadgeOverlap="false">
+        <span [matMenuTriggerFor]="notification" matBadge="18" matBadgeOverlap="false">
             <img src="assets/svg/nbc-noti.svg" srcset="" />
         </span>
+        <mat-menu #notification="matMenu">
+            <div class="noti-container">
+                <div class="noti-header">
+                    <span>THÔNG BÁO</span>
+                    <span [routerLink]="['/home/notification-list']">Tất cả thông báo</span>
+                </div>
+                <mat-list>
+                    <mat-list-item>
+                        <div class="list-item">
+                            <img src="assets/svg/nbc-list-noti.svg" alt="" srcset="" />
+                            &nbsp;
+                            &nbsp;
+                            <div class="item-text">
+                                <div>
+                                    Công ty TNHH MTV Phú An đã cập nhật thông tin doanh nghiệp
+                                </div>
+                                <span>12:30, 21/04/2021</span>
+                            </div>
+                        </div>
+
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>
+                        <div class="list-item">
+                            <img src="assets/svg/nbc-list-noti.svg" alt="" srcset="" />
+                            &nbsp;
+                            &nbsp;
+                            <div class="item-text">
+                                <div>
+                                    Công ty TNHH MTV Phú An đã cập nhật thông tin doanh nghiệp
+                                </div>
+                                <span>12:30, 21/04/2021</span>
+                            </div>
+                        </div>
+
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>
+                        <div class="list-item">
+                            <img src="assets/svg/nbc-list-noti.svg" alt="" srcset="" />
+                            &nbsp;
+                            &nbsp;
+                            <div class="item-text">
+                                <div>
+                                    Công ty TNHH MTV Phú An đã cập nhật thông tin doanh nghiệp
+                                </div>
+                                <span>12:30, 21/04/2021</span>
+                            </div>
+                        </div>
+
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>
+                        <div class="list-item">
+                            <img src="assets/svg/nbc-list-noti.svg" alt="" srcset="" />
+                            &nbsp;
+                            &nbsp;
+                            <div class="item-text">
+                                <div>
+                                    Công ty TNHH MTV Phú An đã cập nhật thông tin doanh nghiệp
+                                </div>
+                                <span>12:30, 21/04/2021</span>
+                            </div>
+                        </div>
+
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>
+                        <div class="list-item">
+                            <img src="assets/svg/nbc-list-noti.svg" alt="" srcset="" />
+                            &nbsp;
+                            &nbsp;
+                            <div class="item-text">
+                                <div>
+                                    Công ty TNHH MTV Phú An đã cập nhật thông tin doanh nghiệp
+                                </div>
+                                <span>12:30, 21/04/2021</span>
+                            </div>
+                        </div>
+
+                    </mat-list-item>
+                </mat-list>
+
+            </div>
+
+        </mat-menu>
         <span matBadge="!" [matMenuTriggerFor]="setting" matBadgeOverlap="false" matBadgeColor="warn">
             <img src="assets/svg/nbc-setting.svg" srcset="" />
         </span>
-        <mat-menu #setting="matMenu" yPosition="below">
+        <mat-menu #setting="matMenu">
             <button mat-menu-item [routerLink]="['/home/setting/enterprise']">Thông tin doanh nghiệp</button>
             <button mat-menu-item [routerLink]="['/home/setting']">Thông tin tài khoản</button>
             <button mat-menu-item>Thay đổi mật khẩu</button>
-            <button mat-menu-item>Đăng xuất</button>
+            <button mat-menu-item (click)="btnLogout()">Đăng xuất</button>
         </mat-menu>
     </div>
     <div class="info">
-        <div class="image" [matMenuTriggerFor]="menu">
+        <div class="image">
             <img src="assets/img/default-avatar.jpg" alt="" srcset="" />
         </div>
-        <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="btnLogout()">
-                <mat-icon> <span class="material-icons"> logout </span> </mat-icon>
-                <span>Đăng xuất</span>
-            </button>
-            <!-- <button mat-menu-item (click)="changePassword()">
-        <mat-icon><span class="material-icons"> https </span></mat-icon>
-        <span>Đổi mật khẩu</span>
-      </button> -->
-        </mat-menu>
+
         <div class="detail">
             <strong>Cty TNHH Nhật Minh</strong>
             <p>Superadmin</p>

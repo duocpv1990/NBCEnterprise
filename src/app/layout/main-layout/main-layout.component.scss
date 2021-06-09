@@ -16,7 +16,7 @@
   }
   .example-sidenav-content {
     height: 100%;
-    width: calc(100%-235px);
+    width: calc(100%-300px);
     align-items: center;
     justify-content: center;
     background-color: var(--color-section);
@@ -24,7 +24,11 @@
   }
   .example-sidenav {
     padding: 10px;
-    width: 235px;
+    width: 273px;
     background: var(--color-list-nav);
+  }
+
+  ::ng-deep .mat-drawer-inner-container {
+    overflow: hidden !important;
   }
 }

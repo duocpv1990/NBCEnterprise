@@ -30,6 +30,16 @@ export const mainRoutes: Routes = [
           import('./shop/shop.module').then((m) => m.ShopModule),
       },
       {
+        path: 'service-package',
+        loadChildren: () =>
+          import('./service-package/service-package.module').then((m) => m.ServicePackageModule),
+      },
+      {
+        path: 'setting',
+        loadChildren: () =>
+          import('./setting/setting.module').then((m) => m.SettingModule),
+      },
+      {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full',

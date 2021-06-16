@@ -1,0 +1,7 @@
+<div class="content-title">Gói dịch vụ</div>
+
+<app-filter [(listFilter)]="listFilter" (callback)="handleCallback($event)">
+</app-filter>
+
+<app-table [tableData]="dataTable" [data]="dataSub" [listActive]="listActive" (callback)="handleCallbackTable($event)">
+</app-table>

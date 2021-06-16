@@ -11,10 +11,10 @@ export class AuthenticationService extends BaseApiService<any> {
   }
 
   login = (params) => {
-    return this.http.post(`api/SalesManager/Admin/Account/Login`, params);
+    return this.http.post(`api/cognito/login`, params);
   };
 
   changePassword = (params: ChangeModel) => {
-    return this.http.post(`api/SalesManager/Admin/Account/ChangePassword`,params,);
+    return this.http.post(`api/SalesManager/Admin/Account/ChangePassword`, params,);
   }
 }

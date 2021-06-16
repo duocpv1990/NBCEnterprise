@@ -17,8 +17,6 @@
   .nav-item {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
-
     img {
       margin: 0 30px;
     }
@@ -79,8 +77,8 @@
   }
 }
 .nav-submenu-active {
-  background: #01214f;
-  color: var(--color-secondary);
+  background: var(--color-secondary);
+  color: var(--color-list-nav);
   border-radius: 15px;
 }
 ::ng-deep .mat-expansion-panel {
@@ -97,7 +95,7 @@
   }
   .mat-expansion-panel-body {
     padding: 0;
-    margin-left: 70px;
+    margin-left: 50px;
     .nav-section {
       .nav-item:last-child {
         margin-bottom: 0;
@@ -108,5 +106,5 @@
 
 .mat-nav-list a {
   padding: 10px;
-  width: 200px;
+  width: 183px;
 }

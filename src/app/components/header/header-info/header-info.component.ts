@@ -16,32 +16,32 @@ import { ChangePasswordComponent } from '../../dialog/change-password/change-pas
 export class HeaderInfoComponent implements OnInit {
   @Input() dataHeaderInfo;
   profile: Observable<ProfileModel>;
-  constructor( private local : LocalStorageService,
+  constructor(private local: LocalStorageService,
     private route: Router,
     private profileService: ProfileService,
-    private dialog: MatDialog ) { }
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
-   this.getProfile()
-    
+    this.getProfile()
+
   }
 
   btnLogout() {
     this.local.clear();
-    this.route.navigate([''])
+    this.route.navigate(['login'])
   }
   getProfile() {
-    this.profile = this.profileService.get('').pipe(map((res : any) => {
+    this.profile = this.profileService.get('').pipe(map((res: any) => {
       return res.data
     }))
-    
+
   }
-  changePassword() : void {
+  changePassword(): void {
     this.dialog.open(ChangePasswordComponent, {
       data: {}
     })
       .afterClosed()
-    .subscribe(() => {})
+      .subscribe(() => { })
   }
 
 }

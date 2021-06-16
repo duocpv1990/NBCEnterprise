@@ -14,7 +14,7 @@ export class AppGuard implements CanLoad, CanActivate {
 
   canLoad(): boolean | Observable<boolean> | Promise<boolean> {
     if (!this.localStorageService.get('access_token')) {
-      this.router.navigate(['']);
+      this.router.navigate(['login']);
       return false;
     } else {
       return true;

@@ -59,7 +59,9 @@ export class MainLayoutComponent implements OnInit {
         name: 'Cài đặt',
         linkURL: 'setting',
         subs: [
-          { name: 'Danh sách tài khoản', path: 'setting/account-list' }
+          { name: 'Danh sách tài khoản', path: 'setting/account-list' },
+          { name: 'Nhóm quyền', path: 'setting/privileges' },
+          { name: 'Phân quyền', path: 'setting/authorization' }
         ]
       },
 

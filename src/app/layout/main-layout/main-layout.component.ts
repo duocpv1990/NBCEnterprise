@@ -48,22 +48,22 @@ export class MainLayoutComponent implements OnInit {
         linkURL: 'product',
         subs: []
       },
-      {
-        icon: 'assets/img/service-package.svg',
-        name: 'Gói dịch vụ',
-        linkURL: 'service-package',
-        subs: []
-      },
-      {
-        icon: 'assets/img/icon-setting.svg',
-        name: 'Cài đặt',
-        linkURL: 'setting',
-        subs: [
-          { name: 'Danh sách tài khoản', path: 'setting/account-list' },
-          { name: 'Nhóm quyền', path: 'setting/privileges' },
-          { name: 'Phân quyền', path: 'setting/authorization' }
-        ]
-      },
+      // {
+      //   icon: 'assets/img/service-package.svg',
+      //   name: 'Gói dịch vụ',
+      //   linkURL: 'service-package',
+      //   subs: []
+      // },
+      // {
+      //   icon: 'assets/img/icon-setting.svg',
+      //   name: 'Cài đặt',
+      //   linkURL: 'setting',
+      //   subs: [
+      //     { name: 'Danh sách tài khoản', path: 'setting/account-list' },
+      //     { name: 'Nhóm quyền', path: 'setting/privileges' },
+      //     { name: 'Phân quyền', path: 'setting/authorization' }
+      //   ]
+      // },
 
     ],
   };
@@ -71,9 +71,6 @@ export class MainLayoutComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    // if (localStorage.getItem("role") === 'saleAdmin') {
-    //   this.dataNav.list.pop();
-    // }
   }
 
   prepareRoute(outlet: RouterOutlet) {

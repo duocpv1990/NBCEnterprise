@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ImportExcelComponent } from 'src/app/components/dialog/import-excel/import-excel.component';
 import { DistributorModel } from 'src/app/models/distributor.model';
+import { DistributorService } from 'src/app/services/distributor.service';
 import { DeleteEnterpriseComponent } from '../../enterprise/delete-enterprise/delete-enterprise.component';
 import { CreateDistributorComponent } from '../create-distributor/create-distributor.component';
 
@@ -13,115 +14,30 @@ import { CreateDistributorComponent } from '../create-distributor/create-distrib
 export class DistributorListComponent implements OnInit {
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private distributorService: DistributorService
   ) { }
   config = new DistributorModel();
   listFilter = [];
-  data = [
-    {
-      "stt": "1",
-      "code": "023456781",
-      "MediaURL": "https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg",
-      "distributor": "Nhà phân phối số 1",
-      'address': "Hàng Bồ - Hoàn Kiếm - Hà Nội",
-      'area': 'Hà Nội',
-      'production': 0,
-      'phone': '0123456789',
-      "global": '023456781',
-      "register": 'Công ty TNHH Việt An',
-      "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021"
-    },
-    {
-      "stt": "2",
-      "code": "023456781",
-      "MediaURL": "https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg",
-      "distributor": "Nhà phân phối số 1",
-      'address': "Hàng Bồ - Hoàn Kiếm - Hà Nội",
-      'area': 'Hà Nội',
-      'production': 0,
-      'phone': '0123456789',
-      "global": '023456781',
-      "register": 'Công ty TNHH Việt An',
-      "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021"
-
-    },
-    {
-      "stt": "3",
-      "code": "023456781",
-      "MediaURL": "https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg",
-      "global": '023456781',
-      "register": 'Công ty TNHH Việt An',
-      "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021",
-      "distributor": "Nhà phân phối số 1",
-      'address': "Hàng Bồ - Hoàn Kiếm - Hà Nội",
-      'area': 'Hà Nội',
-      'production': 0,
-      'phone': '0123456789',
-    },
-    {
-      "stt": "4",
-      "code": "023456781",
-      "MediaURL": "https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg",
-      "global": '023456781',
-      "register": 'Công ty TNHH Việt An',
-      "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021",
-      "distributor": "Nhà phân phối số 1",
-      'address': "Hàng Bồ - Hoàn Kiếm - Hà Nội",
-      'area': 'Hà Nội',
-      'production': 0,
-      'phone': '0123456789',
-    },
-    {
-      "stt": "5",
-      "code": "023456781",
-      "MediaURL": "https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg",
-      "global": '023456781',
-      "register": 'Công ty TNHH Việt An',
-      "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021",
-      "distributor": "Nhà phân phối số 1",
-      'address': "Hàng Bồ - Hoàn Kiếm - Hà Nội",
-      'area': 'Hà Nội',
-      'production': 0,
-      'phone': '0123456789',
-    },
-    {
-      "stt": "6",
-      "code": "023456781",
-      "MediaURL": "https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg",
-
-      "global": '023456781',
-      "register": 'Công ty TNHH Việt An',
-      "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021",
-      "distributor": "Nhà phân phối số 1",
-      'address': "Hàng Bồ - Hoàn Kiếm - Hà Nội",
-      'area': 'Hà Nội',
-      'production': 0,
-      'phone': '0123456789',
-
-    },
-
-
-  ];
+  data = [];
   dataTable;
   listActive;
   dataSub;
   ngOnInit(): void {
+    this.getListDistributor();
     this.listFilter = this.config.filter;
     this.dataTable = this.config.collums;
     this.listActive = this.config.btnActice;
     this.dataSub = this.data;
+  }
+  getListDistributor(){
+    this.distributorService.getListDistributor("", "", 1, 50).subscribe(res => {
+      this.data = res;
+      this.dataSub = this.data;
+      this.dataSub.forEach((x, index) => {
+         x.stt = index + 1;
+      });
+    })
   }
   handleCallback(ev) {
     const filter = this.listFilter.filter(x => x.value);
@@ -148,6 +64,9 @@ export class DistributorListComponent implements OnInit {
   }
   handleCallbackTable(ev) {
     console.log(ev);
+    if(ev.type === "edit"){
+      
+    }
     if (ev.type === 'create') {
       return this.dialog.open(CreateDistributorComponent, {
         width: '940px',

@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeleteComponent } from 'src/app/components/dialog/delete/delete.component';
 import { ImportExcelComponent } from 'src/app/components/dialog/import-excel/import-excel.component';
 import { EnterPriseModel } from 'src/app/models/enterprise.model';
+import { EnterpriseService } from 'src/app/services/enterprise.service';
 import { DeleteEnterpriseComponent } from '../delete-enterprise/delete-enterprise.component';
 import { EnterpriseCreateComponent } from '../enterprise-create/enterprise-create.component';
 import { EnterpriseEditComponent } from '../enterprise-edit/enterprise-edit.component';
@@ -16,108 +17,108 @@ export class EnterpriseListComponent implements OnInit {
   config = new EnterPriseModel();
   listFilter = [];
   data = [
-    {
-      "stt": "1",
-      "code": "023456781",
-      "global": '023456781',
-      "register": 'Công ty TNHH Việt An 1',
-      "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021",
-      "taxcode": "01234",
-      "country":"Viet Nam",
-      "city" : "1",
-      "district": "1",
-      "address" : "Ha Noi - Viet Nam",
-      "phone": "0987654321",
-      "email": "city@gmail.com",
-      "website": "https://www.consultindochina.com/"
-    },
-    {
-      "stt": "2",
-      "code": "023456781",
-      "global": '023456781',
-      "register": 'Công ty TNHH Việt An 2 ',
-      "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021",
-      "taxcode": "01234",
-      "country":"Viet Nam",
-      "city" : "1",
-      "district": "1",
-      "address" : "Ha Noi - Viet Nam",
-      "phone": "0987654321",
-      "email": "city@gmail.com",
-      "website": "https://www.consultindochina.com/"
-    },
-    {
-      "stt": "3",
-      "code": "023456781",
-      "global": '023456781',
-      "register": 'Công ty TNHH Việt An 3',
-      "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021",
-      "taxcode": "01234",
-      "country":"Viet Nam",
-      "city" : "1",
-      "district": "1",
-      "address" : "Ha Noi - Viet Nam",
-      "phone": "0987654321",
-      "email": "city@gmail.com",
-      "website": "https://www.consultindochina.com/"
-    },
-    {
-      "stt": "4",
-      "code": "023456781",
-      "global": '023456781',
-      "register": 'Công ty TNHH Việt An 4',
-      "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021",
-      "taxcode": "01234",
-      "country":"Viet Nam",
-      "city" : "1",
-      "district": "1",
-      "address" : "Ha Noi - Viet Nam",
-      "phone": "0987654321",
-      "email": "city@gmail.com",
-      "website": "https://www.consultindochina.com/"
-    },
-    {
-      "stt": "5",
-      "code": "023456781",
-      "global": '023456781',
-      "register": 'Công ty TNHH Việt An 5',
-      "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021",
-      "taxcode": "01234",
-      "country":"Viet Nam",
-      "city" : "1",
-      "district": "1",
-      "address" : "Ha Noi - Viet Nam",
-      "phone": "0987654321",
-      "email": "city@gmail.com",
-      "website": "https://www.consultindochina.com/"
-    },
-    {
-      "stt": "6",
-      "code": "023456781",
-      "global": '023456781',
-      "register": 'Công ty TNHH Việt An 6',
-      "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021",
-      "taxcode": "01234",
-      "country":"Viet Nam",
-      "city" : "1",
-      "district": "1",
-      "address" : "Ha Noi - Viet Nam",
-      "phone": "0987654321",
-      "email": "city@gmail.com",
-      "website": "https://www.consultindochina.com/"
-    },
+    // {
+    //   "stt": "1",
+    //   "code": "023456781",
+    //   "global": '023456781',
+    //   "register": 'Công ty TNHH Việt An 1',
+    //   "gt": '1 giấy tờ',
+    //   "status": "Đã duyệt",
+    //   "update": "13:30, 21/04/2021",
+    //   "taxcode": "01234",
+    //   "country":"Viet Nam",
+    //   "city" : "1",
+    //   "district": "1",
+    //   "address" : "Ha Noi - Viet Nam",
+    //   "phone": "0987654321",
+    //   "email": "city@gmail.com",
+    //   "website": "https://www.consultindochina.com/"
+    // },
+    // {
+    //   "stt": "2",
+    //   "code": "023456781",
+    //   "global": '023456781',
+    //   "register": 'Công ty TNHH Việt An 2 ',
+    //   "gt": '1 giấy tờ',
+    //   "status": "Đã duyệt",
+    //   "update": "13:30, 21/04/2021",
+    //   "taxcode": "01234",
+    //   "country":"Viet Nam",
+    //   "city" : "1",
+    //   "district": "1",
+    //   "address" : "Ha Noi - Viet Nam",
+    //   "phone": "0987654321",
+    //   "email": "city@gmail.com",
+    //   "website": "https://www.consultindochina.com/"
+    // },
+    // {
+    //   "stt": "3",
+    //   "code": "023456781",
+    //   "global": '023456781',
+    //   "register": 'Công ty TNHH Việt An 3',
+    //   "gt": '1 giấy tờ',
+    //   "status": "Đã duyệt",
+    //   "update": "13:30, 21/04/2021",
+    //   "taxcode": "01234",
+    //   "country":"Viet Nam",
+    //   "city" : "1",
+    //   "district": "1",
+    //   "address" : "Ha Noi - Viet Nam",
+    //   "phone": "0987654321",
+    //   "email": "city@gmail.com",
+    //   "website": "https://www.consultindochina.com/"
+    // },
+    // {
+    //   "stt": "4",
+    //   "code": "023456781",
+    //   "global": '023456781',
+    //   "register": 'Công ty TNHH Việt An 4',
+    //   "gt": '1 giấy tờ',
+    //   "status": "Đã duyệt",
+    //   "update": "13:30, 21/04/2021",
+    //   "taxcode": "01234",
+    //   "country":"Viet Nam",
+    //   "city" : "1",
+    //   "district": "1",
+    //   "address" : "Ha Noi - Viet Nam",
+    //   "phone": "0987654321",
+    //   "email": "city@gmail.com",
+    //   "website": "https://www.consultindochina.com/"
+    // },
+    // {
+    //   "stt": "5",
+    //   "code": "023456781",
+    //   "global": '023456781',
+    //   "register": 'Công ty TNHH Việt An 5',
+    //   "gt": '1 giấy tờ',
+    //   "status": "Đã duyệt",
+    //   "update": "13:30, 21/04/2021",
+    //   "taxcode": "01234",
+    //   "country":"Viet Nam",
+    //   "city" : "1",
+    //   "district": "1",
+    //   "address" : "Ha Noi - Viet Nam",
+    //   "phone": "0987654321",
+    //   "email": "city@gmail.com",
+    //   "website": "https://www.consultindochina.com/"
+    // },
+    // {
+    //   "stt": "6",
+    //   "code": "023456781",
+    //   "global": '023456781',
+    //   "register": 'Công ty TNHH Việt An 6',
+    //   "gt": '1 giấy tờ',
+    //   "status": "Đã duyệt",
+    //   "update": "13:30, 21/04/2021",
+    //   "taxcode": "01234",
+    //   "country":"Viet Nam",
+    //   "city" : "1",
+    //   "district": "1",
+    //   "address" : "Ha Noi - Viet Nam",
+    //   "phone": "0987654321",
+    //   "email": "city@gmail.com",
+    //   "website": "https://www.consultindochina.com/"
+    // },
 
 
   ];
@@ -125,7 +126,8 @@ export class EnterpriseListComponent implements OnInit {
   listActive;
   dataSub;
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private enterprise: EnterpriseService
   ) { }
 
   ngOnInit(): void {
@@ -133,7 +135,20 @@ export class EnterpriseListComponent implements OnInit {
     this.dataTable = this.config.collums;
     this.listActive = this.config.btnActice;
     this.dataSub = this.data;
+    this.getListCompany();
   }
+
+  getListCompany(){
+    this.enterprise.getListCompany("", "", 1, 1, 50).subscribe(res => {
+       this.data = res;
+       this.dataSub = this.data;
+       this.dataSub.forEach((x, index) => {
+         x.stt = index + 1;
+       });
+    })
+  }
+
+
   handleCallback(ev) {
     const filter = this.listFilter.filter(x => x.value);
     if (!filter.length) return this.dataSub = this.data;
@@ -178,6 +193,7 @@ export class EnterpriseListComponent implements OnInit {
         height: '843px',
         data: ev.item
       }).afterClosed().subscribe(result => {
+        this.getListCompany();
       });
     }
     if (ev.type === 'delete') {
@@ -190,6 +206,7 @@ export class EnterpriseListComponent implements OnInit {
           content: "Bạn có muốn xoá thông tin doanh nghiệp trên hệ thống?"
         }
       }).afterClosed().subscribe(result => {
+        this.getListCompany();
       });
     }
   }

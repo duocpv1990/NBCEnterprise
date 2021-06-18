@@ -1,10 +1,10 @@
 .form-create {
   padding: 15px;
   .subtitle {
-    margin-left: 0.5em;
+    // margin-left: 0.5em;
     color: #1894ff;
     font-weight: 600;
-    margin-top: 3em;
+    margin-top: 1em;
   }
   .layout {
     display: grid;
@@ -81,8 +81,9 @@
     }
   }
   .content {
-    padding: 10px 10px 0 10px;
+    // padding: 10px 10px 0 10px;
     align-items: center;
+    margin: 0 0 5px 0;
     .img {
       display: flex;
       flex-direction: column;

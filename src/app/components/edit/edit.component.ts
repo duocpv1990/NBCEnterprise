@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, NgModule, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, NgModule, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
@@ -10,7 +10,7 @@ import { MatMenuModule } from '@angular/material/menu';
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss']
 })
-export class EditComponent implements OnInit {
+export class EditComponent implements OnInit, OnChanges {
   @Input() data: any;
   @Input() option: any;
   @Input() arrayButton: any;
@@ -23,9 +23,12 @@ export class EditComponent implements OnInit {
   imgURL;
   constructor(
   ) { }
+  ngOnChanges(): void {
+    this.model = this.dataModel || {};
+  }
 
   ngOnInit() {
-    this.model = this.dataModel || {};
+
   }
 
   preview(files, value) {

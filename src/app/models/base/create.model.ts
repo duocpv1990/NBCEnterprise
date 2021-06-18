@@ -5,4 +5,5 @@ export class CreateModel {
     label: string;
     data?: [];
     class?: string;
+    ward?: string;
 }

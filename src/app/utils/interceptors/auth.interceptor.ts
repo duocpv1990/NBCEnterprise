@@ -19,12 +19,11 @@ export class AuthInterceptor implements HttpInterceptor {
     if (this.allowed.some((url) => req.url.includes(url))) {
       return next.handle(req);
     }
-    let token = this.storage.get('access_token');
-
+    let token = localStorage.getItem('access_token');
     if (token) {
       req = req.clone({
         setHeaders: {
-          Authorization: 'Bearer ' + token.token,
+          Authorization: 'Bearer ' + token,
         },
       });
     }

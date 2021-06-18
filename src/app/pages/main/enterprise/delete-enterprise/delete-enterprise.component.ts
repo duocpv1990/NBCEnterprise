@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { EnterpriseService } from 'src/app/services/enterprise.service';
 
 @Component({
   selector: 'app-delete-enterprise',
@@ -11,6 +12,7 @@ export class DeleteEnterpriseComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<DeleteEnterpriseComponent>,
+    private enterprise: EnterpriseService
     
   ) { }
 
@@ -18,16 +20,20 @@ export class DeleteEnterpriseComponent implements OnInit {
     this.model = this.data;
   }
   handleEvent(ev){
-    console.log(ev);
     if(ev.value === 'cancel'){
          this.dialogRef.close();
     }
     if(ev.value === 'confirm'){
        this.deleteFunction();
+              
     }
   }
   deleteFunction(){
-    this.dialogRef.close();
+    
+    this.enterprise.deleteCompany(this.data.item.CompanyId).subscribe(res => {
+      this.dialogRef.close();
+    })
+
   }
 
 }

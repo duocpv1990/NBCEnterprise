@@ -48,32 +48,32 @@ export class EnterPriseModel {
                 type: 'text',
             },
             {
-                id: 'code',
+                id: 'CompanyCode',
                 name: 'Mã doanh nghiệp',
                 width: 200,
                 type: 'text',
             },
 
             {
-                id: 'global',
+                id: 'GLN',
                 name: 'Mã địa điểm toàn cầu',
                 width: 200,
                 type: 'text',
             },
             {
-                id: 'register',
+                id: 'Name',
                 name: 'Tên đăng ký',
                 width: 200,
                 type: 'text',
             },
             {
-                id: 'gt',
+                id: 'CertificateNumber',
                 name: 'Giấy tờ',
                 width: 200,
                 type: 'text',
             },
             {
-                id: 'status',
+                id: 'Status',
                 name: 'Trạng thái',
                 width: 200,
                 type: 'text',
@@ -119,69 +119,72 @@ export class EnterPriseModel {
     public get create(): Array<CreateModel> {
         return [
             {
-                id: 'register',
+                id: 'Name',
                 label: 'Tên doanh nghiệp',
-                name: 'register',
+                name: 'Name',
                 type: 'text'
             },
             {
-                id: 'code',
+                id: 'CompanyCode',
                 label: 'Mã doanh nghiệp',
-                name: 'code',
+                name: 'CompanyCode',
                 type: 'text'
             },
             {
-                id: 'global',
+                id: 'GLN',
                 label: 'Mã địa điểm toàn cầu GLN',
-                name: 'global',
+                name: 'GLN',
                 type: 'text'
             },
             {
-                id: 'taxcode',
+                id: 'TaxCode',
                 label: 'Mã số thuế',
-                name: 'taxcode',
+                name: 'TaxCode',
                 type: 'text'
             },
             {
-                id: 'country',
+                id: 'NationId',
                 label: 'Quốc gia',
-                name: 'country',
-                type: 'select'
+                name: 'Nation',
+                type: '',
+                ward: 'Nation'
             },
             {
-                id: 'city',
+                id: 'ProvinceId',
                 label: 'Thành phố/Tỉnh',
                 name: 'city',
-                type: 'select'
+                type: '',
+                ward: 'City'
             },
             {
-                id: 'district',
+                id: 'DistrictId',
                 label: 'Quận/Huyện',
                 name: 'district',
-                type: 'select'
+                type: '',
+                ward: 'District'
             },
             {
-                id: 'address',
+                id: 'Address',
                 label: 'Địa chỉ',
                 name: 'address',
                 type: 'text'
             },
             {
-                id: 'phone',
+                id: 'PhoneNumber',
                 label: 'Số điện thoại',
-                name: 'phone',
+                name: 'PhoneNumber',
                 type: 'text'
             },
             {
-                id: 'email',
+                id: 'Email',
                 label: 'Email',
-                name: 'email',
+                name: 'Email',
                 type: 'text'
             },
             {
-                id: 'website',
+                id: 'Website',
                 label: 'Website',
-                name: 'website',
+                name: 'Website',
                 type: 'text'
             },
             {

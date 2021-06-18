@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col">
                 <label>Tên chứng nhận</label>
-                <input type="text" class="form-control">
+                <input type="text" [(ngModel)]="model.Name"  class="form-control">
             </div>
         </div>
         <div class="row">
@@ -21,7 +21,7 @@
             </div>
             <div class="col">
                 <label>Ngày hết hạn</label>
-                <input type="date" class="form-control">
+                <input type="date" [(ngModel)]="model.ExpiredDate" class="form-control">
             </div>
         </div>
         <div class="row">
@@ -30,8 +30,8 @@
             </div>
 
         </div>
-        <div class="row">
-            <div class="col">
+        <div class="row group-img">
+            <div class="img">
                 <input type="radio" name="certificateImage" id="browser" value="browser" checked>
                 &nbsp;
                 <label for="browser">Tải ảnh từ máy</label>
@@ -55,7 +55,7 @@
                 </div>
 
             </div>
-            <div class="col">
+            <div class="link">
                 <input type="radio" name="certificateImage" id="link" value="link">
                 &nbsp;
                 <label for="link">Đường link</label>
@@ -67,7 +67,7 @@
                 <div class="button-block">
                     <button (click)="closeDialog()" class="action-btn cancel-btn">Hủy bỏ</button>
                     &nbsp;
-                    <button (click)="closeDialog()" class="action-btn save-btn">Lưu</button>
+                    <button (click)="save()" class="action-btn save-btn">Lưu</button>
                 </div>
             </div>
         </div>

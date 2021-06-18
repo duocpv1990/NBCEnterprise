@@ -1,10 +1,10 @@
 .form-create {
   padding: 15px;
   .subtitle {
-    margin-left: 0.5em;
+    // margin-left: 0.5em;
     color: #1894ff;
     font-weight: 600;
-    margin-top: 3em;
+    margin-top: 1em;
   }
   .layout {
     display: grid;
@@ -73,7 +73,7 @@
       border: 1px solid #e4e4e4;
     }
     select {
-      width: 100%;
+      width: 95%;
       padding: 10px;
       border-radius: 5px;
       outline: none;
@@ -81,7 +81,7 @@
     }
   }
   .content {
-    padding: 10px 10px 0 10px;
+    margin: 0 0 5px 0;
     align-items: center;
     .img {
       display: flex;

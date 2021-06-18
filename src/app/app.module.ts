@@ -9,6 +9,7 @@ import { APIInterceptor } from './utils/interceptors/api.interceptor';
 import { AuthInterceptor } from './utils/interceptors/auth.interceptor';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { CiCommonModule, S3FileService } from '@consult-indochina/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,8 +18,12 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
     HttpClientModule,
+    CiCommonModule.forRoot({
+      S3_URL: 'https://li1jm77bc8.execute-api.ap-southeast-1.amazonaws.com/prod/presigned'
+    })
   ],
   providers: [
+    S3FileService,
     { provide: MAT_DATE_LOCALE, useValue: 'vi-vi' },
     {
       provide: HTTP_INTERCEPTORS,

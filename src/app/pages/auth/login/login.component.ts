@@ -32,7 +32,12 @@ export class LoginComponent implements OnInit {
       })
       .subscribe(
         (res) => {
-          this.localStorage.set('access_token', res);
+          const token = JSON.parse(JSON.stringify(res)).payload;
+          console.log(token);
+          
+          localStorage.setItem('access_token', token.AccessToken);
+          this.localStorage.set('access_user', token);
+          localStorage.setItem('RefreshToken', token.RefreshToken);
           this.router.navigate(['home']);
         },
         (err) => {

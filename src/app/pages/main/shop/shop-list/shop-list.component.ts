@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ImportExcelComponent } from 'src/app/components/dialog/import-excel/import-excel.component';
 import { ShopModel } from 'src/app/models/shop.model';
+import { StoreService } from 'src/app/services/store.service';
 import { ShopCreateComponent } from '../shop-create/shop-create.component';
 import { ShopDeleteComponent } from '../shop-delete/shop-delete.component';
 
@@ -14,97 +15,12 @@ export class ShopListComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
+    private storeService: StoreService
   ) { }
   config = new ShopModel();
   listFilter = [];
 
-  data = [
-    {
-      "stt": "1",
-      "code": "023456781",
-      "name": 'Nhà phân phối số 1',
-      "status": "Đã duyệt",
-      "form": "online",
-      "update": "13:30, 21/04/2021",
-      "MediaURL": "assets/img/default-avatar.jpg",
-      "address": "Hàng Bồ - Hoàn Kiếm - Hà Nội",
-      "area": "Ha Noi",
-      "phone": "0123456789",
-      "production": "1",
-    },
-    {
-      "stt": "2",
-      "code": "023456781",
-      "global": '023456781',
-      "name": 'Nhà phân phối số 1',
-      "form": "online",
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021",
-      "address": "Hàng Bồ - Hoàn Kiếm - Hà Nội",
-      "area": "Ha Noi",
-      "phone": "0123456789",
-      "production": "1",
-      "MediaURL": "assets/img/default-avatar.jpg",
-
-    },
-    {
-      "stt": "3",
-      "code": "023456781",
-      "global": '023456781',
-      "name": 'Nhà phân phối số 1',
-      "form": "online",
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021",
-      "address": "Hàng Bồ - Hoàn Kiếm - Hà Nội",
-      "area": "Ha Noi",
-      "phone": "0123456789",
-      "production": "1",
-      "MediaURL": "assets/img/default-avatar.jpg",
-
-    },
-    {
-      "stt": "4",
-      "code": "023456781",
-      "global": '023456781',
-      "name": 'Nhà phân phối số 1',
-      "form": "online",
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021",
-      "address": "Hàng Bồ - Hoàn Kiếm - Hà Nội",
-      "area": "Ha Noi",
-      "phone": "0123456789",
-      "production": "1",
-      "MediaURL": "assets/img/default-avatar.jpg",
-
-    },
-    {
-      "stt": "5",
-      "code": "023456781",
-      "global": '023456781',
-      "name": 'Nhà phân phối số 1',
-      "status": "Đã duyệt",
-      "form": "online",
-      "address": "Hàng Bồ - Hoàn Kiếm - Hà Nội",
-      "area": "Ha Noi",
-      "phone": "0123456789",
-      "production": "1",
-      "update": "13:30, 21/04/2021",
-      "MediaURL": "assets/img/default-avatar.jpg",
-    },
-    {
-      "stt": "6",
-      "code": "023456781",
-      "global": '023456781',
-      "name": 'Nhà phân phối số 1',
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021",
-      "form": "online",
-      "address": "Hàng Bồ - Hoàn Kiếm - Hà Nội",
-      "area": "Ha Noi",
-      "phone": "0123456789",
-      "production": "1",
-      "MediaURL": "assets/img/default-avatar.jpg",
-    }];
+  data = [];
   dataTable;
   listForm =  [
     {
@@ -118,10 +34,19 @@ export class ShopListComponent implements OnInit {
   ]
   listActive;
   ngOnInit(): void {
+    this.getListStore();
     this.listFilter = this.config.filter;
     this.listActive = this.config.btnActice;
     this.listFilter[2].data = this.listForm;
     this.dataTable = this.config.collums;
+  }
+  getListStore(){
+    this.storeService.getListStore("", "", 1, 1, 50).subscribe(res => {
+      this.data = res;
+      this.data.forEach((x, index) => {
+         x.stt = index + 1;
+      });
+    })
   }
   handleCallback(ev){
 

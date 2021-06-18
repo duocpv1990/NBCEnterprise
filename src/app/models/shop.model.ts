@@ -75,25 +75,25 @@ export class ShopModel {
             },
 
             {
-                id: 'name',
+                id: 'Name',
                 name: 'Tên cửa hàng',
                 width: 200,
                 type: 'text',
             },
             {
-                id: 'address',
+                id: 'AddressDetail',
                 name: 'Địa chỉ',
                 width: 200,
                 type: 'text',
             },
             {
-                id: 'area',
+                id: 'District',
                 name: 'Khu vực',
                 width: 200,
                 type: 'text',
             },
             {
-                id: 'phone',
+                id: 'PhoneNumber',
                 name: 'Điện thoại',
                 width: 200,
                 type: 'text',
@@ -111,7 +111,7 @@ export class ShopModel {
                 type: 'text',
             },
             {
-                id: 'update',
+                id: 'UpdatedOn',
                 name: 'Cập nhập',
                 width: 200,
                 type: 'text',

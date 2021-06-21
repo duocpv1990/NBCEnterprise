@@ -5,6 +5,7 @@ import { ShopModel } from 'src/app/models/shop.model';
 import { StoreService } from 'src/app/services/store.service';
 import { ShopCreateComponent } from '../shop-create/shop-create.component';
 import { ShopDeleteComponent } from '../shop-delete/shop-delete.component';
+import { ShopEditComponent } from '../shop-edit/shop-edit.component';
 
 @Component({
   selector: 'app-shop-list',
@@ -52,11 +53,23 @@ export class ShopListComponent implements OnInit {
 
   }
   handleCallbackTable(ev){
+    console.log(ev);
+    
     if (ev.type === 'create') {
       return this.dialog.open(ShopCreateComponent, {
         width: '940px',
         height: '843px'
       }).afterClosed().subscribe(result => {
+        this.getListStore();
+      });
+    }
+    if (ev.type === 'edit') {
+      return this.dialog.open(ShopEditComponent, {
+        width: '940px',
+        height: '843px',
+        data: ev.item
+      }).afterClosed().subscribe(result => {
+        this.getListStore();
       });
     }
     if (ev.type === 'import') {
@@ -67,6 +80,8 @@ export class ShopListComponent implements OnInit {
       });
     }
     if (ev.type === 'delete') {
+      console.log(ev);
+      
       return this.dialog.open(ShopDeleteComponent, {
         width: '400px',
         height: '250px',

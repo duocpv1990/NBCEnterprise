@@ -3,8 +3,6 @@ import { CreateModel } from "./base/create.model";
 import { FilterModel } from "./base/filter.model";
 
 export class DistributorModel {
-
-
     public get filter(): Array<FilterModel> {
         return [
             {
@@ -121,63 +119,72 @@ export class DistributorModel {
     public get create(): Array<CreateModel> {
         return [
             {
-                id: 'name',
+                id: 'CompanyId',
                 label: 'Tên doanh nghiệp',
-                name: 'name',
+                name: 'Name',
+                type: 'autocomplete'
+            },
+            {
+                id: 'Name',
+                label: 'Tên nhà phân phối',
+                name: 'Name',
                 type: 'text'
             },
             {
-                id: 'distributorName',
+                id: 'TaxCode',
                 label: 'Mã doanh nghiệp',
-                name: 'distributorName',
+                name: 'TaxCode',
                 type: 'text'
             },
             {
-                id: 'mst',
+                id: 'TaxCode',
                 label: 'Mã số thuế',
-                name: 'mst',
+                name: 'TaxCode',
                 type: 'text'
             },
             {
-                id: 'country',
+                id: 'NationId',
                 label: 'Quốc gia',
-                name: 'country',
-                type: 'select'
+                name: 'NationId',
+                type: '',
+                ward: 'Nation'
             },
             {
-                id: 'city',
+                id: 'ProvinceId',
                 label: 'Thành phố/Tỉnh',
                 name: 'city',
-                type: 'select'
+                type: '',
+                ward: "City"
             },
             {
-                id: 'district',
+                id: 'DistrictId',
                 label: 'Quận/Huyện',
-                name: 'district',
-                type: 'select'
+                name: 'DistrictId',
+                type: '',
+                ward: 'District'
             },
             {
-                id: 'address',
+                id: 'AddressDetail',
                 label: 'Địa chỉ',
-                name: 'address',
+                name: 'AddressDetail',
                 type: 'text'
             },
             {
-                id: 'phone',
+                id: 'PhoneNumber',
                 label: 'Số điện thoại',
-                name: 'phone',
+                name: 'PhoneNumber',
                 type: 'text'
             },
             {
-                id: 'email',
+                id: 'Email',
                 label: 'Email',
-                name: 'email',
+                name: 'Email',
                 type: 'text'
             },            
             {
-                id: 'website',
+                id: 'Website',
                 label: 'Website',
-                name: 'website',
+                name: 'Website',
                 type: 'text'
             },
             {

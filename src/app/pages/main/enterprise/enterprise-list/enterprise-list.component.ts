@@ -178,6 +178,7 @@ export class EnterpriseListComponent implements OnInit {
         width: '940px',
         height: '843px'
       }).afterClosed().subscribe(result => {
+        this.getListCompany();
       });
     }
     if (ev.type === 'import') {

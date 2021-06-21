@@ -23,6 +23,9 @@ export class EnterpriseService {
     createCompany(data) {
         return this.http.post('api/company', data).pipe(map((res: any) => res.payload));
     }
+    createCompanyMedia(data){
+        return this.http.post('api/company/media', data).pipe(map((res: any) => res.payload));
+    }
     editCompany(companyId, data) {
         return this.http.put(`api/company?companyId=${companyId}`, data).pipe(map((res: any) => res));
     }

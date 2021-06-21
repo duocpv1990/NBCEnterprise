@@ -16,6 +16,8 @@ export class ShopDeleteComponent implements OnInit {
 
   ngOnInit(): void {
     this.model = this.data;
+    console.log(this.data);
+    
   }
   handleEvent(ev){
     console.log(ev);
@@ -27,6 +29,8 @@ export class ShopDeleteComponent implements OnInit {
     }
   }
   deleteFunction(){
+    console.log(this.data);
+    
     this.dialogRef.close();
   }
 }

@@ -72,6 +72,7 @@ export class DistributorListComponent implements OnInit {
         width: '940px',
         height: '843px'
       }).afterClosed().subscribe(result => {
+        this.getListDistributor();
       });
     }
     if (ev.type === 'import') {

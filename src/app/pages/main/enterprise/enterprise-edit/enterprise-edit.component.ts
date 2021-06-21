@@ -1,73 +1,129 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EnterPriseModel } from 'src/app/models/enterprise.model';
+import { WardService } from 'src/app/services/city-district.service';
 import { EnterpriseService } from 'src/app/services/enterprise.service';
 
 @Component({
-  selector: 'app-enterprise-edit',
-  templateUrl: './enterprise-edit.component.html',
-  styleUrls: ['./enterprise-edit.component.scss']
+    selector: 'app-enterprise-edit',
+    templateUrl: './enterprise-edit.component.html',
+    styleUrls: ['./enterprise-edit.component.scss']
 })
 export class EnterpriseEditComponent implements OnInit {
- 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef: MatDialogRef<EnterpriseEditComponent>,
-    private enterpriseService: EnterpriseService
-  ) { }
-  conFig = new EnterPriseModel;
-  dataModel = {};
-  option = {
-      title: 'THÔNG TIN DOANH NGHIỆP',
-      type: 'edit'
-  };
 
-  arrayButton = [{
-      class: 'btn-cancel',
-      text: 'Hủy bỏ'
-  },
-  {
-      class: 'btn-save',
-      text: 'Chỉnh sửa'
-  }]
-  listCreate = [];
+    constructor(
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        private dialogRef: MatDialogRef<EnterpriseEditComponent>,
+        private enterpriseService: EnterpriseService,
+        private wardService: WardService
+    ) { }
+    conFig = new EnterPriseModel;
+    dataModel: any = {};
+    option = {
+        title: 'THÔNG TIN DOANH NGHIỆP',
+        type: 'edit'
+    };
 
- async ngOnInit() {
-      this.listCreate = this.conFig.create;
-      const data = await this.enterpriseService.getCompanyDetail(this.data.CompanyId).toPromise().then();
-      this.dataModel = data;
-      
-  }
+    arrayButton = [{
+        class: 'btn-cancel',
+        text: 'Hủy bỏ'
+    },
+    {
+        class: 'btn-save',
+        text: 'Chỉnh sửa'
+    }]
+    listCreate = [];
 
-  getDetailCompany(){
-      this.enterpriseService.getCompanyDetail(this.data.CompanyId).subscribe(res => {
-          this.dataModel = res;
-      });
-  }
+    ngOnInit() {
+        this.listCreate = this.conFig.create;
+        this.getDetailCompany();
+        this.listCreate[4].data = [{
+            name: "Việt Nam",
+            value: 916
+        }];
 
-  handleCallbackEvent = (value) => {
-      switch (value.class) {
-          case 'btn-cancel':
-              this.cancel();
-              break;
-          case 'btn-save':
-              this.save(value.data)
-              break;
-          default:
-              break;
-      }
-      this.dialogRef.close();
-  }
+    }
+    handleSelectChange(ev) {
+        if (ev.check === 'Nation') {
+            this.wardService.getAllCity(+ev.value).subscribe(res => {
+                const province = res.map(x => {
+                    return {
+                        name: x.Name,
+                        value: +x.ProvinceId
+                    }
+                })
+                this.listCreate[5].data = province;
 
-  cancel = () => {
-  }
+            })
+        }
+        if (ev.check === 'City') {
+            this.wardService.getDistrict(+ev.value).subscribe(res => {
+                const district = res.map(x => {
+                    return {
+                        name: x.Name,
+                        value: +x.DistrictId
+                    }
+                })
+                this.listCreate[6].data = district;
+            })
+        }
+    }
 
-  save = (value) => {
-     this.dataModel = value;
-     this.enterpriseService.editCompany(value.CompanyId, value).subscribe(res => {
-         
-     })
-  }
+    getDetailCompany() {
+        this.enterpriseService.getCompanyDetail(this.data.CompanyId).subscribe(res => {
+            this.dataModel = res;
+            this.dataModel.listMedia = res.CompanyMedias;
+            this.wardService.getAllCity(res.NationId).subscribe(res => {
+                const province = res.map(x => {
+                    return {
+                        name: x.Name,
+                        value: +x.ProvinceId
+                    }
+                })
+                this.listCreate[5].data = province;
+
+            });
+            this.wardService.getDistrict(res.ProvinceId).subscribe(res => {
+                const district = res.map(x => {
+                    return {
+                        name: x.Name,
+                        value: +x.DistrictId
+                    }
+                })
+                this.listCreate[6].data = district;
+            })
+
+        });
+    }
+
+    handleCallbackEvent = (value) => {
+        switch (value.class) {
+            case 'btn-cancel':
+                this.cancel();
+                break;
+            case 'btn-save':
+
+                this.save(value)
+                break;
+            default:
+                break;
+        }
+        this.dialogRef.close();
+    }
+
+    cancel = () => {
+    }
+
+    save = (value) => {
+        value.listMedia.forEach(x => {
+            this.enterpriseService.createCompanyMedia(x).subscribe(res => {
+
+            })
+        });
+        this.enterpriseService.editCompany(value.data.CompanyId, value.data).subscribe(res => {
+
+        })
+    }
 
 
 }

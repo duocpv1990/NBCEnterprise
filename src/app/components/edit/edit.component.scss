@@ -1,5 +1,5 @@
 .form-create {
-  padding: 15px;
+  padding: 15px 25px;
   .subtitle {
     // margin-left: 0.5em;
     color: #1894ff;
@@ -55,12 +55,16 @@
     .btn-add-new {
       outline: none;
       border: none;
-      width: 100%;
+      width: 150px;
       height: 45px;
       background: none;
       border: 1px solid #1894ff;
       color: #1894ff;
       border-radius: 20px;
+    }
+    .label{
+      margin-top: 10px;
+      margin-right: 10px;
     }
   }
   .input-text {
@@ -115,4 +119,33 @@
   color: white;
   cursor: pointer;
   font-size: 16px;
+}
+.certification {
+  text-align: start;
+  width: 100%;
+  min-height: 200px;
+  border: 1px dotted;
+  background-color: #f6f6f6;
+  padding: 10px 20px;
+  .box-content {
+    display: flex;
+    label {
+      font-weight: bold;
+      width: 30%;
+    }
+    span{
+      font-weight: 600;
+    }
+    .list-img{
+      display: flex;
+      flex-direction: column;
+      .text{
+        white-space: nowrap; 
+        width: 500px; 
+        overflow: hidden;
+        text-overflow: ellipsis; 
+        color: #1894FF;
+      }
+    }
+  }
 }

@@ -31,8 +31,6 @@ export class EnterPriseModel {
                 condition: 'stt'
             }];
     }
-
-
     public get collums(): Array<CollumsModel> {
         return [
             {
@@ -80,10 +78,10 @@ export class EnterPriseModel {
                 color: '#26A700'
             },
             {
-                id: 'update',
+                id: 'UpdatedOn',
                 name: 'Cập nhật',
                 width: 200,
-                type: 'text',
+                type: 'date',
             },
             {
                 id: 'noun',
@@ -164,7 +162,7 @@ export class EnterPriseModel {
                 ward: 'District'
             },
             {
-                id: 'Address',
+                id: 'AddressDetail',
                 label: 'Địa chỉ',
                 name: 'address',
                 type: 'text'

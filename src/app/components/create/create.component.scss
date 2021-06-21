@@ -1,5 +1,5 @@
 .form-create {
-  padding: 15px;
+  padding: 15px 20px;
   .subtitle {
     // margin-left: 0.5em;
     color: #1894ff;
@@ -116,4 +116,21 @@
   color: white;
   cursor: pointer;
   font-size: 16px;
+}
+.list-complete{
+  max-height: 250px;
+  width: 400px;
+  border-left: 1px solid;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+  position: absolute;
+  background: white;
+  .select-name{
+     height: 35px;
+     line-height: 35px;
+
+  }
+  .select-name:hover{
+    background-color: #BDBDBD;
+  }
 }

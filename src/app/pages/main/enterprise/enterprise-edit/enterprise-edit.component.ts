@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { BaseUploadComponent, S3FileService } from '@consult-indochina/common';
 import { EnterPriseModel } from 'src/app/models/enterprise.model';
 import { WardService } from 'src/app/services/city-district.service';
 import { EnterpriseService } from 'src/app/services/enterprise.service';
@@ -9,19 +10,21 @@ import { EnterpriseService } from 'src/app/services/enterprise.service';
     templateUrl: './enterprise-edit.component.html',
     styleUrls: ['./enterprise-edit.component.scss']
 })
-export class EnterpriseEditComponent implements OnInit {
+export class EnterpriseEditComponent extends BaseUploadComponent implements OnInit {
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
+        public s3Service: S3FileService,
         private dialogRef: MatDialogRef<EnterpriseEditComponent>,
         private enterpriseService: EnterpriseService,
         private wardService: WardService
-    ) { }
+    ) { super(s3Service) }
     conFig = new EnterPriseModel;
     dataModel: any = {};
     option = {
         title: 'THÔNG TIN DOANH NGHIỆP',
-        type: 'edit'
+        type: 'edit',
+        check: 'enterprise'
     };
 
     arrayButton = [{
@@ -102,7 +105,6 @@ export class EnterpriseEditComponent implements OnInit {
                 this.cancel();
                 break;
             case 'btn-save':
-
                 this.save(value)
                 break;
             default:
@@ -110,19 +112,75 @@ export class EnterpriseEditComponent implements OnInit {
         }
         this.dialogRef.close();
     }
-
     cancel = () => {
     }
 
     save = (value) => {
-        value.listMedia.forEach(x => {
-            this.enterpriseService.createCompanyMedia(x).subscribe(res => {
+        if (!value.data.FileAvatar && value.data.FileBackground) {
+            let fileAvatar = {
+                CompanyId: value.data.CompanyId,
+                MediaURL: value.data.MediaURL,
+                Type: 1,
+                Status: 1
+            }
+            this.enterpriseService.createCompanyMedia(fileAvatar).subscribe(res => { });
+            this.selectImage(value.data.FileBackground).subscribe(res => { }, (err) => { }, () => {
+                let fileBackground = {
+                    CompanyId: value.data.CompanyId,
+                    MediaURL: this.imageLinkUpload,
+                    Type: 2,
+                    Status: 1
+                }
+                this.enterpriseService.createCompanyMedia(fileBackground).subscribe(res => { });
+            })
+        }
+        if (value.data.FileAvatar && !value.data.FileBackground) {
+            let fileBackground = {
+                CompanyId: value.data.CompanyId,
+                MediaURL: value.data.BackgroundURL,
+                Type: 2,
+                Status: 1
+            }
+            this.enterpriseService.createCompanyMedia(fileBackground).subscribe(res => { });
+            this.selectImage(value.data.FileAvatar).subscribe(res => { }, (err) => { }, () => {
+                let fileAvatar = {
+                    CompanyId: value.data.CompanyId,
+                    MediaURL: this.imageLinkUpload,
+                    Type: 1,
+                    Status: 1
+                }
+                this.enterpriseService.createCompanyMedia(fileAvatar).subscribe(res => { });
+            })
+        }
+        if (value.data.FileAvatar && value.data.FileBackground) {
+            this.selectImage(value.data.FileAvatar).subscribe(res => { }, (err) => { }, () => {
+                let fileAvatar = {
+                    CompanyId: value.data.CompanyId,
+                    MediaURL: this.imageLinkUpload,
+                    Type: 1,
+                    Status: 1
+                }
+                this.enterpriseService.createCompanyMedia(fileAvatar).subscribe(res => { });
+                this.selectImage(value.data.FileBackground).subscribe(res => { }, (err) => { }, () => {
+                    let fileBackground = {
+                        CompanyId: value.data.CompanyId,
+                        MediaURL: this.imageLinkUpload,
+                        Type: 2,
+                        Status: 1
+                    }
+                    this.enterpriseService.createCompanyMedia(fileBackground).subscribe(res => { });
+                })
+            });
+        }
+        else {
+            value.data.NationId = +value.data.NationId;
+            value.data.ProvinceId = +value.data.ProvinceId;
+            value.data.DistrictId = +value.data.DistrictId;
+            this.enterpriseService.editCompany(value.data.CompanyId, value.data).subscribe(res => {
 
             })
-        });
-        this.enterpriseService.editCompany(value.data.CompanyId, value.data).subscribe(res => {
+        }
 
-        })
     }
 
 

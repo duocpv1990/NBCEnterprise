@@ -40,8 +40,6 @@ export class CreateComponent extends BaseUploadComponent implements OnInit {
     this.model = this.dataModel || {};
     this.timer = this.enterpriseService.getListCompany("", "", 1, 1, 50).subscribe(res => {
       this.listComplete = res;
-      console.log(this.listComplete);
-
     })
   }
   selectCompany(value){
@@ -52,7 +50,6 @@ export class CreateComponent extends BaseUploadComponent implements OnInit {
   autocomplete(name) {
     if (!name) return this.listSearch = [];
     this.listSearch = this.listComplete.filter(x => x.Name.toLowerCase().indexOf(name.toLowerCase()) > -1);
-    console.log(this.listSearch);
   }
 
   preview(files, value) {

@@ -114,7 +114,7 @@ export class ShopModel {
                 id: 'UpdatedOn',
                 name: 'Cập nhập',
                 width: 200,
-                type: 'text',
+                type: 'date',
             },
             {
                 id: 'noun',

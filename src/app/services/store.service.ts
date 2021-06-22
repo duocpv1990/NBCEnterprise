@@ -23,6 +23,9 @@ export class StoreService {
     createStore(data) {
         return this.http.post('api/Store', data).pipe(map((res: any) => res.payload));
     }
+    createImgStore(data){
+        return this.http.post("api/store/media", data).pipe(map((res: any) => res.payload));
+    }
     editStore(StoreId, data) {
         return this.http.put(`api/Store?StoreId=${StoreId}`, data).pipe(map((res: any) => res));
     }

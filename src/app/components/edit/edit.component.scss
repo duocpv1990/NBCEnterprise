@@ -149,3 +149,19 @@
     }
   }
 }
+.list-complete{
+  max-height: 250px;
+  width: 500px;
+  overflow: auto;
+  position: absolute;
+  background: #f8f8f8;
+  .select-name{
+     min-height: 35px;
+     line-height: 35px;
+     padding: 0 10px;
+     font-weight: 600;
+  }
+  .select-name:hover{
+    background-color: #D8D8D8;
+  }
+}

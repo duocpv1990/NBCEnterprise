@@ -9,7 +9,7 @@ export class DistributorModel {
                 Text: 'Mã doanh nghiệp',
                 type: 'text',
                 data: [],
-                condition: 'code'
+                condition: 'TaxCode'
             },
             {
                 Text: 'Thành phố',
@@ -19,8 +19,8 @@ export class DistributorModel {
             },
             {
                 Text: 'Tìm kiếm',
-                type: 'button',
-                condition: "production"
+                type: 'search',
+                condition: "Name"
             }];
     }
     public get collums(): Array<CollumsModel> {
@@ -84,7 +84,7 @@ export class DistributorModel {
                 id: 'UpdatedOn',
                 name: 'Cập nhập',
                 width: 200,
-                type: 'text',
+                type: 'date',
             },
             {
                 id: 'noun',
@@ -130,12 +130,12 @@ export class DistributorModel {
                 name: 'Name',
                 type: 'text'
             },
-            {
-                id: 'TaxCode',
-                label: 'Mã doanh nghiệp',
-                name: 'TaxCode',
-                type: 'text'
-            },
+            // {
+            //     id: 'TaxCode',
+            //     label: 'Mã doanh nghiệp',
+            //     name: 'TaxCode',
+            //     type: 'text'
+            // },
             {
                 id: 'TaxCode',
                 label: 'Mã số thuế',

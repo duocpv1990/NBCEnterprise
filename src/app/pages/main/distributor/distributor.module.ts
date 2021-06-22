@@ -10,16 +10,19 @@ import { CreateDistributorComponent } from './create-distributor/create-distribu
 import { CreateModule } from 'src/app/components/create/create.component';
 import { DeleteDistributorComponent } from './delete-distributor/delete-distributor.component';
 import { DeleteModule } from 'src/app/components/dialog/delete/delete.component';
+import { EditDistributorComponent } from './edit-distributor/edit-distributor.component';
+import { EditModule } from 'src/app/components/edit/edit.component';
 
 
 
 @NgModule({
-  declarations: [DistributorComponent, DistributorListComponent, CreateDistributorComponent, DeleteDistributorComponent],
+  declarations: [DistributorComponent, DistributorListComponent, CreateDistributorComponent, DeleteDistributorComponent, EditDistributorComponent],
   imports: [
     CommonModule,
     FilterBaseModule,
     TableBaseModule,
     CreateModule,
+    EditModule,
     DeleteModule,
     RouterModule.forChild(distributorRoute)
   ],

@@ -91,6 +91,7 @@ export class ShopListComponent implements OnInit {
           content: "Bạn có muốn xoá thông tin điểm bán trên hệ thống?"
         }
       }).afterClosed().subscribe(result => {
+        this.getListStore();
       });
     }
   }

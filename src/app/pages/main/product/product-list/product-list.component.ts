@@ -5,6 +5,7 @@ import { ProductAddComponent } from '../product-add/product-add.component';
 import { ProductUpdateComponent } from '../product-update/product-update.component';
 import { ProductDeleteComponent } from '../product-delete/product-delete.component';
 import { ImportExcelComponent } from 'src/app/components/dialog/import-excel/import-excel.component';
+import { ProductionService } from 'src/app/services/production.service';
 
 @Component({
   selector: 'app-product-list',
@@ -16,92 +17,27 @@ export class ProductListComponent implements OnInit {
   config = new Product();
   value: string;
   dataSub = [];
-  tableData = [];
   listActive;
   dataTable;
-  data = [
-    {
-      image: 'https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg',
-      productName: 'Bút bi Thiên Long',
-      barcode: '123456789',
-      contractPackage: 'Gói cơ bản',
-      owner: 'Công ty TNHH Việt An',
-      authorization: {
-        name: 'DNSH-NSX',
-        type: 'Toàn quyền'
-      },
-      status: 'Cho quét',
-      infoStatus: 'Đã duyệt',
-      scanCount: 6
-    },
-    {
-      image: 'https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg',
-      productName: 'Bút bi Thiên Long',
-      barcode: '123456789',
-      contractPackage: 'Gói cơ bản',
-      owner: 'Công ty TNHH Việt An',
-      authorization: {
-        name: 'DNSH-NSX',
-        type: 'Toàn quyền'
-      },
-      status: 'Cho quét',
-      infoStatus: 'Đã duyệt',
-      scanCount: 6
-    },
-    {
-      image: 'https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg',
-      productName: 'Bút bi Thiên Long',
-      barcode: '123456789',
-      contractPackage: 'Gói cơ bản',
-      owner: 'Công ty TNHH Việt An',
-      authorization: {
-        name: 'DNSH-NSX',
-        type: 'Toàn quyền'
-      },
-      status: 'Cho quét',
-      infoStatus: 'Đã duyệt',
-      scanCount: 6
-    },
-    {
-      image: 'https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg',
-      productName: 'Bút bi Thiên Long',
-      barcode: '123456789',
-      contractPackage: 'Gói cơ bản',
-      owner: 'Công ty TNHH Việt An',
-      authorization: {
-        name: 'DNSH-NSX',
-        type: 'Toàn quyền'
-      },
-      status: 'Cho quét',
-      infoStatus: 'Đã duyệt',
-      scanCount: 6
-    },
-    {
-      image: 'https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg',
-      productName: 'Bút bi Thiên Long',
-      barcode: '123456789',
-      contractPackage: 'Gói cơ bản',
-      owner: 'Công ty TNHH Việt An',
-      authorization: {
-        name: 'DNSH-NSX',
-        type: 'Toàn quyền'
-      },
-      status: 'Cho quét',
-      infoStatus: 'Đã duyệt',
-      scanCount: 6
-    }
-  ];
+  data = [];
 
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private productService: ProductionService
   ) { }
 
   ngOnInit(): void {
     this.listFilter = this.config.filter;
-    this.tableData = this.config.collums;
     this.dataTable = this.config.collums;
     this.listActive = this.config.btnActice;
-    this.dataSub = this.data;
+    this.getlistProduct();
+  }
+
+  getlistProduct() {
+    this.productService.getListProduct("", "", "", 1, 1, 1, 50).subscribe(res => {
+      this.data = res;
+      this.dataSub = this.data;
+    })
   }
 
   handleCallback(ev) {
@@ -135,6 +71,7 @@ export class ProductListComponent implements OnInit {
         width: '940px',
         height: '843px'
       }).afterClosed().subscribe(result => {
+        this.getlistProduct();
       });
     }
     if (ev.type === 'import') {
@@ -150,6 +87,7 @@ export class ProductListComponent implements OnInit {
         height: '843px',
         data: ev.item
       }).afterClosed().subscribe(result => {
+        this.getlistProduct();
       });
     }
     if (ev.type === 'delete') {
@@ -162,6 +100,7 @@ export class ProductListComponent implements OnInit {
           content: "Bạn có muốn xoá sản phẩm trên hệ thống?"
         }
       }).afterClosed().subscribe(result => {
+        this.getlistProduct();
       });
     }
   }

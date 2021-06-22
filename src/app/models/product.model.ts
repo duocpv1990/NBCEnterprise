@@ -62,26 +62,26 @@ export class Product {
             {
                 id: 'checkbox',
                 name: '',
-                width: 100,
+                width: 75,
                 type: 'checkbox',
             },
 
             {
-                id: 'image',
+                id: 'MediaURL',
                 name: 'Ảnh',
-                width: 200,
+                width: 100,
                 type: 'image'
             },
             {
-                id: 'productName',
+                id: 'Name',
                 name: 'Sản phẩm',
-                width: 200,
+                width: 150,
                 type: 'text',
             },
             {
-                id: 'barcode',
+                id: 'ProductCode',
                 name: 'Mã vạch',
-                width: 200,
+                width: 150,
                 type: 'text',
             },
 
@@ -104,7 +104,7 @@ export class Product {
                 type: 'object',
             },
             {
-                id: 'status',
+                id: 'Status',
                 name: 'Trạng thái',
                 width: 200,
                 type: 'text',
@@ -116,10 +116,28 @@ export class Product {
                 type: 'text',
             },
             {
-                id: 'scanCount',
+                id: 'ScanNumber',
                 name: 'Lượt quét',
                 width: 200,
                 type: 'text',
+            },
+            {
+                id: 'RatingNumber',
+                name: 'Lượt đánh giá',
+                width: 200,
+                type: 'text',
+            },
+            {
+                id: 'Price',
+                name: 'Giá',
+                width: 100,
+                type: 'text',
+            },
+            {
+                id: 'noun',
+                name: 'Hành động',
+                width: 200,
+                type: 'setting',
             },
 
         ];
@@ -163,13 +181,13 @@ export class Product {
                 type: 'text'
             },
             {
-                id: 'productName',
+                id: 'Name',
                 label: 'Tên sản phẩm (*)',
                 name: 'productName',
                 type: 'text'
             },
             {
-                id: 'price',
+                id: 'Price',
                 label: 'Giá niêm yết (*)',
                 name: 'price',
                 type: 'text'
@@ -181,7 +199,7 @@ export class Product {
                 type: 'select'
             },
             {
-                id: 'productDetail',
+                id: 'Description',
                 label: 'Mô tả sản phẩm',
                 name: 'productDetail',
                 type: 'text'
@@ -193,16 +211,16 @@ export class Product {
                 type: 'text'
             },
             {
-                id: 'distributor',
+                id: 'DistributorName',
                 label: 'Nhà phân phối (*)',
-                name: 'distributor',
-                type: 'text'
+                name: 'DistributorName',
+                type: 'autocomplete'
             },
             {
-                id: 'shop',
+                id: 'StoreName',
                 label: 'Điểm bán',
-                name: 'shop',
-                type: 'text'
+                name: 'StoreName',
+                type: 'autocomplete'
             },
 
             {

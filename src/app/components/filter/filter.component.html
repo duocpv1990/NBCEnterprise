@@ -33,7 +33,7 @@
         <div class="search">
             <div *ngFor="let item of listFilter" class="item-filter">
                 <div class="search-input" *ngIf="item.type === 'search'">
-                    <span>{{ item.Text }}</span>
+                    <!-- <span>{{ item.Text }}</span> -->
                     <input type="text" placeholder="Tìm kiếm..." class="base-input-search"
                         (input)="onChangeValueDate($event.target.value, item)" />
                     <img src="assets/img/icon-search.svg">

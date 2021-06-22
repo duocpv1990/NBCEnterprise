@@ -24,10 +24,13 @@ export class EditComponent extends BaseUploadComponent implements OnInit, OnChan
 
   model: any = {};
   imagePath;
-  fileAvatar;
-  fileBackground;
+  fileAvatar: any;
+  fileBackground: any;
   listMedia: any = [];
   imgURL;
+  listComplete: any = [];
+  listSearch: any = [];
+  timer;
   certificationDetail: any = {};
   constructor(
     public s3Service: S3FileService,
@@ -55,6 +58,18 @@ export class EditComponent extends BaseUploadComponent implements OnInit, OnChan
   }
 
   ngOnInit() {
+    this.timer = this.enterpriseService.getListCompany("", "", 1, 1, 50).subscribe(res => {
+      this.listComplete = res;
+    });
+  }
+  selectCompany(value){
+    this.model.CompanyId = value.CompanyId;
+    this.model.CompanyName = value.Name;
+    this.listSearch.length = 0;
+  }
+  autocomplete(name) {
+    if (!name) return this.listSearch.length = 0;
+    this.listSearch = this.listComplete.filter(x => x.Name.toLowerCase().indexOf(name.toLowerCase()) > -1);
   }
   preview(files, value) {
     if (value === 'avatar') {
@@ -66,6 +81,7 @@ export class EditComponent extends BaseUploadComponent implements OnInit, OnChan
       reader.onload = (_event) => {
         this.model.MediaURL = reader.result;
         this.fileAvatar = files;
+        this.model.FileAvatar = files;
       }
     }
     else if (value === 'background') {
@@ -77,6 +93,7 @@ export class EditComponent extends BaseUploadComponent implements OnInit, OnChan
       reader.onload = (_event) => {
         this.model.BackgroundURL = reader.result;
         this.fileBackground = files;
+        this.model.FileBackground = files;
       }
     }
 
@@ -92,28 +109,7 @@ export class EditComponent extends BaseUploadComponent implements OnInit, OnChan
 
   onClickButton = (i) => {
     if (i.class === "btn-save") {
-      this.selectImage(this.fileAvatar).subscribe(res => { }, (err) => { }, () => {
-        let modelAvatar = {
-          CompanyId: this.model.CompanyId,
-          MediaURL: this.imageLinkUpload,
-          Type: 1,
-          Status: 1
-        }
-        this.listMedia.push(modelAvatar);
-        this.selectImage(this.fileBackground).subscribe(res => { }, (err) => { }, () => {
-          let modelBackground = {
-            CompanyId: this.model.CompanyId,
-            MediaURL: this.imageLinkUpload,
-            Type: 2,
-            Status: 1
-          };
-          this.listMedia.push(modelBackground);
-          i.data = this.model;
-          i.listMedia = this.listMedia;
-          this.callback.emit(i);
-        });
-      });
-      i.
+      i.data = this.model;
       this.callback.emit(i);
     }
     else {

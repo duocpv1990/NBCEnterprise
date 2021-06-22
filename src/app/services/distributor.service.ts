@@ -14,8 +14,8 @@ export class DistributorService {
     ) {
 
     }
-    getDistributorDetail() {
-        return this.http.get(`api/distributor/detail`).pipe(map((res: any) => res.payload));
+    getDistributorDetail(distributorId) {
+        return this.http.get(`api/distributor/detail?distributorId=${distributorId}`).pipe(map((res: any) => res.payload));
     }
     getListDistributor(name, provinceId, pageNumber, pageSize) {
         return this.http.get(`api/distributor?name=${name}&provinceId=${provinceId}&pageNumber=${pageNumber}&pageSize=${pageSize}`).pipe(map((res: any) => res.payload));
@@ -23,10 +23,13 @@ export class DistributorService {
     createDistributor(data) {
         return this.http.post('api/distributor', data).pipe(map((res: any) => res.payload));
     }
+    createImgDistributor(data){
+        return this.http.post("api/distributor/media", data).pipe(map((res: any) => res.payload));
+    }
     editDistributor(distributorId, data) {
         return this.http.put(`api/distributor?distributorId=${distributorId}`, data).pipe(map((res: any) => res));
     }
     deleteDistributor(distributorId) {
-        return this.http.delete(`api/distributorId?distributorId=${distributorId}`).pipe(map((res: any) => res));
+        return this.http.delete(`api/distributor?distributorId=${distributorId}`).pipe(map((res: any) => res));
     }
 }

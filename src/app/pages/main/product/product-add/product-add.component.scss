@@ -186,3 +186,20 @@
   color: #1894ff;
   border-radius: 20px;
 }
+.list-complete{
+  max-height: 250px;
+  width: 500px;
+  overflow: auto;
+  position: absolute;
+  background: #f8f8f8;
+  z-index: 999;
+  .select-name{
+     min-height: 35px;
+     line-height: 35px;
+     padding: 0 10px;
+     font-weight: 600;
+  }
+  .select-name:hover{
+    background-color: #D8D8D8;
+  }
+}

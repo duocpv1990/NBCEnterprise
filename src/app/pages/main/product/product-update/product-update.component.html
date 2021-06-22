@@ -14,7 +14,7 @@
             <div class="label"> Mã số sản phẩm toàn cầu (GTIN) (<span class="require-icon">*</span>) </div>
             <div class="input-text">
                 <div>
-                    <input type="text" value="123456789" />
+                    <input type="text" [(ngModel)]="dataModel.ProductCode" />
                 </div>
 
             </div>
@@ -25,7 +25,7 @@
             <div class="label"> Tên sản phẩm (<span class="require-icon">*</span>) </div>
             <div class="input-text">
                 <div>
-                    <input type="text" value="Bút bi Thiên Long" />
+                    <input type="text" [(ngModel)]="dataModel.Name" />
                 </div>
 
             </div>
@@ -36,7 +36,7 @@
             <div class="label"> Gía niêm yết (<span class="require-icon">*</span>) </div>
             <div class="input-text">
                 <div>
-                    <input type="text" value="120.000 đ" />
+                    <input type="text" [(ngModel)]="dataModel.Price" />
                 </div>
             </div>
         </div>
@@ -56,7 +56,10 @@
             <div class="label"> Nhà phân phối (<span class="require-icon">*</span>) </div>
             <div class="input-text">
                 <div>
-                    <input type="text" value="Công ty TNHH Việt An" />
+                    <input (input)="autocompleteDistributor($event.target.value)" [(ngModel)]="dataModel.DistributorName" type="text" name="" id="">
+                    <div class="list-complete" *ngIf="listSearchDistributor"> 
+                       <div class="select-name" (click)="selectDistributor(distributor)" *ngFor="let distributor of listSearchDistributor">{{distributor.Name}}</div>
+                    </div> 
                 </div>
             </div>
         </div>
@@ -64,7 +67,10 @@
             <div class="label"> Điểm bán (<span class="require-icon">*</span>) </div>
             <div class="input-text">
                 <div>
-                    <input type="text" value="Tạp hóa Ut Thư, Tạp hóa đổi mới" />
+                    <input (input)="autocomplete($event.target.value)" [(ngModel)]="dataModel.StoreName" type="text" name="" id="">
+                    <div class="list-complete" *ngIf="listSearchStore"> 
+                       <div class="select-name" (click)="selectStore(store)" *ngFor="let store of listSearchStore">{{store.Name}}</div>
+                    </div> 
                 </div>
             </div>
         </div>
@@ -74,7 +80,7 @@
                 <div>
                     <select name="" id="">
                         <option value="" *ngFor="let country of contries">
-                            {{country.name}}
+                            {{country.Name}}
                         </option>
                     </select>
                 </div>
@@ -128,7 +134,7 @@
             <div class="label"> Nhãn hiệu (<span class="require-icon">*</span>) </div>
             <div class="input-text">
                 <div>
-                    <input type="text" id="" name="" />
+                    <input type="text" [(ngModel)]="dataModel.Label" id="" name="" />
                 </div>
 
             </div>
@@ -139,7 +145,7 @@
             <div class="label"> Khối lượng/dung tích sản phẩm (<span class="require-icon">*</span>) </div>
             <div class="input-text">
                 <div>
-                    <input type="text" id="" name="" />
+                    <input type="text" [(ngModel)]="dataModel.Capacity"  id="" name="" />
                 </div>
             </div>
         </div>
@@ -147,7 +153,7 @@
             <div class="label"> Đơn vị (<span class="require-icon">*</span>) </div>
             <div class="input-text">
                 <div>
-                    <input type="text" id="" name="" />
+                    <input type="text" [(ngModel)]="dataModel.Unit" id="" name="" />
                 </div>
             </div>
         </div>
@@ -155,7 +161,7 @@
             <div class="label"> Ngày sản xuất (<span class="require-icon">*</span>) </div>
             <div class="input-text">
                 <div>
-                    <input type="text" id="" name="" />
+                    <input type="date" [(ngModel)]="dataModel.ManufacturedOn"  id="" name="" />
                 </div>
             </div>
         </div>
@@ -163,7 +169,7 @@
             <div class="label"> Hạn sử dụng (<span class="require-icon">*</span>) </div>
             <div class="input-text">
                 <div>
-                    <input type="text" id="" name="" />
+                    <input type="date" [(ngModel)]="dataModel.ExpiredOn" id="" name="" />
                 </div>
             </div>
         </div>
@@ -176,7 +182,7 @@
     <div class="button-block">
         <button (click)="closeDialog()" class="action-btn cancel-btn">Đóng</button>
         &nbsp;
-        <button (click)="closeDialog()" class="action-btn save-btn">Chỉnh sửa</button>
+        <button (click)="save()" class="action-btn save-btn">Chỉnh sửa</button>
     </div>
 
 </div>

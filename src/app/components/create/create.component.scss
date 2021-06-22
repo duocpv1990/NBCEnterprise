@@ -119,18 +119,17 @@
 }
 .list-complete{
   max-height: 250px;
-  width: 400px;
-  border-left: 1px solid;
-  border-bottom: 1px solid;
-  border-right: 1px solid;
+  width: 500px;
+  overflow: auto;
   position: absolute;
-  background: white;
+  background: #f8f8f8;
   .select-name{
-     height: 35px;
+     min-height: 35px;
      line-height: 35px;
-
+     padding: 0 10px;
+     font-weight: 600;
   }
   .select-name:hover{
-    background-color: #BDBDBD;
+    background-color: #D8D8D8;
   }
 }

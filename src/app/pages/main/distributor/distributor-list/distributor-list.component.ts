@@ -5,6 +5,8 @@ import { DistributorModel } from 'src/app/models/distributor.model';
 import { DistributorService } from 'src/app/services/distributor.service';
 import { DeleteEnterpriseComponent } from '../../enterprise/delete-enterprise/delete-enterprise.component';
 import { CreateDistributorComponent } from '../create-distributor/create-distributor.component';
+import { DeleteDistributorComponent } from '../delete-distributor/delete-distributor.component';
+import { EditDistributorComponent } from '../edit-distributor/edit-distributor.component';
 
 @Component({
   selector: 'app-distributor-list',
@@ -65,7 +67,13 @@ export class DistributorListComponent implements OnInit {
   handleCallbackTable(ev) {
     console.log(ev);
     if(ev.type === "edit"){
-      
+      return this.dialog.open(EditDistributorComponent, {
+        width: '940px',
+        height: '843px',
+        data: ev.item
+      }).afterClosed().subscribe(result => {
+        this.getListDistributor();
+      });
     }
     if (ev.type === 'create') {
       return this.dialog.open(CreateDistributorComponent, {
@@ -83,7 +91,7 @@ export class DistributorListComponent implements OnInit {
       });
     }
     if (ev.type === 'delete') {
-      return this.dialog.open(DeleteEnterpriseComponent, {
+      return this.dialog.open(DeleteDistributorComponent, {
         width: '400px',
         height: '250px',
         data: {
@@ -92,6 +100,7 @@ export class DistributorListComponent implements OnInit {
           content: "Bạn có muốn xoá thông tin nhà phân phối trên hệ thống?"
         }
       }).afterClosed().subscribe(result => {
+        this.getListDistributor();
       });
     }
 

@@ -34,18 +34,21 @@ export class CreateDistributorComponent implements OnInit{
 
   ngOnInit(): void {
       this.listCreate = this.conFig.create;
-      this.listCreate[4].data = [
-        {
-          value: 916,
-          name: "Việt Nam"
-        }
-      ]
+      this.wardService.getNation().subscribe(res => {
+        let nation = res.map(x => {
+          return {
+           name: x.Name,
+           value: x.NationId
+          }
+         });
+         this.listCreate[3].data = nation;
+      })
   }
 
   handleSelectChange(ev){
     if(ev.check === "Nation"){
       this.wardService.getAllCity(+ev.value).subscribe(res => {
-         this.listCreate[5].data = res.map(x => {
+         this.listCreate[4].data = res.map(x => {
            return {
              value: x.ProvinceId,
              name: x.Name
@@ -55,7 +58,7 @@ export class CreateDistributorComponent implements OnInit{
     }
     if(ev.check === 'City'){
       this.wardService.getDistrict(+ev.value).subscribe(res => {
-        this.listCreate[6].data = res.map(x => {
+        this.listCreate[5].data = res.map(x => {
           return {
             value: x.DistrictId,
             name: x.Name

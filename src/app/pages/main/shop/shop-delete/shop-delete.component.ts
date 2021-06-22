@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { StoreService } from 'src/app/services/store.service';
 
 @Component({
   selector: 'app-shop-delete',
@@ -11,26 +12,26 @@ export class ShopDeleteComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<ShopDeleteComponent>,
-    
+    private storeService: StoreService
+
   ) { }
 
   ngOnInit(): void {
     this.model = this.data;
-    console.log(this.data);
-    
   }
-  handleEvent(ev){
+  handleEvent(ev) {
     console.log(ev);
-    if(ev.value === 'cancel'){
-         this.dialogRef.close();
+    if (ev.value === 'cancel') {
+      this.dialogRef.close();
     }
-    if(ev.value === 'confirm'){
-       this.deleteFunction();
+    if (ev.value === 'confirm') {
+      this.deleteFunction();
     }
   }
-  deleteFunction(){
-    console.log(this.data);
-    
-    this.dialogRef.close();
+  deleteFunction() {
+    this.storeService.deleteStore(this.data.item.StoreId).subscribe(res => {
+      this.dialogRef.close();
+    })
+
   }
 }

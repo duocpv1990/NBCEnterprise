@@ -47,10 +47,10 @@
               number }}</span>
             <span *ngIf="i.type === 'text'" (click)="handleRouteLink(item); handleClickRow(item)">{{ item[i.id]
               }}</span>
-            <span *ngIf="i.type === 'object'" (click)="handleRouteLink(item); handleClickRow(item)">{{
-              item[i.id][i.idSub] }}</span>
+            <!-- <span *ngIf="i.type === 'object'" (click)="handleRouteLink(item); handleClickRow(item)">{{
+              item[i.id][i.idSub] }}</span> -->
             <span *ngIf="i.type === 'date'" (click)="handleRouteLink(item); handleClickRow(item)">
-              {{ item[i.id] | date: "dd-MM-YYYY" }}
+              {{ item[i.id] | date: "dd/MM/yyyy" }}
             </span>
             <span *ngIf="i.type === 'setting'">
               <button (click)="onClickSetting(item, 'edit')" class="btn-table">

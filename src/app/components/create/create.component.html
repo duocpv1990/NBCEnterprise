@@ -86,6 +86,24 @@
       <button class="btn-add-new" (click)="addCertificate()">Thêm mới</button>
     </div>
   </div>
+  <div class="certification" *ngIf="option.check === 'enterprise'">
+    <div class="box-content">
+      <label for="">Tên chứng nhận: </label> <span>{{certificationDetail?.Name}}</span>
+    </div>
+    <div class="box-content">
+      <label for="">Trạng thái: </label> <span></span>
+    </div>
+    <div class="box-content">
+      <label for="">Ngày hết hạn: </label> <span>{{certificationDetail?.ExpiredDate | date: "dd/MM/yyyy"}}</span>
+    </div>
+    <div class="box-content">
+      <label for="">Hình ảnh chứng nhận: </label>
+      <div class="list-img">
+        <a [href]="item.MediaURL" target="_blank" class="text" *ngFor="let item of certificationDetail.CertificationMedias">{{item.MediaURL}}</a>
+      </div>
+    </div>
+    <div class="box-content"></div>
+  </div>
   <div class="group-btn">
     <button *ngFor="let i of arrayButton; let index = index" class="btn mbf-btn" [class]="i.class"
       (click)="onClickButton(i)">

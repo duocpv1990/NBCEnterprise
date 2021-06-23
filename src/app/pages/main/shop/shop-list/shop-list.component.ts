@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ImportExcelComponent } from 'src/app/components/dialog/import-excel/import-excel.component';
 import { ShopModel } from 'src/app/models/shop.model';
+import { WardService } from 'src/app/services/city-district.service';
 import { StoreService } from 'src/app/services/store.service';
 import { ShopCreateComponent } from '../shop-create/shop-create.component';
 import { ShopDeleteComponent } from '../shop-delete/shop-delete.component';
@@ -16,11 +17,12 @@ export class ShopListComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private storeService: StoreService
+    private storeService: StoreService,
+    private wardService: WardService
   ) { }
   config = new ShopModel();
   listFilter = [];
-
+  dataSub: any = [];
   data = [];
   dataTable;
   listForm =  [
@@ -40,6 +42,15 @@ export class ShopListComponent implements OnInit {
     this.listActive = this.config.btnActice;
     this.listFilter[2].data = this.listForm;
     this.dataTable = this.config.collums;
+    this.wardService.getAllCity(916).subscribe(res => {
+         let city = res.map(x => {
+           return {
+             name: x.Name,
+             value: x.ProvinceId
+           }
+         });
+         this.listFilter[1].data = city;
+    })
   }
   getListStore(){
     this.storeService.getListStore("", "", 1, 1, 50).subscribe(res => {
@@ -47,10 +58,31 @@ export class ShopListComponent implements OnInit {
       this.data.forEach((x, index) => {
          x.stt = index + 1;
       });
+      this.dataSub = this.data;
     })
   }
-  handleCallback(ev){
+  handleCallback(ev) {
+    console.log(ev);
+    const filter = this.listFilter.filter(x => x.value);
+    if (!filter.length) return this.dataSub = this.data;
+    filter.forEach((x, ix) => {
+      if (ix === 0) {
+        if (x.type === 'text' || x.type === 'search') {
+          this.dataSub = this.data.filter(
+            (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
+        } else {
+          this.dataSub = this.data.filter((a) => a[x.condition] == x.value);
+        }
+      } else {
+        if (x.type === 'text' || x.type === 'search') {
+          this.dataSub = this.dataSub.filter(
+            (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
+        } else {
+          this.dataSub = this.dataSub.filter((a) => a[x.condition] == x.value);
+        }
+      }
 
+    });
   }
   handleCallbackTable(ev){
     console.log(ev);

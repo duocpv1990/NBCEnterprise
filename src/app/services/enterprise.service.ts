@@ -20,12 +20,19 @@ export class EnterpriseService {
     getListCompany(companyCode, companyName, status, pageNumber, pageSize) {
         return this.http.get(`api/company?companyCode=${companyCode}&name=${companyName}&status=${status}&pageNumber=${pageNumber}&pageSize=${pageSize}`).pipe(map((res: any) => res.payload));
     }
+    getCompanyCertificate(companyId){
+        return this.http.get(`api/company/certificate?companyId=${companyId}`).pipe(map((res: any) => res.payload));
+    }
     createCompany(data) {
         return this.http.post('api/company', data).pipe(map((res: any) => res.payload));
     }
     createCompanyMedia(data){
         return this.http.post('api/company/media', data).pipe(map((res: any) => res.payload));
     }
+    CreateCertificateCompany(data){
+        return this.http.post('api/company/certificate', data).pipe(map((res: any) => res.payload));
+    }
+    
     editCompany(companyId, data) {
         return this.http.put(`api/company?companyId=${companyId}`, data).pipe(map((res: any) => res));
     }

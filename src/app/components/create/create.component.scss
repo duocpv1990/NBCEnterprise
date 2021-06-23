@@ -62,6 +62,11 @@
       color: #1894ff;
       border-radius: 20px;
     }
+    .label{
+      color: #1894ff;
+      font-weight: bold;
+      margin-top: 7px;
+    }
   }
   .input-text {
     width: 100%;
@@ -131,5 +136,34 @@
   }
   .select-name:hover{
     background-color: #D8D8D8;
+  }
+}
+.certification {
+  text-align: start;
+  width: 100%;
+  border: 1px dotted;
+  background-color: #f6f6f6;
+  padding: 10px 20px;
+  margin-top: 20px;
+  .box-content {
+    display: flex;
+    label {
+      font-weight: bold;
+      width: 30%;
+    }
+    span{
+      font-weight: 600;
+    }
+    .list-img{
+      display: flex;
+      flex-direction: column;
+      .text{
+        white-space: nowrap; 
+        width: 500px; 
+        overflow: hidden;
+        text-overflow: ellipsis; 
+        color: #1894FF;
+      }
+    }
   }
 }

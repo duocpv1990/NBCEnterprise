@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~11.2.7",
     "@angular/platform-browser-dynamic": "~11.2.7",
     "@angular/router": "~11.2.7",
+    "@consult-indochina/auth": "^2.0.3",
     "@consult-indochina/common": "^1.1.1",
     "apexcharts": "^3.26.2",
     "moment-timezone": "^0.5.32",

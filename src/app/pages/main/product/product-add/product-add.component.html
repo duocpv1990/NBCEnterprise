@@ -8,17 +8,13 @@
         THÔNG TIN CHUNG
     </div>
     <div class="layout">
-
         <div class="content row align-items-center">
             <div class="label"> Mã số sản phẩm toàn cầu (GTIN) (<span class="require-icon">*</span>) </div>
             <div class="input-text">
                 <div>
                     <input type="text" [(ngModel)]="model.ProductCode" id="" name="" />
                 </div>
-
             </div>
-
-
         </div>
         <div class="content row align-items-center">
             <div class="label"> Tên sản phẩm (<span class="require-icon">*</span>) </div>
@@ -26,10 +22,7 @@
                 <div>
                     <input type="text" [(ngModel)]="model.Name" id="" name="" />
                 </div>
-
             </div>
-
-
         </div>
         <div class="content row align-items-center">
             <div class="label"> Giá niêm yết (<span class="require-icon">*</span>) </div>
@@ -43,9 +36,9 @@
             <div class="label"> Ngành hàng (<span class="require-icon">*</span>) </div>
             <div class="input-text">
                 <div>
-                    <select>
-                        <option *ngFor="let category of categories">
-                            {{category}}
+                    <select [(ngModel)]="model.CategoryId">
+                        <option [value]="category.CategoryId" *ngFor="let category of categories">
+                            {{category.Name}}
                         </option>
                     </select>
                 </div>
@@ -54,9 +47,12 @@
         <div class="content row align-items-center">
             <div class="label"> Nhà phân phối (<span class="require-icon">*</span>) </div>
             <div class="input-text">
-                <div>
-                    <input (input)="autocompleteDistributor($event.target.value)" [(ngModel)]="model.DistributorName" type="text" name="" id="">
-                    <div class="list-complete" *ngIf="listSearchDistributor"> 
+                <div class="distributor">
+                    <div class="position">
+                        <input (input)="autocompleteDistributor($event.target.value)" [(ngModel)]="model.DistributorName" type="text" name="" id="">
+                        <img class="img" src="assets/svg/icon-dropdown.svg" alt="">
+                    </div>
+                    <div class="list-complete" [class]="listSearchDistributor.length !== 0 ? '' : 'hidden'"> 
                        <div class="select-name" (click)="selectDistributor(distributor)" *ngFor="let distributor of listSearchDistributor">{{distributor.Name}}</div>
                     </div> 
                 </div>
@@ -65,9 +61,12 @@
         <div class="content row align-items-center">
             <div class="label"> Điểm bán (<span class="require-icon">*</span>) </div>
             <div class="input-text">
-                <div>
-                    <input (input)="autocomplete($event.target.value)" [(ngModel)]="model.StoreName" type="text" name="" id="">
-                    <div class="list-complete" *ngIf="listSearchStore"> 
+                <div class="distributor">
+                    <div class="position">
+                        <input (input)="autocomplete($event.target.value)" [(ngModel)]="model.StoreName" type="text" name="" id="">
+                        <img class="img" src="assets/svg/icon-dropdown.svg" alt="">
+                    </div>
+                    <div class="list-complete" [class]="listSearchStore.length !== 0 ? '' : 'hidden'"> 
                        <div class="select-name" (click)="selectStore(store)" *ngFor="let store of listSearchStore">{{store.Name}}</div>
                     </div> 
                 </div>
@@ -78,8 +77,8 @@
             <div class="input-text">
                 <div>
                     <select name="" id="" [(ngModel)]="model.TargetMarketId">
-                        <option value="" [value]="country.NationId" *ngFor="let country of contries">
-                            {{country.Name}}
+                        <option value="" [value]="targetMarket.TargetMarketId" *ngFor="let targetMarket of listTargetMarket">
+                            {{targetMarket.Name}}
                         </option>
                     </select>
                 </div>
@@ -107,6 +106,33 @@
     <div class="subtitle">
         GIẤY CHỨNG NHẬN &nbsp; &nbsp; <button class="btn-add-new" (click)="addCertificate()">Thêm mới</button>
     </div>
+    <div *ngIf="listCertification">
+        <div class="certification" *ngFor="let item of listCertification">
+          <div class="box-content">
+            <label for="">Tên chứng nhận: </label> <span>{{ item.Name }}</span>
+          </div>
+          <div class="box-content">
+            <label for="">Trạng thái: </label> <span></span>
+          </div>
+          <div class="box-content">
+            <label for="">Ngày hết hạn: </label>
+            <span>{{ item.ExpiredDate | date: "dd/MM/yyyy" }}</span>
+          </div>
+          <div class="box-content">
+            <label for="">Hình ảnh chứng nhận: </label>
+            <div class="list-img">
+              <a
+                [href]="i.MediaURL"
+                target="_blank"
+                class="text"
+                *ngFor="let i of item.CertificationMedia"
+                >{{ i.MediaURL }}</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="box-content"></div>
+      </div>
 
     <div class="subtitle">
         THÔNG TIN CHI TIẾT
@@ -118,8 +144,8 @@
             <div class="label"> Thành phần (<span class="require-icon">*</span>) </div>
             <div class="input-text">
                 <div class="chip-block">
-                    <div class="chip-item" *ngFor="let chip of chips">
-                        {{chip}} &nbsp; &nbsp; <span (click)="removeChip()">x</span>
+                    <div class="chip-item" *ngFor="let chip of chips; let ix = index;">
+                        {{chip}} <span (click)="removeChip(ix)">x</span>
                     </div>
                     <input [(ngModel)]="chipInput" name="chipInput" type="text"
                         (keyup.enter)=addChip($event.target.value) />

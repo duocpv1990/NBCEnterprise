@@ -27,6 +27,16 @@
                         </option>
                     </select>
                 </div>
+                <div *ngIf="item.type === 'city'">
+                    <span>{{ item.Text }}</span>
+                    <br />
+                    <select class="base-input" (change)="onChangeValueDate($event.target.value, item)">
+                        <option value="">Tất cả</option>
+                        <option *ngFor="let i of item.data" [value]="i.name">
+                            {{ i.name }}
+                        </option>
+                    </select>
+                </div>
             </div>
             
         </div>

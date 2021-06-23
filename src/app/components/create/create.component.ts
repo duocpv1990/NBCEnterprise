@@ -29,7 +29,10 @@ export class CreateComponent extends BaseUploadComponent implements OnInit {
   multipFile = [];
   fileBackground;
   listComplete: any = [];
+  listCertification: any = [];
   listMedia: any = [];
+  listIdCertification: any = [];
+  error;
   constructor(
     public s3Service: S3FileService,
     private enterpriseService: EnterpriseService,
@@ -48,8 +51,18 @@ export class CreateComponent extends BaseUploadComponent implements OnInit {
     this.listSearch = [];
   }
   autocomplete(name) {
-    if (!name) return this.listSearch = [];
-    this.listSearch = this.listComplete.filter(x => x.Name.toLowerCase().indexOf(name.toLowerCase()) > -1);
+    if (!name){
+      return this.listSearch = [];
+    } 
+    else{
+      this.listSearch = this.listComplete.filter(x => x.Name.toLowerCase().indexOf(name.toLowerCase()) > -1);
+      if(this.listSearch.length  === 0){
+        this.error = true;
+      } 
+      else{
+        this.error = false;
+      }
+    }
   }
 
   preview(files, value) {
@@ -120,8 +133,10 @@ export class CreateComponent extends BaseUploadComponent implements OnInit {
   addCertificate() {
     this.dialog.open(AddCertificateComponent, {}).afterClosed().subscribe(result => {
       if (result) {
-        console.log(result);
-        this.model.CertificationIdList = [result];
+        this.listCertification.push(result);
+        this.listIdCertification.push(result.CertificationId);
+        this.model.CertificationIdList = this.listIdCertification;
+        console.log(this.model);
       }
     });
   }

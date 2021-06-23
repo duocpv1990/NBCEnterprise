@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, NgModule, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { BaseUploadComponent, S3FileService } from '@consult-indochina/common';
 import { EnterpriseService } from 'src/app/services/enterprise.service';
+import { ProductionService } from 'src/app/services/production.service';
+import { AddCertificateComponent } from '../dialog/add-certificate/add-certificate.component';
 
 @Component({
   selector: 'app-edit',
@@ -17,6 +19,7 @@ export class EditComponent extends BaseUploadComponent implements OnInit, OnChan
   @Input() option: any;
   @Input() arrayButton: any;
   @Input() dataModel?: any;
+  @Input() listCertification: any;
   @Output() callback = new EventEmitter<any>();
   @Output() selectChange = new EventEmitter<any>();
 
@@ -31,16 +34,21 @@ export class EditComponent extends BaseUploadComponent implements OnInit, OnChan
   listComplete: any = [];
   listSearch: any = [];
   timer;
-  certificationDetail: any = {};
+  certificationDetail: any = [];
   constructor(
     public s3Service: S3FileService,
-    private enterpriseService: EnterpriseService
+    private dialog: MatDialog,
+    private enterpriseService: EnterpriseService,
+    private productService: ProductionService
   ) {
     super(s3Service);
   }
   ngOnChanges(): void {
     this.model = this.dataModel || {};
+    this.certificationDetail = this.listCertification;
     console.log(this.model);
+    console.log(this.certificationDetail);
+    
     
     if (this.model.listMedia) {
       this.model.listMedia.forEach(x => {
@@ -52,15 +60,14 @@ export class EditComponent extends BaseUploadComponent implements OnInit, OnChan
         }
       });
     }
-    if (this.model.CompanyCertifications) {
-      this.certificationDetail = this.model.CompanyCertifications[0];
-    }
   }
+  
 
   ngOnInit() {
-    this.timer = this.enterpriseService.getListCompany("", "", 1, 1, 50).subscribe(res => {
-      this.listComplete = res;
-    });
+    // this.timer = this.enterpriseService.getListCompany("", "", 1, 1, 50).subscribe(res => {
+    //   this.listComplete = res;
+    // });
+
   }
   selectCompany(value){
     this.model.CompanyId = value.CompanyId;
@@ -116,7 +123,35 @@ export class EditComponent extends BaseUploadComponent implements OnInit, OnChan
       this.callback.emit(i);
     }
   }
+  addCertificate() {
+    this.dialog.open(AddCertificateComponent, {}).afterClosed().subscribe(result => {
+      if (result) {
+        this.certificationDetail.push(result);
+        // this.listIdCertification.push(result.CertificationId);
+        // this.model.CertificationIdList = this.listIdCertification;
+        console.log(this.certificationDetail);
+        switch (this.option.check) {
+          case 'enterprise':
+            const model = {
+                "CertificationId": result.CertificationId,
+                "CompanyId": this.model.id,
+                "Type": 1,
+                "Status": 1
+            }
+            this.enterpriseService.CreateCertificateCompany(model).subscribe(res => {
+            })
+            break;
+          case 'production':
+               
+            break;
+          default:
+            break;
+        }
+      }
+    });
+  }
 }
+
 
 @NgModule({
   declarations: [EditComponent],

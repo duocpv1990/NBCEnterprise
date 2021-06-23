@@ -103,7 +103,7 @@ export class EnterPriseModel {
             },
             {
                 class: 'btn-delete',
-                text: 'Xoá mã doanh nghiệp',
+                text: 'Xoá',
                 type: 'delete',
                 icon: ''
             }, {

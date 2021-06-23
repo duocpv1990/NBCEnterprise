@@ -50,8 +50,12 @@
     }
   }
   .add-new {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    margin-top: 15px;
+    .label{
+      color: #1894ff;
+      font-weight: bold;
+    }
     .btn-add-new {
       outline: none;
       border: none;
@@ -123,10 +127,10 @@
 .certification {
   text-align: start;
   width: 100%;
-  min-height: 200px;
   border: 1px dotted;
   background-color: #f6f6f6;
   padding: 10px 20px;
+  margin-bottom: 20px;
   .box-content {
     display: flex;
     label {

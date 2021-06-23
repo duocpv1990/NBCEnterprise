@@ -31,12 +31,12 @@ export class Product {
                 data: [],
                 condition: 'package'
             },
-            {
-                Text: 'Quyền quản lý',
-                type: 'select',
-                data: [],
-                condition: 'authorization'
-            },
+            // {
+            //     Text: 'Quyền quản lý',
+            //     type: 'select',
+            //     data: [],
+            //     condition: 'authorization'
+            // },
             {
                 Text: 'Trạng thái',
                 type: 'select',
@@ -74,7 +74,7 @@ export class Product {
             },
             {
                 id: 'Name',
-                name: 'Sản phẩm',
+                name: 'Tên sản phẩm',
                 width: 150,
                 type: 'text',
             },
@@ -85,32 +85,32 @@ export class Product {
                 type: 'text',
             },
 
-            {
-                id: 'contractPackage',
-                name: 'Gói hợp đồng',
-                width: 200,
-                type: 'text',
-            },
-            {
-                id: 'owner',
-                name: 'Công ty sở hữu',
-                width: 200,
-                type: 'text',
-            },
-            {
-                id: 'authorization',
-                name: 'Quyền quản lý',
-                width: 200,
-                type: 'object',
-            },
+            // {
+            //     id: 'contractPackage',
+            //     name: 'Gói hợp đồng',
+            //     width: 200,
+            //     type: 'text',
+            // },
+            // {
+            //     id: 'owner',
+            //     name: 'Công ty sở hữu',
+            //     width: 200,
+            //     type: 'text',
+            // },
+            // {
+            //     id: 'authorization',
+            //     name: 'Quyền quản lý',
+            //     width: 200,
+            //     type: 'object',
+            // },
             {
                 id: 'Status',
-                name: 'Trạng thái',
+                name: 'Trạng thái quét',
                 width: 200,
                 type: 'text',
             },
             {
-                id: 'infoStatus',
+                id: 'Type',
                 name: 'Trạng thái thông tin',
                 width: 200,
                 type: 'text',
@@ -131,7 +131,7 @@ export class Product {
                 id: 'Price',
                 name: 'Giá',
                 width: 100,
-                type: 'text',
+                type: 'number',
             },
             {
                 id: 'noun',
@@ -159,7 +159,7 @@ export class Product {
             // },
             {
                 class: 'btn-delete',
-                text: 'Xoá sản phẩm',
+                text: 'Xoá',
                 type: 'delete',
                 icon: ''
             },

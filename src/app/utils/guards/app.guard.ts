@@ -13,7 +13,7 @@ export class AppGuard implements CanLoad, CanActivate {
   ) { }
 
   canLoad(): boolean | Observable<boolean> | Promise<boolean> {
-    if (!localStorage.getItem('access_token')) {
+    if (!this.localStorageService.get('access_token')) {
       this.router.navigate(['login']);
       return false;
     } else {
@@ -22,7 +22,7 @@ export class AppGuard implements CanLoad, CanActivate {
   }
 
   canActivate(): boolean | Observable<boolean> | Promise<boolean> {
-    if (localStorage.getItem('access_token')) {
+    if (this.localStorageService.get('access_token')) {
       this.router.navigate(['home']);
       return false;
     } else {

@@ -6,20 +6,20 @@
             </div>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="certification">
                 <label>Tên chứng nhận</label>
                 <input type="text" [(ngModel)]="model.Name"  class="form-control">
             </div>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="status">
                 <label>Trạng thái</label>
-                <select class="form-select form-control">
+                <select class="form-select form-control" [(ngModel)]="model.Type">
                     <option value="1"> Hiển thị </option>
-
+                    <option value="2"> Không hiển thị </option>
                 </select>
             </div>
-            <div class="col">
+            <div class="expire">
                 <label>Ngày hết hạn</label>
                 <input type="date" [(ngModel)]="model.ExpiredDate" class="form-control">
             </div>
@@ -32,7 +32,7 @@
         </div>
         <div class="row group-img">
             <div class="img">
-                <input type="radio" name="certificateImage" id="browser" value="browser" checked>
+                <input type="radio" name="certificateImage" id="browser" (change)="check($event.target.value)" value="1" checked>
                 &nbsp;
                 <label for="browser">Tải ảnh từ máy</label>
                 <div class="upload-block">
@@ -56,10 +56,10 @@
 
             </div>
             <div class="link">
-                <input type="radio" name="certificateImage" id="link" value="link">
+                <input type="radio" name="certificateImage" id="link" (change)="check($event.target.value)" value="2">
                 &nbsp;
                 <label for="link">Đường link</label>
-                <input type="text" class="form-control" placeholder="Nhập URL">
+                <input type="text" class="form-control" [(ngModel)]="model.Link" placeholder="Nhập URL">
             </div>
         </div>
         <div class="row">

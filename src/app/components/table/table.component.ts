@@ -42,7 +42,8 @@ export class TableComponent implements OnInit, OnChanges {
         this.currentPage -= 1;
         this.onLoadDatePagitor();
     }
-
+    
+    
     onLoadDatePagitor = () => {
         this.dataSub = this.data.filter((x, ix) => (this.currentPage - 1) * this.pageSive <= ix && ix < this.currentPage * this.pageSive);
     }

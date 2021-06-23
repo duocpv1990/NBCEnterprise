@@ -1,188 +1,209 @@
-<!-- <app-edit [(data)]="listCreate" [(option)]="option" [(dataModel)]="dataModel" [(arrayButton)]="arrayButton"
-    (callback)="handleCallbackEvent($event)"></app-edit> -->
-
-<div class="form-create">
-    <div class="title">
-        THÔNG TIN SẢN PHẨM
-    </div>
-    <div class="subtitle">
-        THÔNG TIN CHUNG
-    </div>
-    <div class="layout">
-
-        <div class="content row align-items-center">
-            <div class="label"> Mã số sản phẩm toàn cầu (GTIN) (<span class="require-icon">*</span>) </div>
-            <div class="input-text">
-                <div>
-                    <input type="text" [(ngModel)]="dataModel.ProductCode" />
-                </div>
-
-            </div>
-
-
+<!-- <app-create [(data)]="listCreate" [(option)]="option" [(arrayButton)]="arrayButton"
+    (callback)="handleCallbackEvent($event)"></app-create> -->
+    <div class="form-create">
+        <div class="title">
+            THÔNG TIN SẢN PHẨM
         </div>
-        <div class="content row align-items-center">
-            <div class="label"> Tên sản phẩm (<span class="require-icon">*</span>) </div>
-            <div class="input-text">
-                <div>
-                    <input type="text" [(ngModel)]="dataModel.Name" />
-                </div>
-
-            </div>
-
-
+        <div class="subtitle">
+            THÔNG TIN CHUNG
         </div>
-        <div class="content row align-items-center">
-            <div class="label"> Gía niêm yết (<span class="require-icon">*</span>) </div>
-            <div class="input-text">
-                <div>
-                    <input type="text" [(ngModel)]="dataModel.Price" />
-                </div>
-            </div>
-        </div>
-        <div class="content row align-items-center">
-            <div class="label"> Ngành hàng (<span class="require-icon">*</span>) </div>
-            <div class="input-text">
-                <div>
-                    <select>
-                        <option *ngFor="let category of categories">
-                            {{category}}
-                        </option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="content row align-items-center">
-            <div class="label"> Nhà phân phối (<span class="require-icon">*</span>) </div>
-            <div class="input-text">
-                <div>
-                    <input (input)="autocompleteDistributor($event.target.value)" [(ngModel)]="dataModel.DistributorName" type="text" name="" id="">
-                    <div class="list-complete" *ngIf="listSearchDistributor"> 
-                       <div class="select-name" (click)="selectDistributor(distributor)" *ngFor="let distributor of listSearchDistributor">{{distributor.Name}}</div>
-                    </div> 
-                </div>
-            </div>
-        </div>
-        <div class="content row align-items-center">
-            <div class="label"> Điểm bán (<span class="require-icon">*</span>) </div>
-            <div class="input-text">
-                <div>
-                    <input (input)="autocomplete($event.target.value)" [(ngModel)]="dataModel.StoreName" type="text" name="" id="">
-                    <div class="list-complete" *ngIf="listSearchStore"> 
-                       <div class="select-name" (click)="selectStore(store)" *ngFor="let store of listSearchStore">{{store.Name}}</div>
-                    </div> 
-                </div>
-            </div>
-        </div>
-        <div class="content row align-items-center">
-            <div class="label"> Thị trường mục tiêu (<span class="require-icon">*</span>) </div>
-            <div class="input-text">
-                <div>
-                    <select name="" id="">
-                        <option value="" *ngFor="let country of contries">
-                            {{country.Name}}
-                        </option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="upload-img">
-        <div class="content row align-items-center">
-            <div class="label"> Ảnh đại diện (<span class="require-icon">*</span>) </div>
-            <div class="input-text">
-                <div class="avatar insideShadow">
-                    <img [src]="imageUrl">
-                    <label for="imageProcess">
-                        <span class="material-icons">
-                            add_a_photo
-                        </span>
-                    </label>
-                    <input #imageProcess type="file" accept='image/*' id="imageProcess"
-                        (change)="processFile(imageProcess.files)" hidden>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="subtitle">
-        GIẤY CHỨNG NHẬN &nbsp; &nbsp; <button class="btn-add-new">Thêm mới</button>
-    </div>
-
-    <div class="subtitle">
-        THÔNG TIN CHI TIẾT
-    </div>
-
-    <div class="layout">
-
-        <div class="content row align-items-center">
-            <div class="label"> Thành phần (<span class="require-icon">*</span>) </div>
-            <div class="input-text">
-                <div class="chip-block">
-                    <div class="chip-item" *ngFor="let chip of chips">
-                        {{chip}} &nbsp; &nbsp; <span (click)="removeChip()">x</span>
+        <div class="layout">
+            <div class="content row align-items-center">
+                <div class="label"> Mã số sản phẩm toàn cầu (GTIN) (<span class="require-icon">*</span>) </div>
+                <div class="input-text">
+                    <div>
+                        <input type="text" [(ngModel)]="dataModel.ProductCode" id="" name="" />
                     </div>
-                    <input [(ngModel)]="chipInput" name="chipInput" type="text"
-                        (keyup.enter)=addChip($event.target.value) />
-                </div>
-
-            </div>
-
-
-        </div>
-        <div class="content row align-items-center">
-            <div class="label"> Nhãn hiệu (<span class="require-icon">*</span>) </div>
-            <div class="input-text">
-                <div>
-                    <input type="text" [(ngModel)]="dataModel.Label" id="" name="" />
-                </div>
-
-            </div>
-
-
-        </div>
-        <div class="content row align-items-center">
-            <div class="label"> Khối lượng/dung tích sản phẩm (<span class="require-icon">*</span>) </div>
-            <div class="input-text">
-                <div>
-                    <input type="text" [(ngModel)]="dataModel.Capacity"  id="" name="" />
                 </div>
             </div>
-        </div>
-        <div class="content row align-items-center">
-            <div class="label"> Đơn vị (<span class="require-icon">*</span>) </div>
-            <div class="input-text">
-                <div>
-                    <input type="text" [(ngModel)]="dataModel.Unit" id="" name="" />
+            <div class="content row align-items-center">
+                <div class="label"> Tên sản phẩm (<span class="require-icon">*</span>) </div>
+                <div class="input-text">
+                    <div>
+                        <input type="text" [(ngModel)]="dataModel.Name" id="" name="" />
+                    </div>
+                </div>
+            </div>
+            <div class="content row align-items-center">
+                <div class="label"> Giá niêm yết (<span class="require-icon">*</span>) </div>
+                <div class="input-text">
+                    <div>
+                        <input type="text" [(ngModel)]="dataModel.Price" id="" name="" />
+                    </div>
+                </div>
+            </div>
+            <div class="content row align-items-center">
+                <div class="label"> Ngành hàng (<span class="require-icon">*</span>) </div>
+                <div class="input-text">
+                    <div>
+                        <select [(ngModel)]="dataModel.CategoryId">
+                            <option [value]="category.CategoryId" *ngFor="let category of categories">
+                                {{category.Name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="content row align-items-center">
+                <div class="label"> Nhà phân phối (<span class="require-icon">*</span>) </div>
+                <div class="input-text">
+                    <div class="distributor">
+                        <div class="position">
+                            <input (input)="autocompleteDistributor($event.target.value)" [(ngModel)]="dataModel.DistributorName" type="text" name="" id="">
+                            <img class="img" src="assets/svg/icon-dropdown.svg" alt="">
+                        </div>
+                        <div class="list-complete" [class]="listSearchDistributor.length !== 0 ? '' : 'hidden'"> 
+                           <div class="select-name" (click)="selectDistributor(distributor)" *ngFor="let distributor of listSearchDistributor">{{distributor.Name}}</div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <div class="content row align-items-center">
+                <div class="label"> Điểm bán (<span class="require-icon">*</span>) </div>
+                <div class="input-text">
+                    <div class="distributor">
+                        <div class="position">
+                            <input (input)="autocomplete($event.target.value)" [(ngModel)]="dataModel.StoreName" type="text" name="" id="">
+                            <img class="img" src="assets/svg/icon-dropdown.svg" alt="">
+                        </div>
+                        <div class="list-complete" [class]="listSearchStore.length !== 0 ? '' : 'hidden'"> 
+                           <div class="select-name" (click)="selectStore(store)" *ngFor="let store of listSearchStore">{{store.Name}}</div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <div class="content row align-items-center">
+                <div class="label"> Thị trường mục tiêu (<span class="require-icon">*</span>) </div>
+                <div class="input-text">
+                    <div>
+                        <select name="" id="" [(ngModel)]="model.TargetMarketId">
+                            <option value="" [value]="category.TargetMarketId" *ngFor="let category of listTargetMarket">
+                                {{category.Name}}
+                            </option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="content row align-items-center">
-            <div class="label"> Ngày sản xuất (<span class="require-icon">*</span>) </div>
-            <div class="input-text">
-                <div>
-                    <input type="date" [(ngModel)]="dataModel.ManufacturedOn"  id="" name="" />
+        <div class="upload-img">
+            <div class="content row align-items-center">
+                <div class="label"> Ảnh đại diện (<span class="require-icon">*</span>) </div>
+                <div class="input-text">
+                    <div class="avatar insideShadow">
+                        <img [src]="imageUrl">
+                        <label for="imageProcess">
+                            <span class="material-icons">
+                                add_a_photo
+                            </span>
+                        </label>
+                        <input #imageProcess type="file" accept='image/*' id="imageProcess"
+                            (change)="processFile(imageProcess.files)" hidden>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="content row align-items-center">
-            <div class="label"> Hạn sử dụng (<span class="require-icon">*</span>) </div>
-            <div class="input-text">
-                <div>
-                    <input type="date" [(ngModel)]="dataModel.ExpiredOn" id="" name="" />
+    
+        <div class="subtitle">
+            GIẤY CHỨNG NHẬN &nbsp; &nbsp; <button class="btn-add-new" (click)="addCertificate()">Thêm mới</button>
+        </div>
+        <div *ngIf="listCertification">
+            <div class="certification" *ngFor="let item of certificationDetail">
+              <div class="box-content">
+                <label for="">Tên chứng nhận: </label> <span>{{ item.Name }}</span>
+              </div>
+              <div class="box-content">
+                <label for="">Trạng thái: </label> <span>{{item.Type === 1 ? 'Hiển thị' : 'Không hiển thị'}}</span>
+              </div>
+              <div class="box-content">
+                <label for="">Ngày hết hạn: </label>
+                <span>{{ item.ExpiredDate | date: "dd/MM/yyyy" }}</span>
+              </div>
+              <div class="box-content">
+                <label for="">Hình ảnh chứng nhận: </label>
+                <div class="list-img">
+                  <a
+                    [href]="i.MediaURL"
+                    target="_blank"
+                    class="text"
+                    *ngFor="let i of item.CertificationMedias"
+                    >{{ i.MediaURL }}</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="box-content"></div>
+          </div>
+    
+        <div class="subtitle">
+            THÔNG TIN CHI TIẾT
+        </div>
+    
+        <div class="layout">
+    
+            <div class="content row align-items-center">
+                <div class="label"> Thành phần (<span class="require-icon">*</span>) </div>
+                <div class="input-text">
+                    <div class="chip-block">
+                        <div class="chip-item" *ngFor="let chip of chips; let ix = index;">
+                            {{chip}} <span (click)="removeChip(ix)">x</span>
+                        </div>
+                        <input [(ngModel)]="chipInput" name="chipInput" type="text"
+                            (keyup.enter)=addChip($event.target.value) />
+                    </div>
+                </div>
+    
+    
+            </div>
+            <div class="content row align-items-center">
+                <div class="label"> Nhãn hiệu (<span class="require-icon">*</span>) </div>
+                <div class="input-text">
+                    <div>
+                        <input type="text" id="" [(ngModel)]="dataModel.Label" name="" />
+                    </div>
+                </div>
+            </div>
+            <div class="content row align-items-center">
+                <div class="label"> Khối lượng/dung tích sản phẩm (<span class="require-icon">*</span>) </div>
+                <div class="input-text">
+                    <div>
+                        <input type="text" [(ngModel)]="dataModel.Capacity" id="" name="" />
+                    </div>
+                </div>
+            </div>
+            <div class="content row align-items-center">
+                <div class="label"> Đơn vị (<span class="require-icon">*</span>) </div>
+                <div class="input-text">
+                    <div>
+                        <input type="text" [(ngModel)]="dataModel.Unit" id="" name="" />
+                    </div>
+                </div>
+            </div>
+            <div class="content row align-items-center">
+                <div class="label"> Ngày sản xuất (<span class="require-icon">*</span>) </div>
+                <div class="input-text">
+                    <div>
+                        <input type="date" [(ngModel)]="dataModel.ManufacturedOn" id="" name="" />
+                    </div>
+                </div>
+            </div>
+            <div class="content row align-items-center">
+                <div class="label"> Hạn sử dụng (<span class="require-icon">*</span>) </div>
+                <div class="input-text">
+                    <div>
+                        <input type="date" [(ngModel)]="dataModel.ExpiredOn" id="" name="" />
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="text-area">
+            <label for="">Hướng dẫn sử dụng (<span class="require-icon">*</span>)</label>
+            <textarea rows="5"></textarea>
+        </div>
+    
+        <div class="button-block">
+            <button (click)="closeDialog()" class="action-btn cancel-btn">Hủy bỏ</button>
+            &nbsp;
+            <button (click)="save()" class="action-btn save-btn">Lưu</button>
+        </div>
+    
     </div>
-    <div class="text-area">
-        <label for="">Hướng dẫn sử dụng (<span class="require-icon">*</span>)</label>
-        <textarea rows="5"></textarea>
-    </div>
-
-    <div class="button-block">
-        <button (click)="closeDialog()" class="action-btn cancel-btn">Đóng</button>
-        &nbsp;
-        <button (click)="save()" class="action-btn save-btn">Chỉnh sửa</button>
-    </div>
-
-</div>

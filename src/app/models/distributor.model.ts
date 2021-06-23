@@ -105,7 +105,7 @@ export class DistributorModel {
             },
             {
                 class: 'btn-delete',
-                text: 'Gỡ nhà phân phối',
+                text: 'Xoá',
                 type: 'delete',
                 icon: ''
             },            {

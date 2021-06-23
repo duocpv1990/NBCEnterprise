@@ -81,7 +81,8 @@ export class ShopCreateComponent implements OnInit {
               this.dataModel.NationId = +value.data.NationId;
               this.dataModel.ProvinceId = +value.data.ProvinceId;
               this.dataModel.DistrictId = +value.data.DistrictId;
-              this.dataModel.CompanyId = 32;
+              this.dataModel.Type = 1;
+              this.dataModel.Status = 1;
               this.dataModel.StoreMedias = value.listMedia;
               this.save(this.dataModel)
               break;

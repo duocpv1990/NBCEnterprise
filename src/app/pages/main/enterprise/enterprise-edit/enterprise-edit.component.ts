@@ -21,6 +21,7 @@ export class EnterpriseEditComponent extends BaseUploadComponent implements OnIn
     ) { super(s3Service) }
     conFig = new EnterPriseModel;
     dataModel: any = {};
+    listCertification: any = [];
     option = {
         title: 'THÔNG TIN DOANH NGHIỆP',
         type: 'edit',
@@ -40,11 +41,11 @@ export class EnterpriseEditComponent extends BaseUploadComponent implements OnIn
     ngOnInit() {
         this.listCreate = this.conFig.create;
         this.getDetailCompany();
+        this.getListCertificate();
         this.listCreate[4].data = [{
             name: "Việt Nam",
             value: 916
         }];
-
     }
     handleSelectChange(ev) {
         if (ev.check === 'Nation') {
@@ -71,10 +72,15 @@ export class EnterpriseEditComponent extends BaseUploadComponent implements OnIn
             })
         }
     }
-
+    getListCertificate(){
+        this.enterpriseService.getCompanyCertificate(this.data.CompanyId).subscribe(res => {
+              this.listCertification = res;
+        })
+    }
     getDetailCompany() {
         this.enterpriseService.getCompanyDetail(this.data.CompanyId).subscribe(res => {
             this.dataModel = res;
+            this.dataModel.id = res.CompanyId;
             this.dataModel.listMedia = res.CompanyMedias;
             this.wardService.getAllCity(res.NationId).subscribe(res => {
                 const province = res.map(x => {

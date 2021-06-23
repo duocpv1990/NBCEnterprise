@@ -11,13 +11,13 @@ export class ShopModel {
                 Text: 'Tên cửa hàng',
                 type: 'text',
                 data: [],
-                condition: 'name'
+                condition: 'Name'
             },
             {
                 Text: 'Tỉnh thành',
-                type: 'select',
+                type: 'city',
                 data: [],
-                condition: 'province'
+                condition: 'Province'
             },
             {
                 Text: 'Hình thức',
@@ -28,7 +28,7 @@ export class ShopModel {
             {
                 Text: 'Tìm kiếm',
                 type: 'button',
-                condition: 'fullText'
+                condition: 'Name'
             }];
     }
    

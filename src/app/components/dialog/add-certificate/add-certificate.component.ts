@@ -24,6 +24,7 @@ export class AddCertificateComponent extends BaseUploadComponent implements OnIn
   model: any = {};
   files: any;
   listMediaURL = [];
+  select = 1;
   ngOnInit(): void {
   }
 
@@ -31,11 +32,13 @@ export class AddCertificateComponent extends BaseUploadComponent implements OnIn
     this.dialogRef.close();
   }
 
-
+  check(ev) {
+    this.select = +ev;
+  }
 
   onSelectFile(files) {
     console.log(files);
-    
+
     this.files = files;
     const fileArr = Object.values(files);
     fileArr.forEach((val: any) => {
@@ -52,23 +55,60 @@ export class AddCertificateComponent extends BaseUploadComponent implements OnIn
     });
   }
   save() {
-   this.multipleUpload(this.files).subscribe(res => {
-    }, () => {}, () => {
-      this.listMediaURL = this.fileLinkList.map(x =>{
-        return {
-          MediaURL : x,
+    if (this.select === 1) {
+      this.multipleUpload(this.files).subscribe(res => {
+      }, () => { }, () => {
+        this.listMediaURL = this.fileLinkList.map(x => {
+          return {
+            MediaURL: x,
+            Type: 1,
+            Status: 1
+          }
+        })
+        this.model.CertificationMedia = this.listMediaURL;
+        this.model.Type = +this.model.Type;
+        this.certificationService.createCertification(this.model).subscribe(res => {
+
+          const modelCertification = {
+            "CertificationId": res,
+            "Name": this.model.Name,
+            "ExpiredDate": this.model.ExpiredDate,
+            "Type": this.model.Type,
+            "Status": 1,
+            "CertificationMedia": this.listMediaURL,
+            "CertificationMedias": this.listMediaURL
+          };
+          this.dialogRef.close(modelCertification);
+        })
+      })
+
+    }
+    else {
+      this.listMediaURL = [
+        {
+          MediaURL: this.model.Link,
           Type: 1,
           Status: 1
         }
-      })
+      ];
       this.model.CertificationMedia = this.listMediaURL;
+      this.model.Type = +this.model.Type;
       this.certificationService.createCertification(this.model).subscribe(res => {
-        this.dialogRef.close(res);
+        const modelCertification = {
+          "CertificationId": res,
+          "Name": this.model.Name,
+          "ExpiredDate": this.model.ExpiredDate,
+          "Type": this.model.Type,
+          "Status": 1,
+          "CertificationMedia": this.listMediaURL,
+          "CertificationMedias": this.listMediaURL
+        };
+        this.dialogRef.close(modelCertification);
       })
-    })
-
     }
+
   }
+}
 @NgModule({
   declarations: [AddCertificateComponent],
   imports: [CommonModule, MatDialogModule, FormsModule],

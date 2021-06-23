@@ -97,12 +97,12 @@ export class Account {
                 width: 200,
                 type: 'text',
             },
-            {
-                id: 'authorization',
-                name: 'Quyền quản lý',
-                width: 200,
-                type: 'object',
-            },
+            // {
+            //     id: 'authorization',
+            //     name: 'Quyền quản lý',
+            //     width: 200,
+            //     type: 'object',
+            // },
             {
                 id: 'status',
                 name: 'Trạng thái',

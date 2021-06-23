@@ -15,7 +15,9 @@ import { EditModule } from 'src/app/components/edit/edit.component';
 import { DeleteModule } from 'src/app/components/dialog/delete/delete.component';
 import { FormsModule } from '@angular/forms';
 import { RoleDirectiveModule } from 'src/app/utils/directives/role.directive';
-
+import { MatChipsModule } from '@angular/material/chips';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [ProductComponent, ProductListComponent, ProductAddComponent, ProductUpdateComponent, ProductDeleteComponent],
   imports: [
@@ -23,6 +25,9 @@ import { RoleDirectiveModule } from 'src/app/utils/directives/role.directive';
     RouterModule.forChild(productRoute),
     FilterBaseModule,
     TableBaseModule,
+    MatChipsModule,
+    MatFormFieldModule,
+    MatIconModule,
     CreateModule,
     EditModule,
     DeleteModule,

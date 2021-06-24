@@ -26,7 +26,8 @@ export class ShopEditComponent extends BaseUploadComponent implements OnInit {
     option = {
         title: 'THÔNG TIN ĐIỂM BÁN',
         type: 'edit',
-        check: 'store'
+        check: 'store',
+        fileLink: 'assets/files/File import Điểm bán.xlsx'
     };
 
     arrayButton = [{
@@ -38,7 +39,7 @@ export class ShopEditComponent extends BaseUploadComponent implements OnInit {
         text: 'Chỉnh sửa'
     }]
     listCreate = [];
-
+   
     ngOnInit() {
         this.listCreate = this.conFig.create;
         this.getDetailStore();
@@ -52,7 +53,7 @@ export class ShopEditComponent extends BaseUploadComponent implements OnInit {
                         value: +x.ProvinceId
                     }
                 })
-                this.listCreate[2].data = province;
+                this.listCreate[3].data = province;
 
             })
         }
@@ -64,7 +65,7 @@ export class ShopEditComponent extends BaseUploadComponent implements OnInit {
                         value: +x.DistrictId
                     }
                 })
-                this.listCreate[3].data = district;
+                this.listCreate[4].data = district;
             })
         }
     }
@@ -85,7 +86,7 @@ export class ShopEditComponent extends BaseUploadComponent implements OnInit {
                        if(x.name === this.dataModel.Nation) 
                        return this.dataModel.NationId = x.value
                    });
-                   this.listCreate[1].data = nationList;
+                   this.listCreate[2].data = nationList;
                    this.wardService.getAllCity(this.dataModel.NationId).subscribe(city => {
                     let cityList = city.map(x => {
                         return {
@@ -98,7 +99,7 @@ export class ShopEditComponent extends BaseUploadComponent implements OnInit {
                         if(x.name === this.dataModel.Province) 
                         return this.dataModel.ProvinceId = x.value
                     });
-                    this.listCreate[2].data = cityList;
+                    this.listCreate[3].data = cityList;
                     this.wardService.getDistrict(this.dataModel.ProvinceId).subscribe(district => {
                         let districtList = district.map(x => {
                             return {
@@ -111,7 +112,7 @@ export class ShopEditComponent extends BaseUploadComponent implements OnInit {
                             if(x.name === this.dataModel.District) 
                             return this.dataModel.DistrictId = x.value
                         });
-                        this.listCreate[3].data = districtList;
+                        this.listCreate[4].data = districtList;
                     })
                 })
             });

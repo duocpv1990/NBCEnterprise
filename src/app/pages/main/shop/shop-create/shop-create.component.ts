@@ -39,15 +39,27 @@ export class ShopCreateComponent implements OnInit {
       this.listCreate = this.conFig.create;
       this.listCreate[1].data = [
         {
-          value: 916,
-          name: "Việt Nam"
+          name: 'Online',
+          value: 1
+        },
+        {
+          name: 'Offline',
+          value: 2
         }
       ]
+      this.wardService.getNation().subscribe(res => {
+        this.listCreate[2].data = res.map(x => {
+          return {
+            value : x.NationId,
+            name: x.Name
+          }
+        })
+      });
   }
   handleSelectChange(ev){
     if(ev.check === "Nation"){
       this.wardService.getAllCity(+ev.value).subscribe(res => {
-         this.listCreate[2].data = res.map(x => {
+         this.listCreate[3].data = res.map(x => {
            return {
              value: x.ProvinceId,
              name: x.Name
@@ -57,7 +69,7 @@ export class ShopCreateComponent implements OnInit {
     }
     if(ev.check === 'City'){
       this.wardService.getDistrict(+ev.value).subscribe(res => {
-        this.listCreate[3].data = res.map(x => {
+        this.listCreate[4].data = res.map(x => {
           return {
             value: x.DistrictId,
             name: x.Name
@@ -81,7 +93,7 @@ export class ShopCreateComponent implements OnInit {
               this.dataModel.NationId = +value.data.NationId;
               this.dataModel.ProvinceId = +value.data.ProvinceId;
               this.dataModel.DistrictId = +value.data.DistrictId;
-              this.dataModel.Type = 1;
+              this.dataModel.Type = +value.data.Type;
               this.dataModel.Status = 1;
               this.dataModel.StoreMedias = value.listMedia;
               this.save(this.dataModel)

@@ -21,7 +21,7 @@ export class AppComponent {
     let rtokexp = +JSON.parse(localStorage.getItem('rtok_expire')) || null;
     if (rtokexp && rtokexp > new Date().getTime()) {
       localStorage.clear();
-      this.router.navigate(['/login']);
+      this.router.navigate(['/log-in']);
     }
     this.authService.retrieveTokenOnPageLoad(); // setup authState
     this.ciAuthStateService.isAuthorized$.subscribe(() => {

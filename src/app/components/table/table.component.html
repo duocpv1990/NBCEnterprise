@@ -2,7 +2,10 @@
   <div class="row btn-header">
     <div class="group-btn">
       <div class="group-btn-item" *ngFor="let i of listActive">
-        <button *ngIf="i.type !== 'create'" class="btn" [class]="i.class" (click)="onClickBtnActive(i)">
+        <button *ngIf="i.type !== 'create' && i.type !== 'delete'" class="btn" [class]="i.class" (click)="onClickBtnActive(i)">
+          {{ i?.text }}
+        </button>
+        <button *ngIf="i.type === 'delete' && showDelete" class="btn" [class]="i.class" (click)="onClickBtnActive(i)">
           {{ i?.text }}
         </button>
         <button [matMenuTriggerFor]="menu" *ngIf="i.type === 'create'" class="btn" [class]="i.class"
@@ -34,14 +37,14 @@
         <tr>
           <th scope="col" *ngFor="let item of tableData" [style.min-width.px]="item.width">
             {{ item.name }}
-            <input class="checkbox" *ngIf="item.type === 'checkbox'" type="checkbox" />
+            <input class="checkbox" *ngIf="item.type === 'checkbox'" [checked]="checkSelectAll" (click)="selectAll($event.target.checked)" type="checkbox" />
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of dataSub; let i = index">
+        <tr *ngFor="let item of dataSub; let index = index">
           <td *ngFor="let i of tableData">
-            <span *ngIf="i.type === 'checkbox'"><input class="checkbox" type="checkbox" /></span>
+            <span *ngIf="i.type === 'checkbox'"><input (click)="selectItem(item, $event.target.checked, index)" class="checkbox" [checked]="item.check" type="checkbox" /></span>
             <span *ngIf="i.type === 'image'"><img class="image" src="{{ item[i.id] }}" alt="" srcset="" /></span>
             <span *ngIf="i.type === 'number'" (click)="handleRouteLink(item); handleClickRow(item)">{{ item[i.id] |
               number: '1.0-0' }}</span>

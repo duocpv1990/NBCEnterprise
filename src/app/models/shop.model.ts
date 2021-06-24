@@ -23,7 +23,7 @@ export class ShopModel {
                 Text: 'Hình thức',
                 type: 'select',
                 data: [],
-                condition: 'form'
+                condition: 'Type'
             },
             {
                 Text: 'Tìm kiếm',
@@ -99,7 +99,7 @@ export class ShopModel {
                 type: 'text',
             },
             {
-                id: 'form',
+                id: 'TypeString',
                 name: 'Hình thức',
                 width: 200,
                 type: 'text',
@@ -112,7 +112,7 @@ export class ShopModel {
             },
             {
                 id: 'UpdatedOn',
-                name: 'Cập nhập',
+                name: 'Cập nhật',
                 width: 200,
                 type: 'date',
             },
@@ -132,6 +132,12 @@ export class ShopModel {
                 label: 'Tên điểm bán',
                 name: 'distributorName',
                 type: 'text'
+            },
+            {
+                id: 'Type',
+                label: 'Hình thức',
+                name: 'type',
+                type: 'select'
             },
             {
                 id: 'NationId',

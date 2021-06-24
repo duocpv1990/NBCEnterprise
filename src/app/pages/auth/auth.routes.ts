@@ -10,7 +10,7 @@ export const authRoutes: Routes = [
     component: AuthComponent,
     children: [
       {
-        path: 'login',
+        path: 'log-in',
         component: LoginComponent,
       },
       {
@@ -19,7 +19,7 @@ export const authRoutes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'login',
+        redirectTo: 'log-in',
         pathMatch: 'full',
       },
     ],

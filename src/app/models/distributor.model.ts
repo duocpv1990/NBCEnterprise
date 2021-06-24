@@ -6,20 +6,20 @@ export class DistributorModel {
     public get filter(): Array<FilterModel> {
         return [
             {
-                Text: 'Mã doanh nghiệp',
+                Text: 'Tên nhà phân phối',
                 type: 'text',
                 data: [],
-                condition: 'TaxCode'
+                condition: 'Name'
             },
             {
                 Text: 'Thành phố',
-                type: 'select',
+                type: 'city',
                 data: [],
-                condition: 'city'
+                condition: 'Province'
             },
             {
                 Text: 'Tìm kiếm',
-                type: 'search',
+                type: 'button',
                 condition: "Name"
             }];
     }
@@ -82,7 +82,7 @@ export class DistributorModel {
             },
             {
                 id: 'UpdatedOn',
-                name: 'Cập nhập',
+                name: 'Cập nhật',
                 width: 200,
                 type: 'date',
             },

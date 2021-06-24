@@ -53,10 +53,16 @@ export class ShopListComponent implements OnInit {
     })
   }
   getListStore(){
-    this.storeService.getListStore("", "", 1, 1, 50).subscribe(res => {
+    this.storeService.getListStore("", "", "", 1, 50).subscribe(res => {
       this.data = res;
       this.data.forEach((x, index) => {
          x.stt = index + 1;
+         if(x.Type === 1){
+           x.TypeString = 'Online'
+         }
+         else{
+           x.TypeString = 'Offline'
+         }
       });
       this.dataSub = this.data;
     })
@@ -107,19 +113,33 @@ export class ShopListComponent implements OnInit {
     if (ev.type === 'import') {
       return this.dialog.open(ImportExcelComponent, {
         width: '500px',
-        height: '350px'
+        height: '350px',
+        data: 'assets/files/store-business.xlsx'
       }).afterClosed().subscribe(result => {
       });
     }
     if (ev.type === 'delete') {
-      console.log(ev);
-      
       return this.dialog.open(ShopDeleteComponent, {
         width: '400px',
         height: '250px',
         data: {
           item: ev.item,
           title: "Xoá điểm bán",
+          check: "delete",
+          content: "Bạn có muốn xoá thông tin điểm bán trên hệ thống?"
+        }
+      }).afterClosed().subscribe(result => {
+        this.getListStore();
+      });
+    }
+    if (ev.type === 'delete-all') {
+      return this.dialog.open(ShopDeleteComponent, {
+        width: '400px',
+        height: '250px',
+        data: {
+          item: ev.item,
+          title: "Xoá điểm bán",
+          check: "delete-all",
           content: "Bạn có muốn xoá thông tin điểm bán trên hệ thống?"
         }
       }).afterClosed().subscribe(result => {

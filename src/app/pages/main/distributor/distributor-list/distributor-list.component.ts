@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ImportExcelComponent } from 'src/app/components/dialog/import-excel/import-excel.component';
 import { DistributorModel } from 'src/app/models/distributor.model';
+import { WardService } from 'src/app/services/city-district.service';
 import { DistributorService } from 'src/app/services/distributor.service';
 import { DeleteEnterpriseComponent } from '../../enterprise/delete-enterprise/delete-enterprise.component';
 import { CreateDistributorComponent } from '../create-distributor/create-distributor.component';
@@ -17,7 +18,8 @@ export class DistributorListComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private distributorService: DistributorService
+    private distributorService: DistributorService,
+    private wardService: WardService
   ) { }
   config = new DistributorModel();
   listFilter = [];
@@ -28,6 +30,14 @@ export class DistributorListComponent implements OnInit {
   ngOnInit(): void {
     this.getListDistributor();
     this.listFilter = this.config.filter;
+    this.wardService.getAllCity(916).subscribe(res => {
+      this.listFilter[1].data = res.map(x => {
+        return {
+          name: x.Name,
+          value: x.ProvinceId
+        }
+      })
+    })
     this.dataTable = this.config.collums;
     this.listActive = this.config.btnActice;
     this.dataSub = this.data;
@@ -86,7 +96,8 @@ export class DistributorListComponent implements OnInit {
     if (ev.type === 'import') {
       return this.dialog.open(ImportExcelComponent, {
         width: '500px',
-        height: '350px'
+        height: '350px',
+        data: 'assets/files/distributor-business.xlsx'
       }).afterClosed().subscribe(result => {
       });
     }
@@ -97,6 +108,20 @@ export class DistributorListComponent implements OnInit {
         data: {
           item: ev.item,
           title: "Xoá nhà phân phối",
+          content: "Bạn có muốn xoá thông tin nhà phân phối trên hệ thống?"
+        }
+      }).afterClosed().subscribe(result => {
+        this.getListDistributor();
+      });
+    }
+    if (ev.type === 'delete-all') {
+      return this.dialog.open(DeleteDistributorComponent, {
+        width: '400px',
+        height: '250px',
+        data: {
+          item: ev.item,
+          title: "Xoá nhà phân phối",
+          check: "delete-all",
           content: "Bạn có muốn xoá thông tin nhà phân phối trên hệ thống?"
         }
       }).afterClosed().subscribe(result => {

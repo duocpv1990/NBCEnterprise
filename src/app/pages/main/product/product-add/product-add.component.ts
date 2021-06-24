@@ -46,7 +46,7 @@ export class ProductAddComponent extends BaseUploadComponent implements OnInit {
 
   ngOnInit(): void {
     this.listCreate = this.conFig.create;
-    this.storeService.getListStore("", "", 1, 1, 50).subscribe(res => {
+    this.storeService.getListStore("", "", "", 1, 50).subscribe(res => {
       this.listStore = res;
     }),
       this.distributor.getListDistributor("", "", 1, 50).subscribe(res => {

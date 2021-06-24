@@ -17,18 +17,66 @@ export class TableComponent implements OnInit, OnChanges {
     currentPage: number = 1;
     dataSub = [];
     pageSive = 5;
-
+    checkSelectAll;
+    showDelete = false;
+    listSelectAll: any = [];
     constructor() { }
 
     ngOnChanges() {
         this.totalPage = Math.ceil((this.data.length / this.pageSive));
         this.currentPage = 1;
         this.onLoadDatePagitor();
+        this.data.map(x => x.check === false);
+        this.showDelete = false;
+        this.checkSelectAll = false;
     }
 
     ngOnInit() {
         this.totalPage = Math.ceil((this.data.length / this.pageSive));
         this.onLoadDatePagitor();
+    }
+
+    selectAll(value) {
+        this.checkSelectAll = true;
+        this.listSelectAll.length = 0;
+        this.data.forEach(x => {
+            x.check = value;
+        });
+        this.data.forEach(x => {
+            if (x.check === true) {
+                this.listSelectAll.push(x);
+            }
+        });
+        if (this.listSelectAll.length === 0) {
+            this.showDelete = false;
+        }
+        else {
+            this.showDelete = true;
+        }
+        console.log(this.listSelectAll);
+
+    }
+    selectItem(item, value, index) {
+        this.showDelete = value;
+        this.listSelectAll.length = [];
+        item.check = value;
+        this.data.forEach(x => {
+            if (x.check === true) {
+                this.listSelectAll.push(x);
+            }
+        });
+        if (this.listSelectAll.length === 0) {
+            this.showDelete = false;
+            this.checkSelectAll = false;
+        }
+        if (this.listSelectAll.length !== 0 && this.listSelectAll.length === this.data.length) {
+            this.showDelete = true;
+            this.checkSelectAll = true;
+        }
+        if ((this.listSelectAll.length !== 0 && this.listSelectAll.length !== this.data.length)) {
+            this.showDelete = true;
+            this.checkSelectAll = false;
+        }
     }
 
     nextPage = () => {
@@ -42,8 +90,8 @@ export class TableComponent implements OnInit, OnChanges {
         this.currentPage -= 1;
         this.onLoadDatePagitor();
     }
-    
-    
+
+
     onLoadDatePagitor = () => {
         this.dataSub = this.data.filter((x, ix) => (this.currentPage - 1) * this.pageSive <= ix && ix < this.currentPage * this.pageSive);
     }
@@ -56,13 +104,18 @@ export class TableComponent implements OnInit, OnChanges {
     }
 
     onClickBtnActive = (i) => {
-        if (i.type !== 'create') {
+        if (i.type === 'delete') {
+            this.callback.emit({
+                type: 'delete-all',
+                item: this.listSelectAll,
+            })
+        }
+        if (i.type === 'export') {
             this.callback.emit({
                 type: i.type,
                 service: i.service
             })
         }
-
     }
 
     handleRouteLink = (item) => {

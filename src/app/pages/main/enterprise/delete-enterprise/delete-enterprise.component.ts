@@ -8,7 +8,7 @@ import { EnterpriseService } from 'src/app/services/enterprise.service';
   styleUrls: ['./delete-enterprise.component.scss']
 })
 export class DeleteEnterpriseComponent implements OnInit {
-   model = {};
+   model: any = {};
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<DeleteEnterpriseComponent>,
@@ -29,11 +29,19 @@ export class DeleteEnterpriseComponent implements OnInit {
     }
   }
   deleteFunction(){
-    
-    this.enterprise.deleteCompany(this.data.item.CompanyId).subscribe(res => {
-      this.dialogRef.close();
-    })
-
+    if(this.model.check === 'delete-all'){
+        this.model.item.forEach(x => {
+          this.enterprise.deleteCompany(x.CompanyId).subscribe(res => {
+            this.dialogRef.close();
+          })
+        });
+    }
+    else{
+      this.enterprise.deleteCompany(this.model.item.CompanyId).subscribe(res => {
+        this.dialogRef.close();
+      })
+    }
+  
   }
 
 }

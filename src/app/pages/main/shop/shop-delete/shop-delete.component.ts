@@ -8,7 +8,7 @@ import { StoreService } from 'src/app/services/store.service';
   styleUrls: ['./shop-delete.component.scss']
 })
 export class ShopDeleteComponent implements OnInit {
-  model = {};
+  model: any = {};
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<ShopDeleteComponent>,
@@ -20,7 +20,6 @@ export class ShopDeleteComponent implements OnInit {
     this.model = this.data;
   }
   handleEvent(ev) {
-    console.log(ev);
     if (ev.value === 'cancel') {
       this.dialogRef.close();
     }
@@ -29,9 +28,17 @@ export class ShopDeleteComponent implements OnInit {
     }
   }
   deleteFunction() {
-    this.storeService.deleteStore(this.data.item.StoreId).subscribe(res => {
-      this.dialogRef.close();
-    })
-
+    if (this.model.check === 'delete-all') {
+      this.model.item.forEach(x => {
+        this.storeService.deleteStore(x.StoreId).subscribe(res => {
+          this.dialogRef.close();
+        })
+      });
+    }
+    else {
+      this.storeService.deleteStore(this.data.item.StoreId).subscribe(res => {
+        this.dialogRef.close();
+      })
+    }
   }
 }

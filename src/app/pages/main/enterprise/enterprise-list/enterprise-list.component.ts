@@ -27,6 +27,20 @@ export class EnterpriseListComponent implements OnInit {
 
   ngOnInit(): void {
     this.listFilter = this.config.filter;
+    this.listFilter[2].data = [
+      {
+        name: "Chờ duyệt", 
+        value: 1
+      },
+      {
+        name: "Đã duyệt", 
+        value: 2
+      },
+      {
+        name: "Từ chối", 
+        value: 3
+      }
+    ]
     this.dataTable = this.config.collums;
     this.listActive = this.config.btnActice;
     this.dataSub = this.data;
@@ -34,11 +48,20 @@ export class EnterpriseListComponent implements OnInit {
   }
 
   getListCompany(){
-    this.enterprise.getListCompany("", "", 1, 1, 50).subscribe(res => {
+    this.enterprise.getListCompany("", "", "", 1, 50).subscribe(res => {
        this.data = res;
        this.dataSub = this.data;
        this.dataSub.forEach((x, index) => {
          x.stt = index + 1;
+         if(x.Status === 1){
+           x.StatusString = "Chờ duyệt"
+         }
+         else if(x.Status === 2){
+           x.StatusString = "Đã duyệt"
+         }
+         else{
+          x.StatusString = "Từ chối"
+         }
        });
     })
   }
@@ -77,7 +100,8 @@ export class EnterpriseListComponent implements OnInit {
     if (ev.type === 'import') {
       return this.dialog.open(ImportExcelComponent, {
         width: '500px',
-        height: '350px'
+        height: '350px',
+        data: 'assets/files/business.xlsx'
       }).afterClosed().subscribe(result => {
       });
     }
@@ -97,6 +121,20 @@ export class EnterpriseListComponent implements OnInit {
         data: {
           item: ev.item,
           title: "Xoá doanh nghiệp",
+          content: "Bạn có muốn xoá thông tin doanh nghiệp trên hệ thống?"
+        }
+      }).afterClosed().subscribe(result => {
+        this.getListCompany();
+      });
+    }
+    if (ev.type === 'delete-all') {
+      return this.dialog.open(DeleteEnterpriseComponent, {
+        width: '400px',
+        height: '250px',
+        data: {
+          item: ev.item,
+          title: "Xoá doanh nghiệp",
+          check: "delete-all",
           content: "Bạn có muốn xoá thông tin doanh nghiệp trên hệ thống?"
         }
       }).afterClosed().subscribe(result => {

@@ -11,19 +11,19 @@ export class EnterPriseModel {
                 Text: 'Mã doanh nghiệp',
                 type: 'text',
                 data: [],
-                condition: 'code'
+                condition: 'CompanyCode'
             },
             {
                 Text: 'Tên đăng ký',
                 type: 'text',
                 data: [],
-                condition: 'register'
+                condition: 'Name'
             },
             {
                 Text: 'Trạng thái',
                 type: 'select',
                 data: [],
-                condition: 'status'
+                condition: 'Status'
             },
             {
                 Text: 'Tìm kiếm',
@@ -71,7 +71,7 @@ export class EnterPriseModel {
                 type: 'text',
             },
             {
-                id: 'Status',
+                id: 'StatusString',
                 name: 'Trạng thái',
                 width: 200,
                 type: 'text',

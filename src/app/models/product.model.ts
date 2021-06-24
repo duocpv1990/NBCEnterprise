@@ -11,26 +11,26 @@ export class Product {
                 Text: 'Mã sản phẩm',
                 type: 'text',
                 data: [],
-                condition: 'code'
+                condition: 'ProductCode'
             },
             {
                 Text: 'Tên sản phẩm',
                 type: 'text',
                 data: [],
-                condition: 'product-name'
+                condition: 'Name'
             },
-            {
-                Text: 'Công ty sở hữu',
-                type: 'text',
-                data: [],
-                condition: 'owner'
-            },
-            {
-                Text: 'Gói sản phẩm',
-                type: 'text',
-                data: [],
-                condition: 'package'
-            },
+            // {
+            //     Text: 'Công ty sở hữu',
+            //     type: 'text',
+            //     data: [],
+            //     condition: 'owner'
+            // },
+            // {
+            //     Text: 'Gói sản phẩm',
+            //     type: 'text',
+            //     data: [],
+            //     condition: 'package'
+            // },
             // {
             //     Text: 'Quyền quản lý',
             //     type: 'select',
@@ -38,21 +38,21 @@ export class Product {
             //     condition: 'authorization'
             // },
             {
-                Text: 'Trạng thái',
+                Text: 'Trạng thái quét',
                 type: 'select',
                 data: [],
-                condition: 'status'
+                condition: 'Type'
             },
             {
                 Text: 'Trạng thái thông tin',
                 type: 'select',
                 data: [],
-                condition: 'info-status'
+                condition: 'Status'
             },
             {
                 Text: 'Tìm kiếm',
                 type: 'button',
-                condition: 'fullText'
+                condition: 'Name'
             }];
     }
 
@@ -80,7 +80,7 @@ export class Product {
             },
             {
                 id: 'ProductCode',
-                name: 'Mã vạch',
+                name: 'Mã sản phẩm',
                 width: 150,
                 type: 'text',
             },

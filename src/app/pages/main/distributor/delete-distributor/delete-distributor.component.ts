@@ -8,7 +8,7 @@ import { DistributorService } from 'src/app/services/distributor.service';
   styleUrls: ['./delete-distributor.component.scss']
 })
 export class DeleteDistributorComponent implements OnInit {
-  model = {};
+  model: any = {};
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<DeleteDistributorComponent>,
@@ -28,10 +28,18 @@ export class DeleteDistributorComponent implements OnInit {
     }
   }
   deleteFunction() {
-    this.distributorService.deleteDistributor(this.data.item.DistributorId).subscribe(res => {
-      this.dialogRef.close();
-    })
-
+    if (this.model.check === 'delete-all') {
+      this.model.item.forEach(x => {
+        this.distributorService.deleteDistributor(x.DistributorId).subscribe(res => {
+          this.dialogRef.close();
+        })
+      });
+    }
+    else {
+      this.distributorService.deleteDistributor(this.model.item.DistributorId).subscribe(res => {
+        this.dialogRef.close();
+      })
+    }
   }
 
 }

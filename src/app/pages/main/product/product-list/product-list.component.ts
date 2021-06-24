@@ -29,14 +29,36 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     this.listFilter = this.config.filter;
     this.dataTable = this.config.collums;
+    this.listFilter[2].data = [
+      {
+        name: 'chưa có thông tin',
+        value: 1
+      },
+      {
+        name: 'Cho quét',
+        value: 2
+      },
+      {
+        name: 'Đã ẩn bởi DNSH',
+        value: 3
+      },
+      {
+        name: 'Không cho quét',
+        value: 4
+      }
+    ]
     this.listActive = this.config.btnActice;
     this.getlistProduct();
   }
 
   getlistProduct() {
-    this.productService.getListProduct("", "", "", 1, 1, 1, 50).subscribe(res => {
+    this.productService.getListProduct("", "", "", "", "", 1, 50).subscribe(res => {
       this.data = res;
       this.dataSub = this.data;
+      this.dataSub.map(x => {
+        x.ProductCode = x.ProductCode || ""
+      })
+
     })
   }
 
@@ -77,7 +99,8 @@ export class ProductListComponent implements OnInit {
     if (ev.type === 'import') {
       return this.dialog.open(ImportExcelComponent, {
         width: '500px',
-        height: '350px'
+        height: '350px',
+        data: 'assets/files/production-business.xlsx'
       }).afterClosed().subscribe(result => {
       });
     }

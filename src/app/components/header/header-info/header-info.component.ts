@@ -28,7 +28,7 @@ export class HeaderInfoComponent implements OnInit {
 
   btnLogout() {
     this.local.clear();
-    this.route.navigate(['login'])
+    this.route.navigate(['log-in'])
   }
   getProfile() {
     this.profile = this.profileService.get('').pipe(map((res: any) => {

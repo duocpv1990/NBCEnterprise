@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, Inject, NgModule, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
@@ -10,11 +10,15 @@ import { MatMenuModule } from '@angular/material/menu';
   styleUrls: ['./import-excel.component.scss']
 })
 export class ImportExcelComponent implements OnInit {
-
-  constructor(private dialogRef: MatDialogRef<ImportExcelComponent>) { }
+   
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogRef: MatDialogRef<ImportExcelComponent>
+    ) { }
 
   ngOnInit(): void {
   }
+  
   import(){
     this.dialogRef.close();
   }

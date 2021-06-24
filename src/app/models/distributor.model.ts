@@ -13,7 +13,7 @@ export class DistributorModel {
             },
             {
                 Text: 'Thành phố',
-                type: 'city',
+                type: 'select',
                 data: [],
                 condition: 'Province'
             },
@@ -122,13 +122,15 @@ export class DistributorModel {
                 id: 'CompanyId',
                 label: 'Tên doanh nghiệp',
                 name: 'Name',
-                type: 'autocomplete'
+                type: 'autocomplete',
+                required: true,
             },
             {
                 id: 'Name',
                 label: 'Tên nhà phân phối',
                 name: 'Name',
-                type: 'text'
+                type: 'text',
+                required: true,
             },
             // {
             //     id: 'TaxCode',
@@ -140,28 +142,32 @@ export class DistributorModel {
                 id: 'TaxCode',
                 label: 'Mã số thuế',
                 name: 'TaxCode',
-                type: 'text'
+                type: 'text',
+                required: true,
             },
             {
                 id: 'NationId',
                 label: 'Quốc gia',
                 name: 'NationId',
                 type: '',
-                ward: 'Nation'
+                ward: 'Nation',
+                required: true,
             },
             {
                 id: 'ProvinceId',
                 label: 'Thành phố/Tỉnh',
                 name: 'city',
                 type: '',
-                ward: "City"
+                ward: "City",
+                required: true,
             },
             {
                 id: 'DistrictId',
                 label: 'Quận/Huyện',
                 name: 'DistrictId',
                 type: '',
-                ward: 'District'
+                ward: 'District',
+                required: true,
             },
             {
                 id: 'AddressDetail',
@@ -191,13 +197,15 @@ export class DistributorModel {
                 id: 'avatar',
                 label: 'Ảnh đại diện',
                 name: 'avatar',
-                type: 'img'
+                type: 'img',
+                required: true,
             },
             {
                 id: 'background',
                 label: 'Ảnh nền',
                 name: 'background',
-                type: 'img'
+                type: 'img',
+                required: true,
             },
         ];
     }

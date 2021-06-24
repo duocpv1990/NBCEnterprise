@@ -27,6 +27,7 @@ export class DistributorListComponent implements OnInit {
   dataTable;
   listActive;
   dataSub;
+  timer;
   ngOnInit(): void {
     this.getListDistributor();
     this.listFilter = this.config.filter;
@@ -51,29 +52,53 @@ export class DistributorListComponent implements OnInit {
       });
     })
   }
-  handleCallback(ev) {
-    const filter = this.listFilter.filter(x => x.value);
-    if (!filter.length) return this.dataSub = this.data;
-    filter.forEach((x, ix) => {
-      if (ix === 0) {
-        if (x.type === 'text' || x.type === 'search') {
-          this.dataSub = this.data.filter(
-            (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
-        } else {
-          this.dataSub = this.data.filter((a) => a[x.condition] == x.value);
-        }
-      } else {
-        if (x.type === 'text' || x.type === 'search') {
-          this.dataSub = this.dataSub.filter(
-            (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
-        } else {
-          this.dataSub = this.dataSub.filter((a) => a[x.condition] == x.value);
-        }
-      }
-
-    });
-
+  getFilterDistributor(name, provinceId, pageNumber, pageSive){
+    this.distributorService.getListDistributor(name, provinceId, pageNumber, pageSive).subscribe(res => {
+      this.dataSub = res;
+      this.dataSub.forEach((x, index) => {
+         x.stt = index + 1;
+      });
+    })
   }
+  handleCallback(ev){
+    console.log(ev);
+    if(ev.condition === 'Name'){
+       clearTimeout(this.timer);
+       this.timer = setTimeout(() => {
+          this.getFilterDistributor(ev.value, "", 1, 50);
+       }, 100);
+    }
+    if(ev.condition === 'Province'){
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+         this.getFilterDistributor("", ev.value, 1, 50);
+      }, 100);
+   }
+    
+  }
+  // handleCallback(ev) {
+  //   const filter = this.listFilter.filter(x => x.value);
+  //   if (!filter.length) return this.dataSub = this.data;
+  //   filter.forEach((x, ix) => {
+  //     if (ix === 0) {
+  //       if (x.type === 'text' || x.type === 'search') {
+  //         this.dataSub = this.data.filter(
+  //           (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
+  //       } else {
+  //         this.dataSub = this.data.filter((a) => a[x.condition] == x.value);
+  //       }
+  //     } else {
+  //       if (x.type === 'text' || x.type === 'search') {
+  //         this.dataSub = this.dataSub.filter(
+  //           (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
+  //       } else {
+  //         this.dataSub = this.dataSub.filter((a) => a[x.condition] == x.value);
+  //       }
+  //     }
+
+  //   });
+
+  // }
   handleCallbackTable(ev) {
     console.log(ev);
     if(ev.type === "edit"){

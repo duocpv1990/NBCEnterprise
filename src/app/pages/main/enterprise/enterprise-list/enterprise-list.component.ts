@@ -20,6 +20,7 @@ export class EnterpriseListComponent implements OnInit {
   dataTable;
   listActive;
   dataSub;
+  timer;
   constructor(
     private dialog: MatDialog,
     private enterprise: EnterpriseService
@@ -29,15 +30,15 @@ export class EnterpriseListComponent implements OnInit {
     this.listFilter = this.config.filter;
     this.listFilter[2].data = [
       {
-        name: "Chờ duyệt", 
+        name: "Chờ duyệt",
         value: 1
       },
       {
-        name: "Đã duyệt", 
+        name: "Đã duyệt",
         value: 2
       },
       {
-        name: "Từ chối", 
+        name: "Từ chối",
         value: 3
       }
     ]
@@ -47,46 +48,87 @@ export class EnterpriseListComponent implements OnInit {
     this.getListCompany();
   }
 
-  getListCompany(){
+  getListCompany() {
     this.enterprise.getListCompany("", "", "", 1, 50).subscribe(res => {
-       this.data = res;
-       this.dataSub = this.data;
-       this.dataSub.forEach((x, index) => {
-         x.stt = index + 1;
-         if(x.Status === 1){
-           x.StatusString = "Chờ duyệt"
-         }
-         else if(x.Status === 2){
-           x.StatusString = "Đã duyệt"
-         }
-         else{
+      this.data = res;
+      this.dataSub = this.data;
+      this.dataSub.forEach((x, index) => {
+        x.stt = index + 1;
+        if (x.Status === 1) {
+          x.StatusString = "Chờ duyệt"
+        }
+        else if (x.Status === 2) {
+          x.StatusString = "Đã duyệt"
+        }
+        else {
           x.StatusString = "Từ chối"
-         }
-       });
+        }
+      });
     })
   }
-  handleCallback(ev) {
-    const filter = this.listFilter.filter(x => x.value);
-    if (!filter.length) return this.dataSub = this.data;
-    filter.forEach((x, ix) => {
-      if (ix === 0) {
-        if (x.type === 'text' || x.type === 'search') {
-          this.dataSub = this.data.filter(
-            (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
-        } else {
-          this.dataSub = this.data.filter((a) => a[x.condition] == x.value);
-        }
-      } else {
-        if (x.type === 'text' || x.type === 'search') {
-          this.dataSub = this.dataSub.filter(
-            (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
-        } else {
-          this.dataSub = this.dataSub.filter((a) => a[x.condition] == x.value);
-        }
-      }
 
-    });
+  getListFilter(companyCode, companyName, status, pageNumber, pageSive) {
+    this.enterprise.getListCompany(companyCode, companyName, status, pageNumber, pageSive).subscribe(res => {
+      this.dataSub = res;
+      this.dataSub.forEach((x, index) => {
+        x.stt = index + 1;
+        if (x.Status === 1) {
+          x.StatusString = "Chờ duyệt"
+        }
+        else if (x.Status === 2) {
+          x.StatusString = "Đã duyệt"
+        }
+        else {
+          x.StatusString = "Từ chối"
+        }
+      });
+    })
   }
+
+  handleCallback(ev) {
+    console.log(ev);
+    if (ev.condition === 'CompanyCode') {
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        this.getListFilter(ev.value, "", "", 1, 50);
+      }, 500);
+    }
+    if (ev.condition === 'Name') {
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        this.getListFilter("", ev.value, "", 1, 50);
+      }, 500);
+    }
+    if (ev.condition === 'Status') {
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        this.getListFilter("", "", ev.value, 1, 50);
+      }, 500);
+    }
+
+  }
+  // handleCallback(ev) {
+  //   const filter = this.listFilter.filter(x => x.value);
+  //   if (!filter.length) return this.dataSub = this.data;
+  //   filter.forEach((x, ix) => {
+  //     if (ix === 0) {
+  //       if (x.type === 'text' || x.type === 'search') {
+  //         this.dataSub = this.data.filter(
+  //           (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
+  //       } else {
+  //         this.dataSub = this.data.filter((a) => a[x.condition] == x.value);
+  //       }
+  //     } else {
+  //       if (x.type === 'text' || x.type === 'search') {
+  //         this.dataSub = this.dataSub.filter(
+  //           (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
+  //       } else {
+  //         this.dataSub = this.dataSub.filter((a) => a[x.condition] == x.value);
+  //       }
+  //     }
+
+  //   });
+  // }
   handleCallbackTable(ev) {
     console.log(ev);
     if (ev.type === 'create') {

@@ -8,7 +8,7 @@ import { ProductionService } from 'src/app/services/production.service';
   styleUrls: ['./product-delete.component.scss']
 })
 export class ProductDeleteComponent implements OnInit {
-  model = {};
+  model: any = {};
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -29,10 +29,18 @@ export class ProductDeleteComponent implements OnInit {
     }
   }
   deleteFunction() {
-    this.productionService.deleteProduct(this.data.item.ProductId).subscribe(res => {
-      this.dialogRef.close();
-    })
-
+    if (this.model.check === 'delete-all') {
+      this.model.item.forEach(x => {
+        this.productionService.deleteProduct(x.ProductId).subscribe(res => {
+          this.dialogRef.close();
+        })
+      });
+    }
+    else {
+      this.productionService.deleteProduct(this.data.item.ProductId).subscribe(res => {
+        this.dialogRef.close();
+      })
+    }
   }
 
 }

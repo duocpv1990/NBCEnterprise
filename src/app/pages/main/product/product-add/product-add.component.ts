@@ -17,7 +17,7 @@ import { categories, contries } from './product-mock';
 })
 export class ProductAddComponent extends BaseUploadComponent implements OnInit {
   conFig = new Product();
-  dataModel = {};
+  dataModel: any = {};
   listCreate = [];
   imageUrl: string;
   chips = [];
@@ -33,6 +33,7 @@ export class ProductAddComponent extends BaseUploadComponent implements OnInit {
   listCertification: any = [];
   listTargetMarket: any = [];
   listIdCertification: any = [];
+  timer;
   constructor(
     public s3Service: S3FileService,
     private dialogRef: MatDialogRef<ProductAddComponent>,
@@ -46,12 +47,6 @@ export class ProductAddComponent extends BaseUploadComponent implements OnInit {
 
   ngOnInit(): void {
     this.listCreate = this.conFig.create;
-    this.storeService.getListStore("", "", "", 1, 50).subscribe(res => {
-      this.listStore = res;
-    }),
-      this.distributor.getListDistributor("", "", 1, 50).subscribe(res => {
-        this.listDistributor = res;
-      });
     this.wardService.getNation().subscribe(res => {
       this.contries = res;
     });
@@ -59,26 +54,52 @@ export class ProductAddComponent extends BaseUploadComponent implements OnInit {
       this.listTargetMarket = res;      
     });
     this.productionService.getCategory().subscribe(res => {
-        this.categories = res;
+      this.categories = res;
     })
   }
+  getListStore(name){
+    this.storeService.getListStore(name, "", "", 1, 50).subscribe(res => {
+      this.listSearchStore = res;
+    });
+  }
+
+  getListDistributor(name){
+    this.distributor.getListDistributor(name, "", 1, 50).subscribe(res => {
+      this.listSearchDistributor = res;
+    });
+  }
   selectStore(value) {
-    this.model.StoreId = value.StoreId;
-    this.model.StoreName = value.Name;
+    this.dataModel.StoreId = value.StoreId;
+    this.dataModel.StoreName = value.Name;
     this.listSearchStore = [];
   }
   selectDistributor(value) {
-    this.model.DistributorId = value.DistributorId;
-    this.model.DistributorName = value.Name;
+    this.dataModel.DistributorId = value.DistributorId;
+    this.dataModel.DistributorName = value.Name;
     this.listSearchDistributor = [];
   }
-  autocomplete(name) {
-    if (!name) return this.listSearchDistributor = [];
-    this.listSearchStore = this.listStore.filter(x => x.Name.toLowerCase().indexOf(name.toLowerCase()) > -1);
+  autocomplete(name: string) {
+    if (!name){
+      this.listSearchStore = [];
+    }
+    else{
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        this.getListStore(name);
+      }, 100);
+    }
   }
+  
   autocompleteDistributor(name) {
-    if (!name) return this.listSearchDistributor = [];
-    this.listSearchDistributor = this.listDistributor.filter(x => x.Name.toLowerCase().indexOf(name.toLowerCase()) > -1);
+    if (!name){
+      this.listSearchDistributor = [];
+    }
+    else{
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        this.getListDistributor(name);
+      }, 100);
+    }
   }
   cancel = () => {
   }
@@ -149,8 +170,10 @@ export class ProductAddComponent extends BaseUploadComponent implements OnInit {
 
   addChip(value) {
     this.chips.push(value);
-    this.model.Ingradient = this.chips.join();
+    this.model.Ingredient = this.chips.join();
     this.chipInput = '';
+    console.log(this.model.Ingredient);
+    
   }
 
   removeChip(index) {

@@ -20,6 +20,7 @@ export class ProductListComponent implements OnInit {
   listActive;
   dataTable;
   data = [];
+  timer;
 
   constructor(
     private dialog: MatDialog,
@@ -31,19 +32,38 @@ export class ProductListComponent implements OnInit {
     this.dataTable = this.config.collums;
     this.listFilter[2].data = [
       {
-        name: 'chưa có thông tin',
+        name: 'Cho quét',
         value: 1
       },
       {
-        name: 'Cho quét',
+        name: 'Không cho quét',
         value: 2
       },
       {
+        name: 'chưa có thông tin',
+        value: 3
+      },
+
+      {
         name: 'Đã ẩn bởi DNSH',
+        value: 4
+      },
+    ];
+    this.listFilter[3].data = [
+      {
+        name: 'Yêu cầu duyệt',
+        value: 1
+      },
+      {
+        name: 'Đã duyệt',
+        value: 2
+      },
+      {
+        name: 'Tạm duyệt',
         value: 3
       },
       {
-        name: 'Không cho quét',
+        name: 'Từ chối duyệt',
         value: 4
       }
     ]
@@ -56,35 +76,81 @@ export class ProductListComponent implements OnInit {
       this.data = res;
       this.dataSub = this.data;
       this.dataSub.map(x => {
-        x.ProductCode = x.ProductCode || ""
+        x.TypeString = (x.Type === 1 ? "Cho quét" : x.Type === 2 ? 'Không cho quét' : x.Type === 3 ? "Chưa có thông tin" : x.Type === 4 ? "Đã ẩn bởi DNSH": "");
+        x.StatusString = (x.Status === 1 ? "Yêu cầu duyệt" : x.Status === 2 ? 'Đã duyệt' : x.Status === 3 ? "Tạm duyệt" : x.Status === 4 ? "Từ chối duyệt" : "");
       })
-
     })
   }
-
   handleCallback(ev) {
-    const filter = this.listFilter.filter(x => x.value);
-    if (!filter.length) return this.dataSub = this.data;
-    filter.forEach((x, ix) => {
-      if (ix === 0) {
-        if (x.type === 'text' || x.type === 'search') {
-          this.dataSub = this.data.filter(
-            (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
-        } else {
-          this.dataSub = this.data.filter((a) => a[x.condition] == x.value);
-        }
-      } else {
-        if (x.type === 'text' || x.type === 'search') {
-          this.dataSub = this.dataSub.filter(
-            (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
-        } else {
-          this.dataSub = this.dataSub.filter((a) => a[x.condition] == x.value);
-        }
-      }
+    if (ev.condition === 'ProductCode') {
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        this.productService.getListProduct("", "", ev.value, "", "", 1, 50).subscribe(res => {
+          this.dataSub = res;
+          this.dataSub.map(x => {
+            x.TypeString = (x.Type === 1 ? "Cho quét" : x.Type === 2 ? 'Không cho quét' : x.Type === 3 ? "Chưa có thông tin" : x.Type === 4 ? "Đã ẩn bởi DNSH": "");
+            x.StatusString = (x.Status === 1 ? "Yêu cầu duyệt" : x.Status === 2 ? 'Đã duyệt' : x.Status === 3 ? "Tạm duyệt" : x.Status === 4 ? "Từ chối duyệt" : "");
+          })
+        })
+      }, 500);
 
-    });
+    }
+    if (ev.condition === 'Name') {
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        this.productService.getListProduct(ev.value, "", "", "", "", 1, 50).subscribe(res => {
+          this.dataSub = res;
+          this.dataSub.map(x => {
+            x.TypeString = (x.Type === 1 ? "Cho quét" : x.Type === 2 ? 'Không cho quét' : x.Type === 3 ? "Chưa có thông tin" : x.Type === 4 ? "Đã ẩn bởi DNSH": "");
+            x.StatusString = (x.Status === 1 ? "Yêu cầu duyệt" : x.Status === 2 ? 'Đã duyệt' : x.Status === 3 ? "Tạm duyệt" : x.Status === 4 ? "Từ chối duyệt" : "");
+          })
+        })
+      }, 500);
+
+    }
+    if (ev.condition === 'Type') {
+      this.productService.getListProduct("", "", "", ev.value, "", 1, 50).subscribe(res => {
+        this.dataSub = res;
+        this.dataSub.map(x => {
+          x.TypeString = (x.Type === 1 ? "Cho quét" : x.Type === 2 ? 'Không cho quét' : x.Type === 3 ? "Chưa có thông tin" : x.Type === 4 ? "Đã ẩn bởi DNSH": "");
+          x.StatusString = (x.Status === 1 ? "Yêu cầu duyệt" : x.Status === 2 ? 'Đã duyệt' : x.Status === 3 ? "Tạm duyệt" : x.Status === 4 ? "Từ chối duyệt" : "");
+        })
+      })
+    };
+    if (ev.condition === 'Status') {
+      this.productService.getListProduct("", "", "", "", ev.value, 1, 50).subscribe(res => {
+        this.dataSub = res;
+        this.dataSub.map(x => {
+          x.TypeString = (x.Type === 1 ? "Cho quét" : x.Type === 2 ? 'Không cho quét' : x.Type === 3 ? "Chưa có thông tin" : x.Type === 4 ? "Đã ẩn bởi DNSH": "");
+          x.StatusString = (x.Status === 1 ? "Yêu cầu duyệt" : x.Status === 2 ? 'Đã duyệt' : x.Status === 3 ? "Tạm duyệt" : x.Status === 4 ? "Từ chối duyệt" : "");
+        })
+      })
+    }
 
   }
+  // handleCallback(ev) {
+  //   const filter = this.listFilter.filter(x => x.value);
+  //   if (!filter.length) return this.dataSub = this.data;
+  //   filter.forEach((x, ix) => {
+  //     if (ix === 0) {
+  //       if (x.type === 'text' || x.type === 'search') {
+  //         this.dataSub = this.data.filter(
+  //           (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
+  //       } else {
+  //         this.dataSub = this.data.filter((a) => a[x.condition] == x.value);
+  //       }
+  //     } else {
+  //       if (x.type === 'text' || x.type === 'search') {
+  //         this.dataSub = this.dataSub.filter(
+  //           (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
+  //       } else {
+  //         this.dataSub = this.dataSub.filter((a) => a[x.condition] == x.value);
+  //       }
+  //     }
+
+  //   });
+
+  // }
 
   handleCallbackTable(ev) {
     console.log(ev);
@@ -120,6 +186,20 @@ export class ProductListComponent implements OnInit {
         data: {
           item: ev.item,
           title: "Xoá sản phẩm",
+          content: "Bạn có muốn xoá sản phẩm trên hệ thống?"
+        }
+      }).afterClosed().subscribe(result => {
+        this.getlistProduct();
+      });
+    }
+    if (ev.type === 'delete-all') {
+      return this.dialog.open(ProductDeleteComponent, {
+        width: '400px',
+        height: '250px',
+        data: {
+          item: ev.item,
+          title: "Xoá sản phẩm",
+          check: 'delete-all',
           content: "Bạn có muốn xoá sản phẩm trên hệ thống?"
         }
       }).afterClosed().subscribe(result => {

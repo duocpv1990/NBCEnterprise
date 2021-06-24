@@ -6,4 +6,5 @@ export class CreateModel {
     data?: [];
     class?: string;
     ward?: string;
+    required?: boolean;
 }

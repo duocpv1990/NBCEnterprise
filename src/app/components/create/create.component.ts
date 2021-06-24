@@ -24,7 +24,7 @@ export class CreateComponent extends BaseUploadComponent implements OnInit {
   model: any = {};
   imagePath;
   imgURL;
-  listSearch;
+  listSearch: any = [];
   fileAvatar;
   multipFile = [];
   fileBackground;
@@ -41,10 +41,10 @@ export class CreateComponent extends BaseUploadComponent implements OnInit {
 
   ngOnInit() {
     this.model = this.dataModel || {};
-    this.timer = this.enterpriseService.getListCompany("", "", 1, 1, 50).subscribe(res => {
-      this.listComplete = res;
-    })
+   
   }
+
+
   selectCompany(value){
     this.model.CompanyId = value.CompanyId;
     this.model.CompanyName = value.Name;
@@ -55,13 +55,11 @@ export class CreateComponent extends BaseUploadComponent implements OnInit {
       return this.listSearch = [];
     } 
     else{
-      this.listSearch = this.listComplete.filter(x => x.Name.toLowerCase().indexOf(name.toLowerCase()) > -1);
-      if(this.listSearch.length  === 0){
-        this.error = true;
-      } 
-      else{
-        this.error = false;
-      }
+      clearTimeout(this.timer);
+      this.timer = this.enterpriseService.getListCompany("",name, "", 1, 50).subscribe(res => {
+        this.listSearch = res;
+      })
+    
     }
   }
 

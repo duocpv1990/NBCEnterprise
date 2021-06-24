@@ -120,46 +120,53 @@ export class EnterPriseModel {
                 id: 'Name',
                 label: 'Tên doanh nghiệp',
                 name: 'Name',
-                type: 'text'
+                type: 'text',
+                required: true,
             },
             {
                 id: 'CompanyCode',
                 label: 'Mã doanh nghiệp',
                 name: 'CompanyCode',
-                type: 'text'
+                type: 'text',
+                required: true,
             },
             {
                 id: 'GLN',
                 label: 'Mã địa điểm toàn cầu GLN',
                 name: 'GLN',
-                type: 'text'
+                type: 'text',
+                required: true,
             },
             {
                 id: 'TaxCode',
                 label: 'Mã số thuế',
                 name: 'TaxCode',
-                type: 'text'
+                type: 'text',
+                required: true,
             },
             {
                 id: 'NationId',
                 label: 'Quốc gia',
                 name: 'Nation',
                 type: '',
-                ward: 'Nation'
+                ward: 'Nation',
+                required: true,
             },
             {
                 id: 'ProvinceId',
                 label: 'Thành phố/Tỉnh',
                 name: 'city',
                 type: '',
-                ward: 'City'
+                ward: 'City',
+                required: true,
             },
             {
                 id: 'DistrictId',
                 label: 'Quận/Huyện',
                 name: 'district',
                 type: '',
-                ward: 'District'
+                ward: 'District',
+                required: true,
             },
             {
                 id: 'AddressDetail',
@@ -189,13 +196,15 @@ export class EnterPriseModel {
                 id: 'avatar',
                 label: 'Ảnh đại diện',
                 name: 'avatar',
-                type: 'img'
+                type: 'img',
+                required: true,
             },
             {
                 id: 'background',
                 label: 'Ảnh nền',
                 name: 'background',
-                type: 'img'
+                type: 'img',
+                required: true,
             },
             {
                 id: 'addnew',

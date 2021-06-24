@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { EnterPriseModel } from 'src/app/models/enterprise.model';
 import { WardService } from 'src/app/services/city-district.service';
 import { EnterpriseService } from 'src/app/services/enterprise.service';
+import { LoaderService } from 'src/app/services/loader.service';
 @Component({
     selector: 'app-enterprise-create',
     templateUrl: './enterprise-create.component.html',
@@ -28,7 +29,8 @@ export class EnterpriseCreateComponent implements OnInit {
     constructor(
         private dialogRef: MatDialogRef<EnterpriseCreateComponent>,
         private wardService: WardService,
-        private enterprise: EnterpriseService
+        private enterprise: EnterpriseService,
+        private loaderService: LoaderService
     ) { }
     listCreate = [];
 
@@ -38,13 +40,13 @@ export class EnterpriseCreateComponent implements OnInit {
             name: "Việt Nam",
             value: 916
         }];
-       
+
     }
     handleSelectChange(ev) {
-        if(ev.check === 'Nation'){
+        if (ev.check === 'Nation') {
             this.wardService.getAllCity(+ev.value).subscribe(res => {
                 console.log(res);
-                
+
                 const province = res.map(x => {
                     return {
                         name: x.Name,
@@ -52,7 +54,7 @@ export class EnterpriseCreateComponent implements OnInit {
                     }
                 })
                 this.listCreate[5].data = province;
-    
+
             })
         }
         if (ev.check === 'City') {
@@ -90,15 +92,18 @@ export class EnterpriseCreateComponent implements OnInit {
             default:
                 break;
         }
-        this.dialogRef.close();
     }
 
     cancel = () => {
     }
 
     save = (model) => {
-        console.log(model);
+        this.loaderService.show();
         this.enterprise.createCompany(model).subscribe(res => {
+            this.loaderService.hide();
+            this.dialogRef.close();
+        }, (err) => {
+            this.loaderService.hide();
         })
     }
 

@@ -39,9 +39,19 @@ export class ShopEditComponent extends BaseUploadComponent implements OnInit {
         text: 'Chỉnh sửa'
     }]
     listCreate = [];
-   
+
     ngOnInit() {
         this.listCreate = this.conFig.create;
+        this.listCreate[1].data = [
+          {
+            name: 'Online',
+            value: 1
+          },
+          {
+            name: 'Offline',
+            value: 2
+          }
+        ]
         this.getDetailStore();
     }
     handleSelectChange(ev) {
@@ -75,42 +85,42 @@ export class ShopEditComponent extends BaseUploadComponent implements OnInit {
             this.dataModel = res;
             this.dataModel.listMedia = res.StoreMedias;
             this.wardService.getNation().subscribe(nation => {
-                   let nationList = nation.map(x => {
-                       return {
+                let nationList = nation.map(x => {
+                    return {
                         name: x.Name,
                         value: x.NationId
-                       }
-                    
-                   })
-                   nationList.forEach(x => {
-                       if(x.name === this.dataModel.Nation) 
-                       return this.dataModel.NationId = x.value
-                   });
-                   this.listCreate[2].data = nationList;
-                   this.wardService.getAllCity(this.dataModel.NationId).subscribe(city => {
+                    }
+
+                })
+                nationList.forEach(x => {
+                    if (x.name === this.dataModel.Nation)
+                        return this.dataModel.NationId = x.value
+                });
+                this.listCreate[2].data = nationList;
+                this.wardService.getAllCity(this.dataModel.NationId).subscribe(city => {
                     let cityList = city.map(x => {
                         return {
-                         name: x.Name,
-                         value: x.ProvinceId
+                            name: x.Name,
+                            value: x.ProvinceId
                         }
-                     
+
                     })
                     cityList.forEach(x => {
-                        if(x.name === this.dataModel.Province) 
-                        return this.dataModel.ProvinceId = x.value
+                        if (x.name === this.dataModel.Province)
+                            return this.dataModel.ProvinceId = x.value
                     });
                     this.listCreate[3].data = cityList;
                     this.wardService.getDistrict(this.dataModel.ProvinceId).subscribe(district => {
                         let districtList = district.map(x => {
                             return {
-                             name: x.Name,
-                             value: x.DistrictId
+                                name: x.Name,
+                                value: x.DistrictId
                             }
-                         
+
                         })
                         districtList.forEach(x => {
-                            if(x.name === this.dataModel.District) 
-                            return this.dataModel.DistrictId = x.value
+                            if (x.name === this.dataModel.District)
+                                return this.dataModel.DistrictId = x.value
                         });
                         this.listCreate[4].data = districtList;
                     })
@@ -200,7 +210,7 @@ export class ShopEditComponent extends BaseUploadComponent implements OnInit {
             value.data.ProvinceId = +value.data.ProvinceId;
             value.data.DistrictId = +value.data.DistrictId;
             console.log(value.data);
-            
+
             this.storeService.editStore(value.data.StoreId, value.data).subscribe(res => {
 
             })

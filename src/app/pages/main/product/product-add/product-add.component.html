@@ -1,5 +1,4 @@
-<!-- <app-create [(data)]="listCreate" [(option)]="option" [(arrayButton)]="arrayButton"
-    (callback)="handleCallbackEvent($event)"></app-create> -->
+<app-loader></app-loader>
 <div class="form-create">
     <div class="title">
         THÊM MỚI SẢN PHẨM
@@ -204,7 +203,7 @@
     <div class="button-block">
         <button (click)="closeDialog()" class="action-btn cancel-btn">Hủy bỏ</button>
         &nbsp;
-        <button (click)="save()" class="action-btn save-btn">Lưu</button>
+        <button (click)="save()" class="action-btn save-btn" [disabled] = "disable">Lưu</button>
     </div>
 
 </div>

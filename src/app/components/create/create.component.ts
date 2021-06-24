@@ -41,25 +41,25 @@ export class CreateComponent extends BaseUploadComponent implements OnInit {
 
   ngOnInit() {
     this.model = this.dataModel || {};
-   
+
   }
 
 
-  selectCompany(value){
+  selectCompany(value) {
     this.model.CompanyId = value.CompanyId;
     this.model.CompanyName = value.Name;
     this.listSearch = [];
   }
   autocomplete(name) {
-    if (!name){
+    if (!name) {
       return this.listSearch = [];
-    } 
-    else{
+    }
+    else {
       clearTimeout(this.timer);
-      this.timer = this.enterpriseService.getListCompany("",name, "", 1, 50).subscribe(res => {
+      this.timer = this.enterpriseService.getListCompany("", name, "", 1, 50).subscribe(res => {
         this.listSearch = res;
       })
-    
+
     }
   }
 
@@ -102,25 +102,66 @@ export class CreateComponent extends BaseUploadComponent implements OnInit {
 
   onClickButton(i) {
     if (i.class === "btn-save") {
-      this.selectImage(this.fileAvatar).subscribe(res => { }, (err) => { }, () => {
-        const modelAvatar = {
-          MediaURL: this.imageLinkUpload,
-          Type: 1,
-          Status: 1
-        }
-        this.listMedia.push(modelAvatar);
+      if (!this.fileAvatar && this.fileBackground) {
         this.selectImage(this.fileBackground).subscribe(res => { }, (err) => { }, () => {
-          const modelBackground = {
-            MediaURL: this.imageLinkUpload,
-            Type: 2,
-            Status: 1
-          }
-          this.listMedia.push(modelBackground);
+          let listMedia = [
+            {
+              MediaURL: this.imageLinkUpload,
+              Type: 1,
+              Status: 1
+            },
+            {
+              MediaURL: this.imageLinkUpload,
+              Type: 2,
+              Status: 1
+            }
+          ];
           i.data = this.model;
-          i.listMedia = this.listMedia;
+          i.listMedia = listMedia;
           this.callback.emit(i);
         })
-      })
+       
+      }
+      else if(this.fileAvatar && !this.fileBackground){
+        this.selectImage(this.fileAvatar).subscribe(res => { }, (err) => { }, () => {
+          let listMedia = [
+            {
+              MediaURL: this.imageLinkUpload,
+              Type: 1,
+              Status: 1
+            },
+            {
+              MediaURL: this.imageLinkUpload,
+              Type: 2,
+              Status: 1
+            }
+          ];
+          i.data = this.model;
+          i.listMedia = listMedia;
+          this.callback.emit(i);
+        })
+      }
+      else{
+        this.selectImage(this.fileAvatar).subscribe(res => { }, (err) => { }, () => {
+          const modelAvatar = {
+            MediaURL: this.imageLinkUpload,
+            Type: 1,
+            Status: 1
+          }
+          this.listMedia.push(modelAvatar);
+          this.selectImage(this.fileBackground).subscribe(res => { }, (err) => { }, () => {
+            const modelBackground = {
+              MediaURL: this.imageLinkUpload,
+              Type: 2,
+              Status: 1
+            }
+            this.listMedia.push(modelBackground);
+            i.data = this.model;
+            i.listMedia = this.listMedia;
+            this.callback.emit(i);
+          })
+        })
+      }
     }
     else {
       this.callback.emit(i);
@@ -138,7 +179,6 @@ export class CreateComponent extends BaseUploadComponent implements OnInit {
       }
     });
   }
-
 }
 
 @NgModule({

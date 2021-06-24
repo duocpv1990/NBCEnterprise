@@ -6,6 +6,8 @@ import { ProductUpdateComponent } from '../product-update/product-update.compone
 import { ProductDeleteComponent } from '../product-delete/product-delete.component';
 import { ImportExcelComponent } from 'src/app/components/dialog/import-excel/import-excel.component';
 import { ProductionService } from 'src/app/services/production.service';
+import { ExportExcelService } from 'src/app/services/base-export-excel.service';
+import { FormatDateService } from 'src/app/services/format-date.service';
 
 @Component({
   selector: 'app-product-list',
@@ -24,7 +26,9 @@ export class ProductListComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private productService: ProductionService
+    private productService: ProductionService,
+    private exportExcel: ExportExcelService,
+    private formatDate: FormatDateService
   ) { }
 
   ngOnInit(): void {
@@ -153,7 +157,22 @@ export class ProductListComponent implements OnInit {
   // }
 
   handleCallbackTable(ev) {
-    console.log(ev);
+    if(ev.type === "export"){
+      this.dataSub = this.dataSub.map(x => {
+        return {
+          "STT": x.stt,
+          "Ảnh": x.MediaURL,
+          "Mã sản phẩm": x.ProductCode,
+          "Trạng thái quét": x.TypeString,
+          "Trạng thái thông tin":x.StatusString,
+          "Lượt quét": x.ScanNumber,
+          "Lượt đánh giá": x.RatingNumber,
+          "Cập nhật": x.UpdatedOn === null ? "" : this.formatDate.formatDate(x.UpdatedOn, 'DD/MM/YYYY'),
+        }
+      })
+      this.exportExcel.exportExcel(this.dataSub, "product-data");
+      return this.dataSub = this.data;
+    }
     if (ev.type === 'create') {
       return this.dialog.open(ProductAddComponent, {
         width: '940px',

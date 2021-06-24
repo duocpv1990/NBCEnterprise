@@ -3,6 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { EnterPriseModel } from 'src/app/models/enterprise.model';
 import { ShopModel } from 'src/app/models/shop.model';
 import { WardService } from 'src/app/services/city-district.service';
+import { LoaderService } from 'src/app/services/loader.service';
 import { StoreService } from 'src/app/services/store.service';
 import { EnterpriseCreateComponent } from '../../enterprise/enterprise-create/enterprise-create.component';
 
@@ -31,7 +32,8 @@ export class ShopCreateComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<ShopCreateComponent>,
     private wardService: WardService,
-    private shopService: StoreService
+    private shopService: StoreService,
+    private loaderService: LoaderService
   ) { }
   listCreate = [];
 
@@ -79,11 +81,8 @@ export class ShopCreateComponent implements OnInit {
     }
     
   }
-  
 
   handleCallbackEvent = (value) => {
-      console.log(value);
-      
       switch (value.class) {
           case 'btn-cancel':
               this.cancel();
@@ -101,15 +100,18 @@ export class ShopCreateComponent implements OnInit {
           default:
               break;
       }
-      this.dialogRef.close();
+
   }
 
   cancel = () => {
+    this.dialogRef.close();
   }
 
   save = (model) => {
+    this.loaderService.show();
       this.shopService.createStore(model).subscribe(res => {
-          
+        this.loaderService.hide();
+        this.dialogRef.close();
       })
   }
 

@@ -137,7 +137,7 @@ export class ShopModel {
             {
                 id: 'Type',
                 label: 'Hình thức',
-                name: 'type',
+                name: 'Type',
                 type: 'select',
                 required: true,
             },

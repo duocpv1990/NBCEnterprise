@@ -18,6 +18,8 @@ import { RoleDirectiveModule } from 'src/app/utils/directives/role.directive';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { LoaderService } from 'src/app/services/loader.service';
+import { LoaderModule } from 'src/app/utils/loader/loader.component';
 @NgModule({
   declarations: [ProductComponent, ProductListComponent, ProductAddComponent, ProductUpdateComponent, ProductDeleteComponent],
   imports: [
@@ -25,6 +27,7 @@ import { MatIconModule } from '@angular/material/icon';
     RouterModule.forChild(productRoute),
     FilterBaseModule,
     TableBaseModule,
+    LoaderModule,
     MatChipsModule,
     MatFormFieldModule,
     MatIconModule,

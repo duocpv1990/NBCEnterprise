@@ -6,6 +6,7 @@ import { AddCertificateComponent } from 'src/app/components/dialog/add-certifica
 import { Product } from 'src/app/models/product.model';
 import { WardService } from 'src/app/services/city-district.service';
 import { DistributorService } from 'src/app/services/distributor.service';
+import { LoaderService } from 'src/app/services/loader.service';
 import { ProductionService } from 'src/app/services/production.service';
 import { StoreService } from 'src/app/services/store.service';
 import { categories, contries } from './product-mock';
@@ -34,6 +35,7 @@ export class ProductAddComponent extends BaseUploadComponent implements OnInit {
   listTargetMarket: any = [];
   listIdCertification: any = [];
   timer;
+  disable = false;
   constructor(
     public s3Service: S3FileService,
     private dialogRef: MatDialogRef<ProductAddComponent>,
@@ -41,7 +43,8 @@ export class ProductAddComponent extends BaseUploadComponent implements OnInit {
     private storeService: StoreService,
     private wardService: WardService,
     private distributor: DistributorService,
-    private productionService: ProductionService
+    private productionService: ProductionService,
+    private loaderService: LoaderService
 
   ) { super(s3Service) }
 
@@ -69,13 +72,13 @@ export class ProductAddComponent extends BaseUploadComponent implements OnInit {
     });
   }
   selectStore(value) {
-    this.dataModel.StoreId = value.StoreId;
-    this.dataModel.StoreName = value.Name;
+    this.model.StoreId = value.StoreId;
+    this.model.StoreName = value.Name;
     this.listSearchStore = [];
   }
   selectDistributor(value) {
-    this.dataModel.DistributorId = value.DistributorId;
-    this.dataModel.DistributorName = value.Name;
+    this.model.DistributorId = value.DistributorId;
+    this.model.DistributorName = value.Name;
     this.listSearchDistributor = [];
   }
   autocomplete(name: string) {
@@ -104,6 +107,8 @@ export class ProductAddComponent extends BaseUploadComponent implements OnInit {
   cancel = () => {
   }
   save = () => {
+    this.loaderService.show();
+    this.disable = true;
     this.model.CompanyId = 32;
     this.model.Price = +this.model.Price;
     this.model.TargetMarketId = +this.model.TargetMarketId;
@@ -136,6 +141,8 @@ export class ProductAddComponent extends BaseUploadComponent implements OnInit {
         ];
         this.model.ProductMedias = ProductMedias;
         this.productionService.createProduct(this.model).subscribe(res => {
+          this.loaderService.hide();
+          this.disable = false;
           this.dialogRef.close();
         })
       });
@@ -150,6 +157,8 @@ export class ProductAddComponent extends BaseUploadComponent implements OnInit {
       ];
       this.model.ProductMedias = ProductMedias;
       this.productionService.createProduct(this.model).subscribe(res => {
+        this.loaderService.hide();
+        this.disable = false;
         this.dialogRef.close();
       })
     }

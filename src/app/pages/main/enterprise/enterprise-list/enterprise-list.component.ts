@@ -3,7 +3,9 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeleteComponent } from 'src/app/components/dialog/delete/delete.component';
 import { ImportExcelComponent } from 'src/app/components/dialog/import-excel/import-excel.component';
 import { EnterPriseModel } from 'src/app/models/enterprise.model';
+import { ExportExcelService } from 'src/app/services/base-export-excel.service';
 import { EnterpriseService } from 'src/app/services/enterprise.service';
+import { FormatDateService } from 'src/app/services/format-date.service';
 import { DeleteEnterpriseComponent } from '../delete-enterprise/delete-enterprise.component';
 import { EnterpriseCreateComponent } from '../enterprise-create/enterprise-create.component';
 import { EnterpriseEditComponent } from '../enterprise-edit/enterprise-edit.component';
@@ -23,7 +25,9 @@ export class EnterpriseListComponent implements OnInit {
   timer;
   constructor(
     private dialog: MatDialog,
-    private enterprise: EnterpriseService
+    private enterprise: EnterpriseService,
+    private exportService: ExportExcelService,
+    private formatDate: FormatDateService
   ) { }
 
   ngOnInit(): void {
@@ -130,6 +134,22 @@ export class EnterpriseListComponent implements OnInit {
   //   });
   // }
   handleCallbackTable(ev) {
+    if(ev.type === "export"){
+      this.dataSub = this.dataSub.map(x => {
+        return {
+          "STT": x.stt,
+          "Mã doanh nghiệp": x.CompanyCode,
+          "Mã địa điểm toàn cầu": x.GLN,
+          "Tên đăng ký": x.Name,
+          "Giấy tờ": x.CertificateNumber,
+          "Trạng thái":x.StatusString,
+          "Cập nhật": x.UpdatedOn === null ? "" : this.formatDate.formatDate(x.UpdatedOn, 'DD/MM/YYYY'),
+          
+        }
+      })
+      this.exportService.exportExcel(this.dataSub, "business");
+      return this.dataSub = this.data;
+    }
     console.log(ev);
     if (ev.type === 'create') {
       return this.dialog.open(EnterpriseCreateComponent, {

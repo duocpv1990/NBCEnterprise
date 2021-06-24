@@ -13,6 +13,8 @@ import { DeleteEnterpriseComponent } from './delete-enterprise/delete-enterprise
 import { CertificateEnterpriseComponent } from './enterprise-create/certificate-enterprise/certificate-enterprise.component';
 import { EnterpriseEditComponent } from './enterprise-edit/enterprise-edit.component';
 import { EditModule } from 'src/app/components/edit/edit.component';
+import { LoaderService } from 'src/app/services/loader.service';
+import { LoaderModule } from 'src/app/utils/loader/loader.component';
 
 @NgModule({
   declarations: [EnterpriseComponent, EnterpriseListComponent, EnterpriseCreateComponent, DeleteEnterpriseComponent, CertificateEnterpriseComponent, EnterpriseEditComponent],
@@ -20,6 +22,7 @@ import { EditModule } from 'src/app/components/edit/edit.component';
     CommonModule,
     FilterBaseModule,
     TableBaseModule,
+    LoaderModule,
     CreateModule,
     DeleteModule,
     EditModule,

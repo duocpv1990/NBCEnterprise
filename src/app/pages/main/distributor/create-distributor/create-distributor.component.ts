@@ -98,13 +98,10 @@ export class CreateDistributorComponent implements OnInit {
     this.dialogRef.close();
   }
   onFunictionSave = (model) => {
-    this.loaderService.show();
     this.distributorService.createDistributor(model).subscribe(res => {
-      this.loaderService.hide();
       this.dialogRef.close();
 
     },(err) => {
-      this.loaderService.hide();
       this.dialogRef.close();
     })
   }

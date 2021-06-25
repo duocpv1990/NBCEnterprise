@@ -75,13 +75,9 @@
             <div class="content row align-items-center">
                 <div class="label"> Thị trường mục tiêu (<span class="require-icon">*</span>) </div>
                 <div class="input-text">
-                    <div>
-                        <select name=""  [(ngModel)]="model.TargetMarketId">
-                            <option value="" [value]="category.TargetMarketId" *ngFor="let category of listTargetMarket">
-                                {{category.Name}}
-                            </option>
-                        </select>
-                    </div>
+                    <mat-select class="mat-select" (selectionChange)="check(dataModel.TargetMarketIdList)" [(ngModel)]="dataModel.TargetMarketIdList"  multiple>
+                        <mat-option *ngFor="let targetMarket of listTargetMarket" [value]="targetMarket.TargetMarketId">{{targetMarket.Name}}</mat-option>
+                      </mat-select>
                 </div>
             </div>
         </div>

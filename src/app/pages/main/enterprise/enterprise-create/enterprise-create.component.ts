@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { EnterPriseModel } from 'src/app/models/enterprise.model';
 import { WardService } from 'src/app/services/city-district.service';
@@ -13,6 +14,7 @@ import { LoaderService } from 'src/app/services/loader.service';
 export class EnterpriseCreateComponent implements OnInit {
     conFig = new EnterPriseModel;
     dataModel: any = {};
+    disable;
     option = {
         title: 'Thêm mới doanh nghiệp',
         type: 'create'
@@ -30,7 +32,8 @@ export class EnterpriseCreateComponent implements OnInit {
         private dialogRef: MatDialogRef<EnterpriseCreateComponent>,
         private wardService: WardService,
         private enterprise: EnterpriseService,
-        private loaderService: LoaderService
+        private loaderService: LoaderService,
+        private toastr: ToastrService
     ) { }
     listCreate = [];
 
@@ -78,16 +81,7 @@ export class EnterpriseCreateComponent implements OnInit {
                 this.cancel();
                 break;
             case 'btn-save':
-                this.dataModel = value.data;
-                this.dataModel.NationId = +value.data.NationId;
-                this.dataModel.ProvinceId = +value.data.ProvinceId;
-                this.dataModel.DistrictId = +value.data.DistrictId;
-                this.dataModel.companyMedias = value.listMedia;
-                this.dataModel.Status = 1;
-                this.dataModel.Type = 1;
-                delete this.dataModel.BackgroundURL;
-                delete this.dataModel.MediaURL;
-                this.save(this.dataModel);
+                this.save(value);
                 break;
             default:
                 break;
@@ -95,15 +89,26 @@ export class EnterpriseCreateComponent implements OnInit {
     }
 
     cancel = () => {
+        this.dialogRef.close();
     }
 
-    save = (model) => {
-        this.loaderService.show();
-        this.enterprise.createCompany(model).subscribe(res => {
-            this.loaderService.hide();
+    save = (value) => {
+        this.dataModel = value.data;
+        this.dataModel.NationId = +value.data.NationId;
+        this.dataModel.ProvinceId = +value.data.ProvinceId;
+        this.dataModel.DistrictId = +value.data.DistrictId;
+        this.dataModel.companyMedias = value.listMedia;
+        this.dataModel.Status = 1;
+        this.dataModel.Type = 1;
+        delete this.dataModel.BackgroundURL;
+        delete this.dataModel.MediaURL;
+        this.disable = true;
+        this.enterprise.createCompany(this.dataModel).subscribe(res => {
+            this.toastr.success("Tạo Thành công!")
             this.dialogRef.close();
         }, (err) => {
-            this.loaderService.hide();
+            this.toastr.error('Có lỗi xảy ra, vui lòng thử lại sau!');
+            this.disable = false;
         })
     }
 

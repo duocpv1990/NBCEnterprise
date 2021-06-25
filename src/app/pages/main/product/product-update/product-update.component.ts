@@ -60,8 +60,6 @@ export class ProductUpdateComponent extends BaseUploadComponent implements OnIni
       this.dataModel.ManufacturedOn = this.formatDate.formatDate(this.dataModel.ManufacturedOn, 'YYYY-MM-DD' || 'YYYY-DD-MM')
       this.productService.getCategory().subscribe(data => {
         this.categories = data;
-        console.log(data);
-        
         this.categories.forEach(x => {
           if (this.dataModel.Category === x.Name) {
             this.dataModel.CategoryId = x.CategoryId;
@@ -69,7 +67,6 @@ export class ProductUpdateComponent extends BaseUploadComponent implements OnIni
         });
       });
        console.log(this.dataModel);
-       
     });
     this.storeService.getListStore("", "", "", 1, 50).subscribe(res => {
       this.listStore = res;
@@ -86,6 +83,11 @@ export class ProductUpdateComponent extends BaseUploadComponent implements OnIni
       this.categories = res;
     })
     this.getListCertificate();
+  }
+  check(ev: any){
+    console.log(this.dataModel.TargetMarketIdList);
+    
+
   }
   getListStore(name){
     this.storeService.getListStore(name, "", "", 1, 50).subscribe(res => {
@@ -107,6 +109,10 @@ export class ProductUpdateComponent extends BaseUploadComponent implements OnIni
   }
   removeChip(index) {
     this.chips.splice(index, 1);
+    let newlist =  this.chips.join();
+    this.dataModel.Ingredient = newlist;
+    console.log(this.dataModel);
+    
   }
   selectStore(value) {
     this.dataModel.StoreId = value.StoreId;

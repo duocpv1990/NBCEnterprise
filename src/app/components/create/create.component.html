@@ -199,6 +199,7 @@
       class="btn mbf-btn"
       [class]="i.class"
       (click)="onClickButton(i)"
+      [disabled]="i.class === 'btn-save' && disable"
     >
       {{ i?.text }}
     </button>

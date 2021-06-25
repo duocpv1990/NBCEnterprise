@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product.model';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ProductAddComponent } from '../product-add/product-add.component';
 import { ProductUpdateComponent } from '../product-update/product-update.component';
 import { ProductDeleteComponent } from '../product-delete/product-delete.component';
 import { ImportExcelComponent } from 'src/app/components/dialog/import-excel/import-excel.component';
 import { ProductionService } from 'src/app/services/production.service';
 import { ExportExcelService } from 'src/app/services/base-export-excel.service';
 import { FormatDateService } from 'src/app/services/format-date.service';
+import { ProductAddComponent } from '../product-add/product-add.component';
 
 @Component({
   selector: 'app-product-list',
@@ -160,7 +160,6 @@ export class ProductListComponent implements OnInit {
     if(ev.type === "export"){
       this.dataSub = this.dataSub.map(x => {
         return {
-          "STT": x.stt,
           "Ảnh": x.MediaURL,
           "Mã sản phẩm": x.ProductCode,
           "Trạng thái quét": x.TypeString,
@@ -175,7 +174,7 @@ export class ProductListComponent implements OnInit {
     }
     if (ev.type === 'create') {
       return this.dialog.open(ProductAddComponent, {
-        width: '940px',
+        width: '1200px',
         height: '843px'
       }).afterClosed().subscribe(result => {
         this.getlistProduct();

@@ -7,7 +7,6 @@ import { ProductComponent } from './product.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { FilterBaseModule } from 'src/app/components/filter/filter.component';
 import { TableBaseModule } from 'src/app/components/table/table.component';
-import { ProductAddComponent } from './product-add/product-add.component';
 import { ProductUpdateComponent } from './product-update/product-update.component';
 import { ProductDeleteComponent } from './product-delete/product-delete.component';
 import { CreateModule } from 'src/app/components/create/create.component';
@@ -18,8 +17,9 @@ import { RoleDirectiveModule } from 'src/app/utils/directives/role.directive';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { LoaderService } from 'src/app/services/loader.service';
 import { LoaderModule } from 'src/app/utils/loader/loader.component';
+import { ProductAddComponent } from './product-add/product-add.component';
+import { MatSelectModule } from '@angular/material/select';
 @NgModule({
   declarations: [ProductComponent, ProductListComponent, ProductAddComponent, ProductUpdateComponent, ProductDeleteComponent],
   imports: [
@@ -28,6 +28,7 @@ import { LoaderModule } from 'src/app/utils/loader/loader.component';
     FilterBaseModule,
     TableBaseModule,
     LoaderModule,
+    MatSelectModule,
     MatChipsModule,
     MatFormFieldModule,
     MatIconModule,

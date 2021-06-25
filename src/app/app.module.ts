@@ -12,6 +12,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { CiCommonModule, S3FileService } from '@consult-indochina/common';
 import { ciAuthInterceptorProvider, CiAuthModule } from '@consult-indochina/auth';
 import { LoaderService } from './services/loader.service';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,11 @@ import { LoaderService } from './services/loader.service';
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
     HttpClientModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      closeButton: true,
+      messageClass: 'toastr-link',
+    }),
     CiCommonModule.forRoot({
       S3_URL: 'https://fgehlb1to6.execute-api.ap-southeast-1.amazonaws.com/prod/presigned-url'
     }),

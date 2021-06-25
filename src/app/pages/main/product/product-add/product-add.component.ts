@@ -6,6 +6,7 @@ import { AddCertificateComponent } from 'src/app/components/dialog/add-certifica
 import { Product } from 'src/app/models/product.model';
 import { WardService } from 'src/app/services/city-district.service';
 import { DistributorService } from 'src/app/services/distributor.service';
+import { EnterpriseService } from 'src/app/services/enterprise.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { ProductionService } from 'src/app/services/production.service';
 import { StoreService } from 'src/app/services/store.service';
@@ -36,6 +37,7 @@ export class ProductAddComponent extends BaseUploadComponent implements OnInit {
   listIdCertification: any = [];
   timer;
   disable = false;
+  listCompany: any = [];
   constructor(
     public s3Service: S3FileService,
     private dialogRef: MatDialogRef<ProductAddComponent>,
@@ -44,7 +46,8 @@ export class ProductAddComponent extends BaseUploadComponent implements OnInit {
     private wardService: WardService,
     private distributor: DistributorService,
     private productionService: ProductionService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private companyService: EnterpriseService
 
   ) { super(s3Service) }
 
@@ -54,19 +57,47 @@ export class ProductAddComponent extends BaseUploadComponent implements OnInit {
       this.contries = res;
     });
     this.productionService.getTargetMarket().subscribe(res => {
-      this.listTargetMarket = res;      
+      this.listTargetMarket = res;
     });
     this.productionService.getCategory().subscribe(res => {
       this.categories = res;
     })
   }
-  getListStore(name){
+
+  check(ev: any) {
+
+  }
+  getListCompany(name) {
+    this.companyService.getListCompany("", name, "", 1, 50).subscribe(res => {
+      this.listCompany = res;
+    });
+  }
+
+  searchCompany(keyword){
+    if (!keyword) {
+      this.listCompany = [];
+    }
+    else {
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        this.getListCompany(keyword);
+      }, 100);
+    }
+  }
+
+  selectCompany(value){
+    this.model.CompanyId = value.CompanyId;
+    this.model.CompanyName = value.Name;
+    this.listCompany = [];
+  }
+
+  getListStore(name) {
     this.storeService.getListStore(name, "", "", 1, 50).subscribe(res => {
       this.listSearchStore = res;
     });
   }
 
-  getListDistributor(name){
+  getListDistributor(name) {
     this.distributor.getListDistributor(name, "", 1, 50).subscribe(res => {
       this.listSearchDistributor = res;
     });
@@ -82,22 +113,22 @@ export class ProductAddComponent extends BaseUploadComponent implements OnInit {
     this.listSearchDistributor = [];
   }
   autocomplete(name: string) {
-    if (!name){
+    if (!name) {
       this.listSearchStore = [];
     }
-    else{
+    else {
       clearTimeout(this.timer);
       this.timer = setTimeout(() => {
         this.getListStore(name);
       }, 100);
     }
   }
-  
+
   autocompleteDistributor(name) {
-    if (!name){
+    if (!name) {
       this.listSearchDistributor = [];
     }
-    else{
+    else {
       clearTimeout(this.timer);
       this.timer = setTimeout(() => {
         this.getListDistributor(name);
@@ -108,12 +139,9 @@ export class ProductAddComponent extends BaseUploadComponent implements OnInit {
   }
   save = () => {
     this.loaderService.show();
-    this.disable = true;
-    this.model.CompanyId = 32;
     this.model.Price = +this.model.Price;
     this.model.TargetMarketId = +this.model.TargetMarketId;
     this.model.CategoryId = +this.model.CategoryId;
-    this.model.Type = 1;
     this.model.Status = 1;
     let DistributorProducts = [
       {
@@ -130,8 +158,8 @@ export class ProductAddComponent extends BaseUploadComponent implements OnInit {
       }
     ];
     this.model.DistributorProducts = DistributorProducts;
-    if(this.fileImg){
-      this.selectImage(this.fileImg).subscribe(res => { }, (err) => { }, () => {
+    if (this.fileImg) {
+      this.selectImage(this.fileImg).subscribe(res => { }, (err) => { this.loaderService.hide() }, () => {
         let ProductMedias = [
           {
             "MediaURL": this.imageLinkUpload,
@@ -142,12 +170,14 @@ export class ProductAddComponent extends BaseUploadComponent implements OnInit {
         this.model.ProductMedias = ProductMedias;
         this.productionService.createProduct(this.model).subscribe(res => {
           this.loaderService.hide();
-          this.disable = false;
+          this.dialogRef.close();
+        }, (err) => {
+          this.loaderService.hide();
           this.dialogRef.close();
         })
       });
     }
-    else{
+    else {
       let ProductMedias = [
         {
           "MediaURL": "https://nbc-files.s3.ap-southeast-1.amazonaws.com/4-b84dc417-5afb-46ed-a046-8dd7281727cd.jpg",
@@ -158,7 +188,9 @@ export class ProductAddComponent extends BaseUploadComponent implements OnInit {
       this.model.ProductMedias = ProductMedias;
       this.productionService.createProduct(this.model).subscribe(res => {
         this.loaderService.hide();
-        this.disable = false;
+        this.dialogRef.close();
+      }, () => {
+        this.loaderService.hide();
         this.dialogRef.close();
       })
     }
@@ -181,12 +213,11 @@ export class ProductAddComponent extends BaseUploadComponent implements OnInit {
     this.chips.push(value);
     this.model.Ingredient = this.chips.join();
     this.chipInput = '';
-    console.log(this.model.Ingredient);
-    
   }
 
   removeChip(index) {
     this.chips.splice(index, 1);
+    this.model.Ingredient = this.chips.join();
   }
 
 

@@ -52,7 +52,6 @@ handleSelectChange(ev) {
                 }
             })
             this.listCreate[5].data = province;
-
         })
     }
     if (ev.check === 'City') {
@@ -198,7 +197,7 @@ save = (value) => {
         value.data.ProvinceId = +value.data.ProvinceId;
         value.data.DistrictId = +value.data.DistrictId;
         this.distributorService.editDistributor(value.data.DistributorId, value.data).subscribe(res => {
-
+                  
         })
     }
 

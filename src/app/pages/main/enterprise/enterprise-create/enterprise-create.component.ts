@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { EnterPriseModel } from 'src/app/models/enterprise.model';
 import { WardService } from 'src/app/services/city-district.service';
 import { EnterpriseService } from 'src/app/services/enterprise.service';
+import { LoaderService } from 'src/app/services/loader.service';
 @Component({
     selector: 'app-enterprise-create',
     templateUrl: './enterprise-create.component.html',
@@ -12,6 +14,7 @@ import { EnterpriseService } from 'src/app/services/enterprise.service';
 export class EnterpriseCreateComponent implements OnInit {
     conFig = new EnterPriseModel;
     dataModel: any = {};
+    disable;
     option = {
         title: 'Thêm mới doanh nghiệp',
         type: 'create'
@@ -28,7 +31,9 @@ export class EnterpriseCreateComponent implements OnInit {
     constructor(
         private dialogRef: MatDialogRef<EnterpriseCreateComponent>,
         private wardService: WardService,
-        private enterprise: EnterpriseService
+        private enterprise: EnterpriseService,
+        private loaderService: LoaderService,
+        private toastr: ToastrService
     ) { }
     listCreate = [];
 
@@ -38,13 +43,13 @@ export class EnterpriseCreateComponent implements OnInit {
             name: "Việt Nam",
             value: 916
         }];
-       
+
     }
     handleSelectChange(ev) {
-        if(ev.check === 'Nation'){
+        if (ev.check === 'Nation') {
             this.wardService.getAllCity(+ev.value).subscribe(res => {
                 console.log(res);
-                
+
                 const province = res.map(x => {
                     return {
                         name: x.Name,
@@ -52,7 +57,7 @@ export class EnterpriseCreateComponent implements OnInit {
                     }
                 })
                 this.listCreate[5].data = province;
-    
+
             })
         }
         if (ev.check === 'City') {
@@ -76,29 +81,34 @@ export class EnterpriseCreateComponent implements OnInit {
                 this.cancel();
                 break;
             case 'btn-save':
-                this.dataModel = value.data;
-                this.dataModel.NationId = +value.data.NationId;
-                this.dataModel.ProvinceId = +value.data.ProvinceId;
-                this.dataModel.DistrictId = +value.data.DistrictId;
-                this.dataModel.companyMedias = value.listMedia;
-                this.dataModel.Status = 1;
-                this.dataModel.Type = 1;
-                delete this.dataModel.BackgroundURL;
-                delete this.dataModel.MediaURL;
-                this.save(this.dataModel);
+                this.save(value);
                 break;
             default:
                 break;
         }
-        this.dialogRef.close();
     }
 
     cancel = () => {
+        this.dialogRef.close();
     }
 
-    save = (model) => {
-        console.log(model);
-        this.enterprise.createCompany(model).subscribe(res => {
+    save = (value) => {
+        this.dataModel = value.data;
+        this.dataModel.NationId = +value.data.NationId;
+        this.dataModel.ProvinceId = +value.data.ProvinceId;
+        this.dataModel.DistrictId = +value.data.DistrictId;
+        this.dataModel.companyMedias = value.listMedia;
+        this.dataModel.Status = 1;
+        this.dataModel.Type = 1;
+        delete this.dataModel.BackgroundURL;
+        delete this.dataModel.MediaURL;
+        this.disable = true;
+        this.enterprise.createCompany(this.dataModel).subscribe(res => {
+            this.toastr.success("Tạo Thành công!")
+            this.dialogRef.close();
+        }, (err) => {
+            this.toastr.error('Có lỗi xảy ra, vui lòng thử lại sau!');
+            this.disable = false;
         })
     }
 

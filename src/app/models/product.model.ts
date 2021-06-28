@@ -104,13 +104,13 @@ export class Product {
             //     type: 'object',
             // },
             {
-                id: 'Status',
+                id: 'TypeString',
                 name: 'Trạng thái quét',
                 width: 200,
                 type: 'text',
             },
             {
-                id: 'Type',
+                id: 'StatusString',
                 name: 'Trạng thái thông tin',
                 width: 200,
                 type: 'text',

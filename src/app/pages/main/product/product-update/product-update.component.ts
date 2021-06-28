@@ -37,6 +37,7 @@ export class ProductUpdateComponent extends BaseUploadComponent implements OnIni
   listIdCertification: any = [];
   certificationDetail: any = [];
   listTargetMarket: any = [];
+  timer;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public s3Service: S3FileService,
@@ -54,6 +55,9 @@ export class ProductUpdateComponent extends BaseUploadComponent implements OnIni
     this.productService.getProductionDetail(this.data.ProductId).subscribe(res => {
       this.dataModel = res;
       this.imageUrl = this.dataModel.ProductMedias[0].MediaURL;
+      this.chips = this.dataModel.Ingredient.split(",");
+      this.dataModel.ExpiredOn = this.formatDate.formatDate(this.dataModel.ExpiredOn, 'YYYY-MM-DD' || 'YYYY-DD-MM');
+      this.dataModel.ManufacturedOn = this.formatDate.formatDate(this.dataModel.ManufacturedOn, 'YYYY-MM-DD' || 'YYYY-DD-MM')
       this.productService.getCategory().subscribe(data => {
         this.categories = data;
         this.categories.forEach(x => {
@@ -62,11 +66,9 @@ export class ProductUpdateComponent extends BaseUploadComponent implements OnIni
           }
         });
       });
-      
        console.log(this.dataModel);
-       
     });
-    this.storeService.getListStore("", "", 1, 1, 50).subscribe(res => {
+    this.storeService.getListStore("", "", "", 1, 50).subscribe(res => {
       this.listStore = res;
     }),
       this.distributorService.getListDistributor("", "", 1, 50).subscribe(res => {
@@ -82,17 +84,36 @@ export class ProductUpdateComponent extends BaseUploadComponent implements OnIni
     })
     this.getListCertificate();
   }
+  check(ev: any){
+    console.log(this.dataModel.TargetMarketIdList);
+    
+
+  }
+  getListStore(name){
+    this.storeService.getListStore(name, "", "", 1, 50).subscribe(res => {
+      this.listSearchStore = res;
+    });
+  }
+
+  getListDistributor(name){
+    this.distributorService.getListDistributor(name, "", 1, 50).subscribe(res => {
+      this.listSearchDistributor = res;
+    });
+  }
 
   addChip(value) {
     this.chips.push(value);
-    this.dataModel.Ingradient = this.chips.join();
+    let newlist =  this.chips.join();
+    this.dataModel.Ingredient = newlist;
     this.chipInput = '';
   }
-
   removeChip(index) {
     this.chips.splice(index, 1);
+    let newlist =  this.chips.join();
+    this.dataModel.Ingredient = newlist;
+    console.log(this.dataModel);
+    
   }
-
   selectStore(value) {
     this.dataModel.StoreId = value.StoreId;
     this.dataModel.StoreName = value.Name;
@@ -103,29 +124,29 @@ export class ProductUpdateComponent extends BaseUploadComponent implements OnIni
     this.dataModel.DistributorName = value.Name;
     this.listSearchDistributor = [];
   }
-  autocomplete(name) {
-    if (!name) return this.listSearchDistributor = [];
-    this.listSearchStore = this.listStore.filter(x => x.Name.toLowerCase().indexOf(name.toLowerCase()) > -1);
+  autocomplete(name: string) {
+    if (!name){
+      this.listSearchStore = [];
+    }
+    else{
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        this.getListStore(name);
+      }, 100);
+    }
   }
+  
   autocompleteDistributor(name) {
-    if (!name) return this.listSearchDistributor = [];
-    this.listSearchDistributor = this.listDistributor.filter(x => x.Name.toLowerCase().indexOf(name.toLowerCase()) > -1);
+    if (!name){
+      this.listSearchDistributor = [];
+    }
+    else{
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        this.getListDistributor(name);
+      }, 100);
+    }
   }
-  // handleCallbackEvent = (value) => {
-  //   console.log(value);
-
-  //   switch (value.class) {
-  //     case 'btn-cancel':
-  //       this.cancel();
-  //       break;
-  //     case 'btn-save':
-  //       this.save(value)
-  //       break;
-  //     default:
-  //       break;
-  //   }
-
-  // }
 
   cancel = () => {
   }

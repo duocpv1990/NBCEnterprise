@@ -12,7 +12,7 @@
                 <div class="label"> Mã số sản phẩm toàn cầu (GTIN) (<span class="require-icon">*</span>) </div>
                 <div class="input-text">
                     <div>
-                        <input type="text" [(ngModel)]="dataModel.ProductCode" id="" name="" />
+                        <input type="text" [(ngModel)]="dataModel.ProductCode"  name="" />
                     </div>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                 <div class="label"> Tên sản phẩm (<span class="require-icon">*</span>) </div>
                 <div class="input-text">
                     <div>
-                        <input type="text" [(ngModel)]="dataModel.Name" id="" name="" />
+                        <input type="text" [(ngModel)]="dataModel.Name"  name="" />
                     </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                 <div class="label"> Giá niêm yết (<span class="require-icon">*</span>) </div>
                 <div class="input-text">
                     <div>
-                        <input type="text" [(ngModel)]="dataModel.Price" id="" name="" />
+                        <input type="text" [(ngModel)]="dataModel.Price"  name="" />
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                 <div class="input-text">
                     <div>
                         <select [(ngModel)]="dataModel.CategoryId">
-                            <option [value]="category.CategoryId" *ngFor="let category of categories">
+                            <option [value]="category.CategoryId" [selected]='category.CategoryId === dataModel.CategoryId' *ngFor="let category of categories">
                                 {{category.Name}}
                             </option>
                         </select>
@@ -49,7 +49,7 @@
                 <div class="input-text">
                     <div class="distributor">
                         <div class="position">
-                            <input (input)="autocompleteDistributor($event.target.value)" [(ngModel)]="dataModel.DistributorName" type="text" name="" id="">
+                            <input (input)="autocompleteDistributor($event.target.value)" [(ngModel)]="dataModel.DistributorName" type="text" name="" >
                             <img class="img" src="assets/svg/icon-dropdown.svg" alt="">
                         </div>
                         <div class="list-complete" [class]="listSearchDistributor.length !== 0 ? '' : 'hidden'"> 
@@ -63,7 +63,7 @@
                 <div class="input-text">
                     <div class="distributor">
                         <div class="position">
-                            <input (input)="autocomplete($event.target.value)" [(ngModel)]="dataModel.StoreName" type="text" name="" id="">
+                            <input (input)="autocomplete($event.target.value)" [(ngModel)]="dataModel.StoreName" type="text" name="" >
                             <img class="img" src="assets/svg/icon-dropdown.svg" alt="">
                         </div>
                         <div class="list-complete" [class]="listSearchStore.length !== 0 ? '' : 'hidden'"> 
@@ -75,13 +75,9 @@
             <div class="content row align-items-center">
                 <div class="label"> Thị trường mục tiêu (<span class="require-icon">*</span>) </div>
                 <div class="input-text">
-                    <div>
-                        <select name="" id="" [(ngModel)]="model.TargetMarketId">
-                            <option value="" [value]="category.TargetMarketId" *ngFor="let category of listTargetMarket">
-                                {{category.Name}}
-                            </option>
-                        </select>
-                    </div>
+                    <mat-select class="mat-select" (selectionChange)="check(dataModel.TargetMarketIdList)" [(ngModel)]="dataModel.TargetMarketIdList"  multiple>
+                        <mat-option *ngFor="let targetMarket of listTargetMarket" [value]="targetMarket.TargetMarketId">{{targetMarket.Name}}</mat-option>
+                      </mat-select>
                 </div>
             </div>
         </div>
@@ -158,7 +154,7 @@
                 <div class="label"> Nhãn hiệu (<span class="require-icon">*</span>) </div>
                 <div class="input-text">
                     <div>
-                        <input type="text" id="" [(ngModel)]="dataModel.Label" name="" />
+                        <input type="text"  [(ngModel)]="dataModel.Label" name="" />
                     </div>
                 </div>
             </div>
@@ -166,7 +162,7 @@
                 <div class="label"> Khối lượng/dung tích sản phẩm (<span class="require-icon">*</span>) </div>
                 <div class="input-text">
                     <div>
-                        <input type="text" [(ngModel)]="dataModel.Capacity" id="" name="" />
+                        <input type="text" [(ngModel)]="dataModel.Capacity"  name="" />
                     </div>
                 </div>
             </div>
@@ -174,7 +170,7 @@
                 <div class="label"> Đơn vị (<span class="require-icon">*</span>) </div>
                 <div class="input-text">
                     <div>
-                        <input type="text" [(ngModel)]="dataModel.Unit" id="" name="" />
+                        <input type="text" [(ngModel)]="dataModel.Unit"  name="" />
                     </div>
                 </div>
             </div>
@@ -182,7 +178,7 @@
                 <div class="label"> Ngày sản xuất (<span class="require-icon">*</span>) </div>
                 <div class="input-text">
                     <div>
-                        <input type="date" [(ngModel)]="dataModel.ManufacturedOn" id="" name="" />
+                        <input type="date" [(ngModel)]="dataModel.ManufacturedOn"  name="" />
                     </div>
                 </div>
             </div>
@@ -190,14 +186,14 @@
                 <div class="label"> Hạn sử dụng (<span class="require-icon">*</span>) </div>
                 <div class="input-text">
                     <div>
-                        <input type="date" [(ngModel)]="dataModel.ExpiredOn" id="" name="" />
+                        <input type="date" [(ngModel)]="dataModel.ExpiredOn"  name="" />
                     </div>
                 </div>
             </div>
         </div>
         <div class="text-area">
             <label for="">Hướng dẫn sử dụng (<span class="require-icon">*</span>)</label>
-            <textarea rows="5"></textarea>
+            <textarea rows="5">{{dataModel.Manual}}</textarea>
         </div>
     
         <div class="button-block">

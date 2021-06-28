@@ -124,10 +124,12 @@
 }
 .list-complete{
   max-height: 250px;
-  width: 500px;
+  width: 450px;
   overflow: auto;
   position: absolute;
-  background: #f8f8f8;
+  background: #ffffff;
+  border: 1px solid;
+  z-index: 999;
   .select-name{
      min-height: 35px;
      line-height: 35px;
@@ -135,7 +137,8 @@
      font-weight: 600;
   }
   .select-name:hover{
-    background-color: #D8D8D8;
+    background-color: #1894FF;
+    color: white;
   }
 }
 .certification {
@@ -166,4 +169,21 @@
       }
     }
   }
+}
+.required{
+  color: red;
+}
+.position{
+  position: relative;
+  .img{
+    position: absolute;
+    right: 30px;
+    top: 10px;
+  }
+}
+.company{
+  position: relative;
+}
+.hidden{
+  display: none;
 }

@@ -15,7 +15,7 @@ export class ShopModel {
             },
             {
                 Text: 'Tỉnh thành',
-                type: 'city',
+                type: 'select',
                 data: [],
                 condition: 'Province'
             },
@@ -131,34 +131,39 @@ export class ShopModel {
                 id: 'Name',
                 label: 'Tên điểm bán',
                 name: 'distributorName',
-                type: 'text'
+                type: 'text',
+                required: true,
             },
             {
                 id: 'Type',
                 label: 'Hình thức',
-                name: 'type',
-                type: 'select'
+                name: 'Type',
+                type: 'select',
+                required: true,
             },
             {
                 id: 'NationId',
                 label: 'Quốc gia',
                 name: 'NationId',
                 type: '',
-                ward: "Nation"
+                ward: "Nation",
+                required: true,
             },
             {
                 id: 'ProvinceId',
                 label: 'Thành phố/Tỉnh',
                 name: 'ProvinceId',
                 type: '',
-                ward: "City"
+                ward: "City",
+                required: true,
             },
             {
                 id: 'DistrictId',
                 label: 'Quận/Huyện',
                 name: 'DistrictId',
                 type: '',
-                ward: "District"
+                ward: "District",
+                required: true,
             },
             {
                 id: 'AddressDetail',
@@ -188,13 +193,15 @@ export class ShopModel {
                 id: 'avatar',
                 label: 'Ảnh đại diện',
                 name: 'avatar',
-                type: 'img'
+                type: 'img',
+                required: true,
             },
             {
                 id: 'background',
                 label: 'Ảnh nền',
                 name: 'background',
-                type: 'img'
+                type: 'img',
+                required: true,
             },
         ];
     }

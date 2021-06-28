@@ -24,11 +24,14 @@
     "@consult-indochina/auth": "^2.0.3",
     "@consult-indochina/common": "^1.1.1",
     "apexcharts": "^3.26.2",
+    "file-saver": "^2.0.5",
     "moment-timezone": "^0.5.32",
     "ng-apexcharts": "^1.5.9",
     "ngx-pagination": "^5.0.0",
+    "ngx-toastr": "^14.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
+    "xlsx": "^0.17.0",
     "zone.js": "~0.11.3"
   },
   "devDependencies": {

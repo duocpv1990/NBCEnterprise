@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, NgModule, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, NgModule, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { BaseUploadComponent, S3FileService } from '@consult-indochina/common';
+import { ToastrService } from 'ngx-toastr';
 import { EnterpriseService } from 'src/app/services/enterprise.service';
 import { AddCertificateComponent } from '../dialog/add-certificate/add-certificate.component';
 @Component({
@@ -12,9 +13,10 @@ import { AddCertificateComponent } from '../dialog/add-certificate/add-certifica
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.scss']
 })
-export class CreateComponent extends BaseUploadComponent implements OnInit {
+export class CreateComponent extends BaseUploadComponent implements OnInit, OnChanges {
   @Input() data: any;
   @Input() option: any;
+  @Input() disableButton: any;
   @Input() arrayButton: any;
   @Input() dataModel?: any;
   @Output() callback = new EventEmitter<any>();
@@ -24,7 +26,8 @@ export class CreateComponent extends BaseUploadComponent implements OnInit {
   model: any = {};
   imagePath;
   imgURL;
-  listSearch;
+  disable = false;
+  listSearch: any = [];
   fileAvatar;
   multipFile = [];
   fileBackground;
@@ -35,33 +38,35 @@ export class CreateComponent extends BaseUploadComponent implements OnInit {
   error;
   constructor(
     public s3Service: S3FileService,
+    private toastr: ToastrService,
     private enterpriseService: EnterpriseService,
     private dialog: MatDialog
   ) { super(s3Service) }
+  ngOnChanges(): void {
+    this.disable = this.disableButton;
+  }
 
   ngOnInit() {
     this.model = this.dataModel || {};
-    this.timer = this.enterpriseService.getListCompany("", "", 1, 1, 50).subscribe(res => {
-      this.listComplete = res;
-    })
+    
   }
-  selectCompany(value){
+
+
+  selectCompany(value) {
     this.model.CompanyId = value.CompanyId;
     this.model.CompanyName = value.Name;
     this.listSearch = [];
   }
   autocomplete(name) {
-    if (!name){
+    if (!name) {
       return this.listSearch = [];
-    } 
-    else{
-      this.listSearch = this.listComplete.filter(x => x.Name.toLowerCase().indexOf(name.toLowerCase()) > -1);
-      if(this.listSearch.length  === 0){
-        this.error = true;
-      } 
-      else{
-        this.error = false;
-      }
+    }
+    else {
+      clearTimeout(this.timer);
+      this.timer = this.enterpriseService.getListCompany("", name, "", 1, 50).subscribe(res => {
+        this.listSearch = res;
+      })
+
     }
   }
 
@@ -99,35 +104,76 @@ export class CreateComponent extends BaseUploadComponent implements OnInit {
   }
   onCallBackData = () => { }
 
-
-
-
   onClickButton(i) {
     if (i.class === "btn-save") {
-      this.selectImage(this.fileAvatar).subscribe(res => { }, (err) => { }, () => {
-        const modelAvatar = {
-          MediaURL: this.imageLinkUpload,
-          Type: 1,
-          Status: 1
-        }
-        this.listMedia.push(modelAvatar);
+      this.disable = true;
+      if (!this.fileAvatar && this.fileBackground) {
         this.selectImage(this.fileBackground).subscribe(res => { }, (err) => { }, () => {
-          const modelBackground = {
-            MediaURL: this.imageLinkUpload,
-            Type: 2,
-            Status: 1
-          }
-          this.listMedia.push(modelBackground);
+          let listMedia = [
+            {
+              MediaURL: this.imageLinkUpload,
+              Type: 1,
+              Status: 1
+            },
+            {
+              MediaURL: this.imageLinkUpload,
+              Type: 2,
+              Status: 1
+            }
+          ];
           i.data = this.model;
-          i.listMedia = this.listMedia;
+          i.listMedia = listMedia;
           this.callback.emit(i);
         })
-      })
+       
+      }
+      else if(this.fileAvatar && !this.fileBackground){
+        this.selectImage(this.fileAvatar).subscribe(res => { }, (err) => { }, () => {
+          let listMedia = [
+            {
+              MediaURL: this.imageLinkUpload,
+              Type: 1,
+              Status: 1
+            },
+            {
+              MediaURL: this.imageLinkUpload,
+              Type: 2,
+              Status: 1
+            }
+          ];
+          i.data = this.model;
+          i.listMedia = listMedia;
+          this.callback.emit(i);
+        })
+      }
+      else if(this.fileAvatar && this.fileBackground){
+        this.selectImage(this.fileAvatar).subscribe(res => { }, (err) => { }, () => {
+          const modelAvatar = {
+            MediaURL: this.imageLinkUpload,
+            Type: 1,
+            Status: 1
+          }
+          this.listMedia.push(modelAvatar);
+          this.selectImage(this.fileBackground).subscribe(res => { }, (err) => { }, () => {
+            const modelBackground = {
+              MediaURL: this.imageLinkUpload,
+              Type: 2,
+              Status: 1
+            }
+            this.listMedia.push(modelBackground);
+            i.data = this.model;
+            i.listMedia = this.listMedia;
+            this.callback.emit(i);
+          })
+        })
+      }
+      else{
+        this.callback.emit(i);
+      }
     }
     else {
       this.callback.emit(i);
     }
-
   }
 
   addCertificate() {
@@ -136,11 +182,9 @@ export class CreateComponent extends BaseUploadComponent implements OnInit {
         this.listCertification.push(result);
         this.listIdCertification.push(result.CertificationId);
         this.model.CertificationIdList = this.listIdCertification;
-        console.log(this.model);
       }
     });
   }
-
 }
 
 @NgModule({

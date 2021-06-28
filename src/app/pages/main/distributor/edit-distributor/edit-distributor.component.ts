@@ -27,20 +27,18 @@ export class EditDistributorComponent extends BaseUploadComponent implements OnI
         check: 'distributor'
     };
 
-    arrayButton = [{
-        class: 'btn-cancel',
-        text: 'Hủy bỏ'
-    },
-    {
-        class: 'btn-save',
-        text: 'Chỉnh sửa'
-    }]
-    listCreate = [];
-
-    ngOnInit() {
-        this.listCreate = this.conFig.create;
-        this.getDetailCompany();
-
+}
+handleSelectChange(ev) {
+    if (ev.check === 'Nation') {
+        this.wardService.getAllCity(+ev.value).subscribe(res => {
+            const province = res.map(x => {
+                return {
+                    name: x.Name,
+                    value: +x.ProvinceId
+                }
+            })
+            this.listCreate[5].data = province;
+        })
     }
     handleSelectChange(ev) {
         if (ev.check === 'Nation') {
@@ -154,55 +152,18 @@ export class EditDistributorComponent extends BaseUploadComponent implements OnI
                 }
                 this.distributorService.createImgDistributor(fileBackground).subscribe(res => { });
             })
-        }
-        if (value.data.FileAvatar && !value.data.FileBackground) {
-            let fileBackground = {
-                DistributorId: value.data.DistributorId,
-                MediaURL: value.data.BackgroundURL,
-                Type: 2,
-                Status: 1
-            }
-            this.distributorService.createImgDistributor(fileBackground).subscribe(res => { });
-            this.selectImage(value.data.FileAvatar).subscribe(res => { }, (err) => { }, () => {
-                let fileAvatar = {
-                    DistributorId: value.data.DistributorId,
-                    MediaURL: this.imageLinkUpload,
-                    Type: 1,
-                    Status: 1
-                }
-                this.distributorService.createImgDistributor(fileAvatar).subscribe(res => { });
-            })
-        }
-        if (value.data.FileAvatar && value.data.FileBackground) {
-            this.selectImage(value.data.FileAvatar).subscribe(res => { }, (err) => { }, () => {
-                let fileAvatar = {
-                    DistributorId: value.data.DistributorId,
-                    MediaURL: this.imageLinkUpload,
-                    Type: 1,
-                    Status: 1
-                }
-                this.distributorService.createImgDistributor(fileAvatar).subscribe(res => { });
-                this.selectImage(value.data.FileBackground).subscribe(res => { }, (err) => { }, () => {
-                    let fileBackground = {
-                        DistributorId: value.data.DistributorId,
-                        MediaURL: this.imageLinkUpload,
-                        Type: 2,
-                        Status: 1
-                    }
-                    this.distributorService.createImgDistributor(fileBackground).subscribe(res => { });
-                })
-            });
-        }
-        else {
-            value.data.NationId = +value.data.NationId;
-            value.data.ProvinceId = +value.data.ProvinceId;
-            value.data.DistrictId = +value.data.DistrictId;
-            this.distributorService.editDistributor(value.data.DistributorId, value.data).subscribe(res => {
-
-            })
-        }
-
+        });
     }
+    else {
+        value.data.NationId = +value.data.NationId;
+        value.data.ProvinceId = +value.data.ProvinceId;
+        value.data.DistrictId = +value.data.DistrictId;
+        this.distributorService.editDistributor(value.data.DistributorId, value.data).subscribe(res => {
+
+        })
+    }
+
+}
 
 
 }

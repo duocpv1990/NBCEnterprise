@@ -5,6 +5,8 @@ import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dial
 import { BaseUploadComponent, S3FileService } from '@consult-indochina/common';
 import { BehaviorSubject } from 'rxjs';
 import { CertificationService } from 'src/app/services/certification.service';
+import { LoaderService } from 'src/app/services/loader.service';
+import { LoaderModule } from 'src/app/utils/loader/loader.component';
 
 @Component({
   selector: 'app-add-certificate',
@@ -19,7 +21,8 @@ export class AddCertificateComponent extends BaseUploadComponent implements OnIn
   constructor(
     public s3Service: S3FileService,
     private dialogRef: MatDialogRef<AddCertificateComponent>,
-    private certificationService: CertificationService
+    private certificationService: CertificationService,
+    private loaderService: LoaderService
   ) { super(s3Service) }
   model: any = {};
   files: any;
@@ -55,9 +58,10 @@ export class AddCertificateComponent extends BaseUploadComponent implements OnIn
     });
   }
   save() {
+    this.loaderService.show();
     if (this.select === 1) {
       this.multipleUpload(this.files).subscribe(res => {
-      }, () => { }, () => {
+      }, () => { this.loaderService.hide(); }, () => {
         this.listMediaURL = this.fileLinkList.map(x => {
           return {
             MediaURL: x,
@@ -68,7 +72,7 @@ export class AddCertificateComponent extends BaseUploadComponent implements OnIn
         this.model.CertificationMedia = this.listMediaURL;
         this.model.Type = +this.model.Type;
         this.certificationService.createCertification(this.model).subscribe(res => {
-
+          this.loaderService.hide();
           const modelCertification = {
             "CertificationId": res,
             "Name": this.model.Name,
@@ -79,6 +83,8 @@ export class AddCertificateComponent extends BaseUploadComponent implements OnIn
             "CertificationMedias": this.listMediaURL
           };
           this.dialogRef.close(modelCertification);
+        }, (err) => {
+          this.loaderService.hide();
         })
       })
 
@@ -94,6 +100,7 @@ export class AddCertificateComponent extends BaseUploadComponent implements OnIn
       this.model.CertificationMedia = this.listMediaURL;
       this.model.Type = +this.model.Type;
       this.certificationService.createCertification(this.model).subscribe(res => {
+        this.loaderService.hide();
         const modelCertification = {
           "CertificationId": res,
           "Name": this.model.Name,
@@ -104,6 +111,8 @@ export class AddCertificateComponent extends BaseUploadComponent implements OnIn
           "CertificationMedias": this.listMediaURL
         };
         this.dialogRef.close(modelCertification);
+      }, (err) => {
+        this.loaderService.hide();
       })
     }
 
@@ -111,7 +120,7 @@ export class AddCertificateComponent extends BaseUploadComponent implements OnIn
 }
 @NgModule({
   declarations: [AddCertificateComponent],
-  imports: [CommonModule, MatDialogModule, FormsModule],
+  imports: [CommonModule, MatDialogModule, LoaderModule, FormsModule],
   exports: [AddCertificateComponent]
 })
 export class AddCertificateModule { }

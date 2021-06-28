@@ -12,6 +12,7 @@ import { DeleteDistributorComponent } from './delete-distributor/delete-distribu
 import { DeleteModule } from 'src/app/components/dialog/delete/delete.component';
 import { EditDistributorComponent } from './edit-distributor/edit-distributor.component';
 import { EditModule } from 'src/app/components/edit/edit.component';
+import { LoaderModule } from 'src/app/utils/loader/loader.component';
 
 
 
@@ -20,6 +21,7 @@ import { EditModule } from 'src/app/components/edit/edit.component';
   imports: [
     CommonModule,
     FilterBaseModule,
+    LoaderModule,
     TableBaseModule,
     CreateModule,
     EditModule,

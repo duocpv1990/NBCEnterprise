@@ -1,5 +1,4 @@
-<!-- <app-create [(data)]="listCreate" [(option)]="option" [(arrayButton)]="arrayButton"
-    (callback)="handleCallbackEvent($event)"></app-create> -->
+<app-loader></app-loader>
 <div class="form-create">
     <div class="title">
         THÊM MỚI SẢN PHẨM
@@ -45,6 +44,20 @@
             </div>
         </div>
         <div class="content row align-items-center">
+            <div class="label"> Doanh nghiệp (<span class="require-icon">*</span>) </div>
+            <div class="input-text">
+                <div class="distributor">
+                    <div class="position">
+                        <input (input)="searchCompany($event.target.value)" [(ngModel)]="model.CompanyName" type="text" name="" id="">
+                        <img class="img" src="assets/svg/icon-dropdown.svg" alt="">
+                    </div>
+                    <div class="list-complete" [class]="listCompany.length !== 0 ? '' : 'hidden'"> 
+                       <div class="select-name" (click)="selectCompany(company)" *ngFor="let company of listCompany">{{company.Name}}</div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <div class="content row align-items-center">
             <div class="label"> Nhà phân phối (<span class="require-icon">*</span>) </div>
             <div class="input-text">
                 <div class="distributor">
@@ -75,12 +88,10 @@
         <div class="content row align-items-center">
             <div class="label"> Thị trường mục tiêu (<span class="require-icon">*</span>) </div>
             <div class="input-text">
-                <div>
-                    <select name="" id="" [(ngModel)]="model.TargetMarketId">
-                        <option value="" [value]="targetMarket.TargetMarketId" *ngFor="let targetMarket of listTargetMarket">
-                            {{targetMarket.Name}}
-                        </option>
-                    </select>
+                <div class="mat-list">
+                    <mat-select (selectChange)="check(model.TargetMarketIdList)" [(ngModel)]="model.TargetMarketIdList" multiple>
+                        <mat-option *ngFor="let topping of listTargetMarket" [value]="topping.TargetMarketId">{{topping.Name}}</mat-option>
+                      </mat-select>
                 </div>
             </div>
         </div>
@@ -198,7 +209,7 @@
     </div>
     <div class="text-area">
         <label for="">Hướng dẫn sử dụng (<span class="require-icon">*</span>)</label>
-        <textarea rows="5"></textarea>
+        <textarea rows="5" [(ngModel)]="model.Manual"></textarea>
     </div>
 
     <div class="button-block">

@@ -69,7 +69,7 @@
   }
   .input-text {
     width: 100%;
-    input {
+    input, .mat-list {
       outline: none;
       width: 95%;
       padding: 10px;
@@ -131,6 +131,7 @@
     width: 98%;
     border: 1px solid #bcbcbc;
     outline-style: none;
+    padding: 10px;
   }
 }
 

@@ -13,6 +13,7 @@ import { CiCommonModule, S3FileService } from '@consult-indochina/common';
 import { ciAuthInterceptorProvider, CiAuthModule } from '@consult-indochina/auth';
 import { LoaderService } from './services/loader.service';
 import { ToastrModule } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,7 +30,7 @@ import { ToastrModule } from 'ngx-toastr';
     CiCommonModule.forRoot({
       S3_URL: 'https://fgehlb1to6.execute-api.ap-southeast-1.amazonaws.com/prod/presigned-url'
     }),
-    CiAuthModule.forRoot({ API_URL: 'http://192.168.1.34/nbc/api', PermissionNames: [], uiOption: 'custom' })
+    CiAuthModule.forRoot({ API_URL: `${environment.API_URL}/api`, PermissionNames: [], uiOption: 'custom' })
   ],
   providers: [
     LoaderService,

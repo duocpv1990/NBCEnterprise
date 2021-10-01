@@ -1,5 +1,5 @@
 {
-  "name": "vt-htbh-admin",
+  "name": "nbc",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -21,11 +21,13 @@
     "@angular/platform-browser": "~11.2.7",
     "@angular/platform-browser-dynamic": "~11.2.7",
     "@angular/router": "~11.2.7",
+    "apexcharts": "^3.26.2",
+    "moment-timezone": "^0.5.32",
+    "ng-apexcharts": "^1.5.9",
     "ngx-pagination": "^5.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
-    "zone.js": "~0.11.3",
-    "moment-timezone": "^0.5.32"
+    "zone.js": "~0.11.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1102.6",

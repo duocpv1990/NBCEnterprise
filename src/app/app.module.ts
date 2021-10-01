@@ -7,8 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { APIInterceptor } from './utils/interceptors/api.interceptor';
 import { AuthInterceptor } from './utils/interceptors/auth.interceptor';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 @NgModule({
-  declarations: [AppComponent,],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
@@ -16,6 +18,7 @@ import { AuthInterceptor } from './utils/interceptors/auth.interceptor';
     HttpClientModule,
   ],
   providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'vi-vi' },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: APIInterceptor,
@@ -26,6 +29,11 @@ import { AuthInterceptor } from './utils/interceptors/auth.interceptor';
       useClass: AuthInterceptor,
       multi: true,
     },
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    },
+
   ],
   bootstrap: [AppComponent],
 })

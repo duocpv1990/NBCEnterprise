@@ -1,1 +1,5 @@
-<p>enterprise-list works!</p>
+<div class="content-title">Danh sách mã doanh nghiệp</div>
+<!-- <app-filter [(listFilter)]="listFilter" (callback)="handleCallback($event)">
+</app-filter> -->
+<app-table [tableData]="dataTable" [data]="dataSub" [listActive]="listActive" (callback)="handleCallbackTable($event)"></app-table>
+

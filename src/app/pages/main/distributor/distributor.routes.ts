@@ -1,7 +1,7 @@
 import { Routes } from "@angular/router";
+import { DistributorListComponent } from "./distributor-list/distributor-list.component";
 
 import { DistributorComponent } from './distributor.component';
-import { DisributorListComponent } from './disributor-list/disributor-list.component';
 
 export const distributorRoute: Routes = [
   {
@@ -12,7 +12,7 @@ export const distributorRoute: Routes = [
     children: [
       {
         path: '',
-        component: DisributorListComponent
+        component: DistributorListComponent
       }
     ]
   }

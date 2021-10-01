@@ -1,0 +1,329 @@
+<div class="home-container">
+    <div class="col">
+        <div class="col__item-1">
+            <div class="row-1">
+                <div class="box">
+                    <div class="box__content">
+                        <div>Khách hàng</div>
+                        <div>683</div>
+                    </div>
+
+                </div>
+                <div class="box">
+                    <div class="box__content">
+                        <div>Nhà phân phối</div>
+                        <div>234</div>
+                    </div>
+
+                </div>
+                <div class="box">
+                    <div class="box__content">
+                        <div>Điểm bán</div>
+                        <div>82</div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row-2">
+                <div class="row-2__content">
+                    <div>
+                        Sản phẩm
+                    </div>
+                    <div>
+                        300/ <small>1 gói</small>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row-3">
+
+                <div class="row-3__content">
+
+                    <select>
+                        <option value="">
+                            Scan
+                        </option>
+                        <option value="">
+                            Đánh giá
+                        </option>
+                        <option value="">
+                            Hỏi đáp
+                        </option>
+                    </select>
+                    <mat-tab-group>
+                        <mat-tab label=" Hôm nay">
+                            <div class="tab-content">
+                                Chưa có thông tin
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Tuần này">
+                            <div class="chart tab-content">
+                                <div class="search">
+                                    <div class="date-picker">
+                                        <mat-form-field appearance="fill">
+                                            <!-- <mat-label>Angular forms</mat-label> -->
+                                            <input matInput [matDatepicker]="picker1" [formControl]="date">
+                                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker1></mat-datepicker>
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="fill">
+                                            <!-- <mat-label>Angular forms (w/ deserialization)</mat-label> -->
+                                            <input matInput [matDatepicker]="picker2" [formControl]="serializedDate">
+                                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker2></mat-datepicker>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="search-button">
+                                        <button>Tìm kiếm</button>
+                                    </div>
+
+                                </div>
+
+                                <apx-chart [series]="chart2Options.series" [chart]="chart2Options.chart"
+                                    [xaxis]="chart2Options.xaxis" [dataLabels]="chart2Options.dataLabels"
+                                    [grid]="chart2Options.grid" [stroke]="chart2Options.stroke"
+                                    [title]="chart2Options.title" [markers]="chart2Options.markers"></apx-chart>
+                            </div>
+                            <div class="subtitle">
+                                <span class="subtitle-dot">&#8226;</span>
+                                &nbsp;
+                                <span class="subtitle-text">Số lượng scan</span>
+                            </div>
+
+
+
+                        </mat-tab>
+                        <mat-tab label="Tháng này">
+                            <div class="tab-content">
+                                Chưa có thông tin
+
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+
+                </div>
+
+
+
+            </div>
+        </div>
+        <div class="col__item-2 col__item-left">
+            <div class="chart-title">Vị trí quét</div>
+            <div class="chart-content">
+                <apx-chart [series]="chart1Options.series" [chart]="chart1Options.chart" [labels]="chart1Options.labels"
+                    [responsive]="chart1Options.responsive"></apx-chart>
+            </div>
+
+        </div>
+    </div>
+    <div class="col">
+        <div class="col__item-1 col__item-right">
+
+            <div class="list">
+                <div class="list-header">
+                    <div class="title">
+                        Lần quét mới
+                    </div>
+                    <div class="link">
+                        Xem tất cả
+                    </div>
+                </div>
+                <div class="list-content">
+                    <div class="list-item">
+                        <div class="list-item_left">
+                            <img src="https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg"
+                                alt="">
+                            <div class="list-item_left-text">
+                                <div>Bút Thiên Long</div>
+                                <div>123456789</div>
+                                <button>Scan</button>
+                            </div>
+                        </div>
+                        <div class="list-item_right">
+                            <div class="list-item_right-text">
+                                <div>Không lấy được vị trí</div>
+                                <div> 13:30, 21/04/2021 </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <div class="list-item_left">
+                            <img src="https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg"
+                                alt="">
+                            <div class="list-item_left-text">
+                                <div>Bút Thiên Long</div>
+                                <div>123456789</div>
+                                <button>Scan</button>
+                            </div>
+                        </div>
+                        <div class="list-item_right">
+                            <div class="list-item_right-text">
+                                <div>Không lấy được vị trí</div>
+                                <div> 13:30, 21/04/2021 </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <div class="list-item_left">
+                            <img src="https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg"
+                                alt="">
+                            <div class="list-item_left-text">
+                                <div>Bút Thiên Long</div>
+                                <div>123456789</div>
+                                <button>Scan</button>
+                            </div>
+                        </div>
+                        <div class="list-item_right">
+                            <div class="list-item_right-text">
+                                <div>403 Hoàng Quốc Việt, Nghĩa Tân, Cầu Giấy, Hà Nội </div>
+                                <div> 13:30, 21/04/2021 </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="list-item">
+                        <div class="list-item_left">
+                            <img src="https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg"
+                                alt="">
+                            <div class="list-item_left-text">
+                                <div>Bút Thiên Long</div>
+                                <div>123456789</div>
+                                <button>Scan</button>
+                            </div>
+                        </div>
+                        <div class="list-item_right">
+                            <div class="list-item_right-text">
+                                <div>Tòa nhà N03-T7 phường Xuân Tảo, quận Bắc Từ Liêm, Hà Nội</div>
+                                <div> 13:30, 21/04/2021 </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="list-item">
+                        <div class="list-item_left">
+                            <img src="https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg"
+                                alt="">
+                            <div class="list-item_left-text">
+                                <div>Bút Thiên Long</div>
+                                <div>123456789</div>
+                                <button>Scan</button>
+                            </div>
+                        </div>
+                        <div class="list-item_right">
+                            <div class="list-item_right-text">
+                                <div>Không lấy được vị trí</div>
+                                <div> 13:30, 21/04/2021 </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col__item-2">
+            <div class="col-2__block-2 col__item-right">
+                <div class="list">
+                    <div class="list-header">
+                        <div class="title">
+                            Khách hàng mới
+                        </div>
+                        <div class="link">
+                            Xem tất cả
+                        </div>
+                    </div>
+                    <div class="list-content">
+                        <div class="list-item">
+                            <div class="list-item_left">
+                                <img src="assets/img/person.svg" alt="">
+                                <div class="list-item_left-text">
+                                    <div>0345659***</div>
+                                    <div>0345659***</div>
+                                </div>
+                            </div>
+                            <div class="list-item_right">
+                                <div class="list-item_right-text">
+                                    <div>Đang cập nhật</div>
+                                    <div> 13:30, 21/04/2021 </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="list-item_left">
+                                <img src="assets/img/person.svg" alt="">
+                                <div class="list-item_left-text">
+                                    <div>0345659***</div>
+                                    <div>0345659***</div>
+                                </div>
+                            </div>
+                            <div class="list-item_right">
+                                <div class="list-item_right-text">
+                                    <div>Đang cập nhật</div>
+                                    <div> 13:30, 21/04/2021 </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="list-item_left">
+                                <img src="assets/img/person.svg" alt="">
+                                <div class="list-item_left-text">
+                                    <div>0345659***</div>
+                                    <div>0345659***</div>
+                                </div>
+                            </div>
+                            <div class="list-item_right">
+                                <div class="list-item_right-text">
+                                    <div>Đang cập nhật</div>
+                                    <div> 13:30, 21/04/2021 </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="list-item_left">
+                                <img src="assets/img/person.svg" alt="">
+                                <div class="list-item_left-text">
+                                    <div>0345659***</div>
+                                    <div>0345659***</div>
+                                </div>
+                            </div>
+                            <div class="list-item_right">
+                                <div class="list-item_right-text">
+                                    <div>Đang cập nhật</div>
+                                    <div> 13:30, 21/04/2021 </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="list-item_left">
+                                <img src="assets/img/person.svg" alt="">
+                                <div class="list-item_left-text">
+                                    <div>0345659***</div>
+                                    <div>0345659***</div>
+                                </div>
+                            </div>
+                            <div class="list-item_right">
+                                <div class="list-item_right-text">
+                                    <div>Đang cập nhật</div>
+                                    <div> 13:30, 21/04/2021 </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

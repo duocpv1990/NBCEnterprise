@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/VT-HTBH-Admin",
+    "public": "dist/NBCEnterprise",
     "ignore": [
       "firebase.json",
       "**/.*",

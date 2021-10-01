@@ -1,54 +1,56 @@
-<div class="table-style shadow">
-    <div class="row">
-        <div class="col-5">
-            <div class="paginator">
-                <div class="current-page">
-                    <button (click)="backPage()">
-                        <img src="assets/svg/icon-left.svg" />
-                    </button>
-                    <span>{{ currentPage }}</span>
-                    <button (click)="nextPage()">
-                        <img src="assets/svg/icon-right.svg" />
-                    </button>
-                </div>
-                <span>/ {{ totalPage }}</span>
-            </div>
-        </div>
-        <div class="col-7 group-btn">
+<div class="table-style">
+    <div class="row btn-header">
+
+        <div class="group-btn">
             <button *ngFor="let i of listActive" class="btn" [class]="i.class" (click)="onClickBtnActive(i)">
                 {{ i?.text }}
             </button>
+        </div>
+        <div class="paginator">
+            <div class="current-page">
+                <button (click)="backPage()">
+                    <img src="assets/svg/icon-left.svg" />
+                </button>
+                <span>{{ currentPage }}</span>
+                <button (click)="nextPage()">
+                    <img src="assets/svg/icon-right.svg" />
+                </button>
+            </div>
+            <span>/ {{ totalPage }}</span>
         </div>
     </div>
     <div class="scroll">
         <table class="data-table">
             <thead>
                 <tr>
-                    <th>STT </th>
-                    <th scope="col" *ngFor="let item of tableData" [style.min-width.px]="item.width">{{ item.name }}
+                    <th scope="col" *ngFor="let item of tableData" [style.min-width.px]="item.width">
+                        {{ item.name }}
+                        <input class="checkbox" *ngIf="item.type === 'checkbox'" type="checkbox">
                     </th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let item of dataSub; let i = index">
-                    <td>
-                        {{ i+1 }}
-                    </td>
                     <td *ngFor="let i of tableData">
-                        <span *ngIf="i.type === 'number'" (click)="handleRouteLink(item)">{{ item[i.id] | number
-                            }}</span>
-                        <span *ngIf="i.type === 'text'" (click)="handleRouteLink(item)">{{ item[i.id] }}</span>
-                        <span *ngIf="i.type === 'object'" (click)="handleRouteLink(item)">{{ item[i.id][i.idSub]
-                            }}</span>
-                        <span *ngIf="i.type === 'date'" (click)="handleRouteLink(item)">
+                        <span *ngIf="i.type === 'checkbox'"><input class="checkbox" type="checkbox"></span>
+                        <span *ngIf="i.type === 'image'"><img class="image" src="{{item[i.id]}}" alt=""
+                                srcset=""></span>
+                        <span *ngIf="i.type === 'number'" (click)="handleRouteLink(item);handleClickRow(item)">{{
+                            item[i.id] |
+                            number}}</span>
+                        <span *ngIf="i.type === 'text'" (click)="handleRouteLink(item);handleClickRow(item)">{{
+                            item[i.id] }}</span>
+                        <span *ngIf="i.type === 'object'" (click)="handleRouteLink(item);handleClickRow(item)">{{
+                            item[i.id][i.idSub]}}</span>
+                        <span *ngIf="i.type === 'date'" (click)="handleRouteLink(item);handleClickRow(item)">
                             {{ item[i.id] | date: "dd-MM-YYYY" }}
                         </span>
                         <span *ngIf="i.type === 'setting'">
-                            <button (click)="onClickSetting(item, 'edit')" class="btn mbf-btn-active">
-                                Sửa
+                            <button (click)="onClickSetting(item, 'edit')" class="btn-table">
+                                <img src="assets/svg/nbc-edit.svg" alt="" srcset="">
                             </button>
-                            <button (click)="onClickSetting(item, 'delete')" class="btn mbf-btn-create ml-2">
-                                Xóa
+                            <button (click)="onClickSetting(item, 'delete')" class="btn-table">
+                                <img src="assets/svg/nbc-delete.svg" alt="" srcset="">
                             </button>
                         </span>
                     </td>
